@@ -1,0 +1,73 @@
+package net.sytes.botg.plotlify;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.awt.Desktop;
+
+import org.apache.commons.io.FileUtils;
+
+public class PlotlifyUtils {
+
+	public static final String PLOTLY_NAME = "plotly";
+	public static final String VERSION = "latest";
+	public static final String CDN_LINK = "https://cdn.plot.ly/plotly-" + VERSION + ".min.js";
+		
+	public enum ModeType {
+		MARKERS ("markers"), LINES ("lines"), LINES_MARKERS ("lines+markers");
+		
+		private final String type;
+		
+		private ModeType(String type) {
+			this.type = type;
+		}
+		
+		@Override
+		public String toString() {
+			return this.type;
+		}
+	}
+	
+	public enum PlotType {
+		
+		SCATTER ("scatter"), BAR ("bar"), PIE ("pie"); 
+		
+		private final String type;
+		
+		private PlotType(String type) {
+			this.type = type;
+		}
+		
+		@Override
+		public String toString() {
+			return this.type;
+		}
+	}
+	
+	public static void downloadPlotlyLibrary(String folderPath) {
+		URL url = null;
+		try {
+			url = new URL(CDN_LINK);
+		} catch (MalformedURLException e1) {
+			e1.printStackTrace();
+		}
+		String filePath = folderPath + File.separator + PLOTLY_NAME + "-" + VERSION + ".min.js";
+    	File f = new File(filePath);
+    	try {
+			FileUtils.copyURLToFile(url, f);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void openInBrowser(String filePath) {
+		File htmlFile = new File(filePath);
+		try {
+			Desktop.getDesktop().browse(htmlFile.toURI());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+}
