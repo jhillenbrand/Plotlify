@@ -31,7 +31,7 @@ public class PlotlifyUtils {
 	
 	public enum PlotType {
 		
-		SCATTER ("scatter"), BAR ("bar"), PIE ("pie"); 
+		SCATTER ("scatter"), BAR ("bar"), PIE ("pie"), SCATTER3D ("scatter3d"); 
 		
 		private final String type;
 		
@@ -67,6 +67,24 @@ public class PlotlifyUtils {
 			Desktop.getDesktop().browse(htmlFile.toURI());
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * checks whether the dimensions of the input data are equal, if not an uncaught IllegalArgumentException is thrown
+	 * @param x
+	 * @param y
+	 * @param z
+	 */
+	public static void checkDimensions(double[] x, double[] y, double[] z) {
+		if (z != null) {
+			if (x.length != y.length || y.length != z.length) {
+				throw new IllegalArgumentException("Dimension mismatch in input (x[" + x.length + "], y[" + y.length + "], z[" + z.length + "])");
+			}
+		} else {
+			if (x.length != y.length) {
+				throw new IllegalArgumentException("Dimension mismatch in input (x[" + x.length + "], y[" + y.length + "])");
+			}
 		}
 	}
 	

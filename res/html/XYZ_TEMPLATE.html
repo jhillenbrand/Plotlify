@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+	<head>
+	  	<!-- Plotly.js -->
+	  	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	</head>
+	<body>
+		<div id="plot1" style="width:100%; height:100%;"></div>
+		<script>
+			var plotDiv = document.getElementById('plot1');
+			
+			var trace1 = {
+					x: #XDATA,
+					y: #YDATA,
+					z: #ZDATA
+					mode: '#MARKER_TYPE',
+					type: '#PLOT_TYPE',
+					name: '#TRACE_NAME'
+			};
+			
+			//#MORE_TRACES
+			
+			var data = [trace1];//#TRACES];
+			
+			var layout = {
+				autosize: true,
+				title: '#TITLE',
+				xaxis: {
+				    title: {
+						text: '#XAXIS_TITLE'
+					},
+					autotick: false,
+				    zeroline: true,
+				    showline: true,  
+				    showgrid: true,
+				    mirror: 'ticks',
+				    linecolor: '#000000'
+				},
+				yaxis: {
+				    title: {
+				      	text: '#YAXIS_TITLE'
+				    },
+				    autotick: true,
+				    zeroline: true,
+				    showline: true, 
+				    showgrid: true,
+				    mirror: 'ticks',
+				    linecolor: '#000000'
+				},
+				zaxis: {
+				    title: {
+				      	text: '#ZAXIS_TITLE'
+				    },
+				    autotick: true,
+				    zeroline: true,
+				    showline: true, 
+				    showgrid: true,
+				    mirror: 'ticks',
+				    linecolor: '#000000'
+				},
+				margin: {
+					l: 50,
+				    r: 50,
+				    b: 100,
+				    t: 100,
+				    pad: 4
+				}
+			};
+			
+			Plotly.plot(plotDiv, data, layout, {responsive: true});
+			
+		</script>
+	</body>
+</html>

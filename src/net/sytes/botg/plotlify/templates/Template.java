@@ -1,12 +1,13 @@
-package net.sytes.botg.plotlify;
+package net.sytes.botg.plotlify.templates;
 
 import java.util.Arrays;
 
+import net.sytes.botg.plotlify.PlotlifyUtils;
 import net.sytes.botg.plotlify.PlotlifyUtils.ModeType;
 import net.sytes.botg.plotlify.PlotlifyUtils.PlotType;
 import net.sytes.botg.text.TextParser;
 
-public abstract class Template implements ITemplate {
+public abstract class Template implements ITemplate, ITemplate2D {
 	
 	protected static String TEMPLATE_FILE = "";
 	
@@ -42,6 +43,7 @@ public abstract class Template implements ITemplate {
 
 	@Override
 	public void setData(double[] x, double[] y, String name) {
+		PlotlifyUtils.checkDimensions(x, y, null);
 		if (x == null) {
 			this.inject(XDATA_ID, "[]");
 		} else {
@@ -61,6 +63,7 @@ public abstract class Template implements ITemplate {
 
 	@Override
 	public void addData(double[] x, double[] y, String name) {
+		PlotlifyUtils.checkDimensions(x, y, null);
 		if (x != null && y != null) {
 			++this.numberOfTraces;			
 			if (name == null) {
@@ -106,7 +109,6 @@ public abstract class Template implements ITemplate {
 			this.inject(YAXIS_TITLE, yLabel);
 		}
 	}
-
 
 	@Override
 	public void setModeType(ModeType markerType) {

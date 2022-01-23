@@ -15,7 +15,7 @@ public class UnitTest_Plotlify {
 		String filePath = "C:\\Users\\hillenbrand\\Downloads\\test\\test.html";
 		String title = "Test1";
 		
-		Plotlify.lineChart(filePath, x, y, title);
+		Plotlify.line(filePath, x, y, title);
 		
 	}
 	
