@@ -77,6 +77,9 @@ public class PlotlifyUtils {
 	 * @param z
 	 */
 	public static void checkDimensions(double[] x, double[] y, double[] z) {
+		if (x == null && y == null && z == null) {
+			return;
+		}
 		if (z != null) {
 			if (x.length != y.length || y.length != z.length) {
 				throw new IllegalArgumentException("Dimension mismatch in input (x[" + x.length + "], y[" + y.length + "], z[" + z.length + "])");
