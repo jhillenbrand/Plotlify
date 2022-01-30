@@ -53,8 +53,8 @@ public class PlotlifyUtils {
 			e1.printStackTrace();
 		}
 		String filePath = folderPath + File.separator + PLOTLY_NAME + "-" + VERSION + ".min.js";
-    	File f = new File(filePath);
-    	try {
+    		File f = new File(filePath);
+    		try {
 			FileUtils.copyURLToFile(url, f);
 		} catch (IOException e) {
 			e.printStackTrace();
