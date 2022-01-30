@@ -15,7 +15,7 @@ public void test00() {
 	double[] y = {12.234, 43.122, 34.1234, 18.9122, 22.923};
 		
 	String filePath = "C:\\Users\\*****\\Downloads\\test\\test.html";
-	String title = "Test1";
+	String title = "Test0";
 		
 	Plotlify.line(filePath, x, y, title);
 		
