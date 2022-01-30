@@ -9,7 +9,7 @@ public class UnitTest_PlotlifyUtils {
 	@Test
 	public void test00() {
 		
-		PlotlifyUtils.downloadPlotlyLibrary("C:\\Users\\hillenbrand\\Downloads\\test");
+		PlotlifyUtils.downloadPlotlyLibrary("C:\\Users\\****\\Downloads\\test");
 		
 	}
 	
