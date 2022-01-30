@@ -90,5 +90,16 @@ public class PlotlifyUtils {
 			}
 		}
 	}
+
+	/**
+	 * checks whether the {@code filePath} exists
+	 * @param filePath
+	 */
+	public static void checkFilePath(String filePath) {
+		File f = new File(filePath);
+		if (!f.getParentFile().isDirectory()) {
+			throw new IllegalArgumentException("Filepath '" + filePath + "' does not exist");
+		}
+	}
 	
 }

@@ -36,6 +36,7 @@ public abstract class Template implements ITemplate, ITemplate2D {
 	
 	@Override
 	public void export(String filePath) {
+		PlotlifyUtils.checkFilePath(filePath);
 		// replace not replaced ID with default before export
 		this.injectDefault();	
 		TextParser.writeTextToFile(filePath, this.loadedTemplate);

@@ -1,6 +1,7 @@
 package net.sytes.botg.plotlify.templates;
 
 import java.io.File;
+import java.util.Arrays;
 
 import net.sytes.botg.plotlify.PlotlifyUtils;
 import net.sytes.botg.plotlify.PlotlifyUtils.ModeType;
@@ -18,15 +19,55 @@ public class XYZTemplate extends XYTemplate implements ITemplate3D {
 	@Override
 	public void setData(double[] x, double[] y, double[] z, String name) {
 		PlotlifyUtils.checkDimensions(x, y, z);
-		// TODO Auto-generated method stub
-		
+		if (x == null) {
+			this.inject(XDATA_ID, "[]");
+		} else {
+			this.inject(XDATA_ID, Arrays.toString(x));
+		}
+		if (y == null) {
+			this.inject(YDATA_ID, "[]");
+		} else {
+			this.inject(YDATA_ID, Arrays.toString(y));
+		}
+		if (z == null) {
+			this.inject(ZDATA_ID, "[]");
+		} else {
+			this.inject(ZDATA_ID, Arrays.toString(y));
+		}
+		if (name == null) {
+			this.inject(TRACE_NAME_ID, "trace" + this.numberOfTraces);
+		} else {
+			this.inject(TRACE_NAME_ID, name);
+		}
 	}
 
 	@Override
 	public void addData(double[] x, double[] y, double[] z, String name) {
 		PlotlifyUtils.checkDimensions(x, y, z);
-		// TODO Auto-generated method stub
-		
+		if (x != null && y != null && z != null) {
+			++this.numberOfTraces;			
+			if (name == null) {
+				name = "trace" + this.numberOfTraces;
+			}
+			// create the text for new trace
+			StringBuilder sb1 = new StringBuilder();
+			sb1.append("\t\t\tvar trace").append(this.numberOfTraces).append(" = {\n")
+				.append("\t\t\t\tx: ").append(Arrays.toString(x)).append(",\n")
+				.append("\t\t\t\ty: ").append(Arrays.toString(y)).append(",\n")
+				.append("\t\t\t\tz: ").append(Arrays.toString(z)).append(",\n")
+				.append("\t\t\t\tmode: '").append(MARKER_TYPE_ID).append("',\n")
+				.append("\t\t\t\ttype: '").append(PLOT_TYPE_ID).append("',\n")
+				.append("\t\t\t\tname: '").append(name).append("'\n")
+				.append("\t\t\t};\n")
+				.append("\n")
+				.append("\t\t\t").append(MORE_TRACES_ID);
+						
+			this.inject(MORE_TRACES_ID, sb1.toString());
+			
+			StringBuilder sb2 = new StringBuilder();
+			sb2.append(", trace").append(this.numberOfTraces).append(TRACES_ID);
+			this.inject(TRACES_ID, sb2.toString());
+		}		
 	}
 
 	@Override
@@ -42,7 +83,7 @@ public class XYZTemplate extends XYTemplate implements ITemplate3D {
 	@Override
 	public void injectDefault() {
 		this.setData(null, null, null, "trace" + this.numberOfTraces);
-		this.setPlotType(PlotType.SCATTER);
+		this.setPlotType(PlotType.SCATTER3D);
 		this.setModeType(ModeType.MARKERS);
 		this.setXLabel("X");
 		this.setYLabel("Y");

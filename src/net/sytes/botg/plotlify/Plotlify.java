@@ -3,6 +3,7 @@ package net.sytes.botg.plotlify;
 import net.sytes.botg.plotlify.PlotlifyUtils.ModeType;
 import net.sytes.botg.plotlify.PlotlifyUtils.PlotType;
 import net.sytes.botg.plotlify.templates.XYTemplate;
+import net.sytes.botg.plotlify.templates.XYZTemplate;
 
 public class Plotlify {
 
@@ -91,6 +92,7 @@ public class Plotlify {
 	 */
 	public static void scatter(String filePath, double[] x, double[] y, String traceName, String title, String xLabel, String yLabel) {
 		XYTemplate template = new XYTemplate();
+		template.load();
 		template.setData(x, y, traceName);
 		template.setTitle(title);
 		template.setXLabel(xLabel);
@@ -141,6 +143,16 @@ public class Plotlify {
 	 * @param zLabel
 	 */
 	public static void scatter3D(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) {
-		// TODO
+		XYZTemplate template = new XYZTemplate();
+		template.load();
+		template.setData(x, y, z, traceName);
+		template.setTitle(title);
+		template.setXLabel(xLabel);
+		template.setYLabel(yLabel);
+		template.setYLabel(zLabel);
+		//template.setPlotType(PlotType.SCATTER3D);
+		//template.setModeType(ModeType.MARKERS);
+		template.export(filePath);
+		PlotlifyUtils.openInBrowser(filePath);
 	}
 }
