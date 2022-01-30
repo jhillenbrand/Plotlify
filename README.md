@@ -7,7 +7,7 @@ is a Java Utility Project for visualizing data generated in Java in Plotly.js pl
 based on HTML Templates for specific plots, the Plotlify.java Class contains static methods for<br>
 populating these templates with actual data and to export those templates to a HTML file, that can be shared with anybody with a browser.
 
-´´´javascript
+```javascript
 @Test
 public void test00() {
 		
@@ -35,4 +35,4 @@ public void test01() {
 		Plotlify.scatter3D(filePath, x, y, z, title);
 		
 }
-´´´
+```
