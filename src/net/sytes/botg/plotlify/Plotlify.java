@@ -1,5 +1,6 @@
 package net.sytes.botg.plotlify;
 
+import net.sytes.botg.array.ArrayUtility;
 import net.sytes.botg.plotlify.PlotlifyUtils.ModeType;
 import net.sytes.botg.plotlify.PlotlifyUtils.PlotType;
 import net.sytes.botg.plotlify.templates.XYTemplate;
@@ -7,6 +8,11 @@ import net.sytes.botg.plotlify.templates.XYZTemplate;
 
 public class Plotlify {
 
+	public static void line(String filePath, double[] y) {
+		double[] x = ArrayUtility.linspace(y.length);
+		line(filePath, x, y, null, null, null, null);
+	}
+	
 	/**
 	 * creates a line plot based on the double arrays passed with {@code x} and {@code y} and exports it as html file under specified {@code filePath}
 	 * @param filePath
