@@ -2,6 +2,7 @@ package plotlify;
 
 import org.junit.Test;
 
+import net.sytes.botg.array.ArrayUtility;
 import net.sytes.botg.plotlify.Plotlify;
 
 public class UnitTest_Plotlify {
@@ -12,7 +13,7 @@ public class UnitTest_Plotlify {
 		double[] x = {1.0, 1.4, 1.5, 1.9, 2.0};
 		double[] y = {12.234, 43.122, 34.1234, 18.9122, 22.923};
 		
-		String filePath = "C:\\Users\\****\\Downloads\\test\\test.html";
+		String filePath = "test.html";
 		String title = "Test1";
 		
 		Plotlify.line(filePath, x, y, title);
@@ -32,5 +33,17 @@ public class UnitTest_Plotlify {
 		Plotlify.scatter3D(filePath, x, y, z, title);
 		
 	}
+	
+	@Test
+	public void test02() {
+		
+		double[] y = ArrayUtility.createRandomDoubleArray(100_000);
+		
+		String filePath = "test.html";
+		
+		Plotlify.line(filePath, y);
+		
+	}
+	
 	
 }

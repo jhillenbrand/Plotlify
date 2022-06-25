@@ -56,7 +56,7 @@ public class Plotlify {
 		template.setXLabel(xLabel);
 		template.setYLabel(yLabel);
 		template.setPlotType(PlotType.SCATTER);
-		template.setModeType(ModeType.LINES_MARKERS);
+		template.setModeType(ModeType.LINES);
 		template.export(filePath);
 		PlotlifyUtils.openInBrowser(filePath);
 	}
