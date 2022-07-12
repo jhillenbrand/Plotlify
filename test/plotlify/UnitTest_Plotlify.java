@@ -2,7 +2,7 @@ package plotlify;
 
 import org.junit.Test;
 
-import net.sytes.botg.array.ArrayUtility;
+import net.sytes.botg.array.ArUtils;
 import net.sytes.botg.plotlify.Plotlify;
 
 public class UnitTest_Plotlify {
@@ -37,7 +37,7 @@ public class UnitTest_Plotlify {
 	@Test
 	public void test02() {
 		
-		double[] y = ArrayUtility.createRandomDoubleArray(100_000);
+		double[] y = ArUtils.createRandomDoubleArray(100_000);
 		
 		String filePath = "test.html";
 		
