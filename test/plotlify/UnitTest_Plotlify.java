@@ -37,7 +37,7 @@ public class UnitTest_Plotlify {
 	@Test
 	public void test02() {
 		
-		double[] y = ArUtils.createRandomDoubleArray(100_000);
+		double[] y = ArUtils.rand(100_000);
 		
 		String filePath = "test.html";
 		
