@@ -3,6 +3,7 @@ package net.sytes.botg.plotlify;
 import net.sytes.botg.array.ArUtils;
 import net.sytes.botg.plotlify.PlotlifyUtils.ModeType;
 import net.sytes.botg.plotlify.PlotlifyUtils.PlotType;
+import net.sytes.botg.plotlify.templates.SurfaceTemplate;
 import net.sytes.botg.plotlify.templates.XYTemplate;
 import net.sytes.botg.plotlify.templates.XYZTemplate;
 
@@ -158,6 +159,41 @@ public class Plotlify {
 		template.setYLabel(zLabel);
 		//template.setPlotType(PlotType.SCATTER3D);
 		//template.setModeType(ModeType.MARKERS);
+		template.export(filePath);
+		PlotlifyUtils.openInBrowser(filePath);
+	}
+	
+	/**
+	 * creates a surface plot based on {@code x}, {@code y} and {@code z}, where {@code z} = [m x n] with {@code x} = [n] and {@code y} = [m]
+	 * @param filePath
+	 * @param x
+	 * @param y
+	 * @param z
+	 */
+	public static void surface(String filePath, double[] x, double[] y, double[][] z) {
+		surface(filePath, x, y, z, "surf1", "Surface Plot", "X", "Y", "Z");
+	}
+	
+	/**
+	 * creates a surface plot based on {@code x}, {@code y} and {@code z}, where {@code z} = [m x n] with {@code x} = [n] and {@code y} = [m]
+	 * @param filePath
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param traceName
+	 * @param title
+	 * @param xLabel
+	 * @param yLabel
+	 * @param zLabel
+	 */
+	public static void surface(String filePath, double[] x, double[] y, double[][] z, String traceName, String title, String xLabel, String yLabel, String zLabel) {
+		SurfaceTemplate template = new SurfaceTemplate();
+		template.load();
+		template.setData(x, y, z, traceName);
+		template.setTitle(title);
+		template.setXLabel(xLabel);
+		template.setYLabel(yLabel);
+		template.setYLabel(zLabel);
 		template.export(filePath);
 		PlotlifyUtils.openInBrowser(filePath);
 	}

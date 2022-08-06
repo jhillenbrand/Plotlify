@@ -21,6 +21,9 @@ public abstract class Template implements ITemplate, ITemplate2D {
 	protected static final String XAXIS_TITLE = "#XAXIS_TITLE";
 	protected static final String YAXIS_TITLE = "#YAXIS_TITLE";	
 	protected static final String TITLE_ID = "#TITLE";
+	protected static final String LEGEND_ON_OFF_ID = "#LEGEND_ON_OFF";
+	protected static final String HEIGHT_ID = "#HEIGHT";
+	protected static final String WIDTH_ID = "#WIDTH";
 	
 	protected String loadedTemplate = null;
 	protected int numberOfTraces = 1;
@@ -123,6 +126,25 @@ public abstract class Template implements ITemplate, ITemplate2D {
 		if (plotType != null) {
 			this.inject(PLOT_TYPE_ID, plotType.toString());
 		}		
+	}
+	
+	@Override
+	public void setWidth(int width) {
+		if (width > 0) {
+			this.inject(WIDTH_ID, "" + width);
+		}
+	}
+	
+	@Override
+	public void setHeight(int height) {
+		if (height > 0) {
+			this.inject(HEIGHT_ID, "" + height);
+		}
+	}	
+	
+	@Override
+	public void setLegend(boolean onOff) {
+		this.inject(LEGEND_ON_OFF_ID, "" + onOff);
 	}
 	
 }

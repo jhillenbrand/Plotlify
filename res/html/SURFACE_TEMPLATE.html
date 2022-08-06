@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+	<head>
+	  	<!-- Plotly.js -->
+	  	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	</head>
+	<body>
+		<div id="plot1" style="width:100%; height:100%;"></div>
+		<script>
+			var plotDiv = document.getElementById('plot1');
+			
+			var trace1 = {
+					z: #ZDATA,
+					type: '#PLOT_TYPE',
+					name: '#TRACE_NAME'
+			};
+			
+			//#MORE_TRACES
+			
+			var data = [trace1];//#TRACES];
+			
+			var layout = {
+				autosize: true,
+				title: '#TITLE',
+				height: #HEIGHT,
+				width: #WIDTH,
+				showlegend: #LEGEND_ON_OFF
+			};
+			
+			Plotly.plot(plotDiv, data, layout, {responsive: true});
+			
+		</script>
+	</body>
+</html>

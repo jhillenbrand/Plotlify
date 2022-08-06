@@ -31,7 +31,7 @@ public class PlotlifyUtils {
 	
 	public enum PlotType {
 		
-		SCATTER ("scatter"), BAR ("bar"), PIE ("pie"), SCATTER3D ("scatter3d"); 
+		SCATTER ("scatter"), BAR ("bar"), PIE ("pie"), SCATTER3D ("scatter3d"), SURFACE ("surface"); 
 		
 		private final String type;
 		

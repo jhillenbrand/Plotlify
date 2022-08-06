@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+	<head>
+	  	<!-- Plotly.js -->
+	  	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	</head>
+	<body>
+		<div id="plot1" style="width:100%; height:100%;"></div>
+		<script>
+			var plotDiv = document.getElementById('plot1');
+			
+			var trace1 = {
+					z: [[, 1.0, 2.0, 3.0, 4.0], [3.0, 2.0, 3.0, 5.0, 0.0], [5.0, 1.0, 1.0, 1.0, 1.0], [6.0, 3.0, 1.0, 0.0, -1.0], [9.0, 5.0, 0.0, -1.0, -2.0], [11.0, 3.0, 2.0, 2.0, 1.0]],
+					type: 'surface',
+					name: 'surf1'
+			};
+			
+			//#MORE_TRACES
+			
+			var data = [trace1];//#TRACES];
+			
+			var layout = {
+				autosize: true,
+				title: 'Surface Plot',
+				height: 700,
+				width: 1000,
+				showlegend: false
+			};
+			
+			Plotly.plot(plotDiv, data, layout, {responsive: true});
+			
+		</script>
+	</body>
+</html>

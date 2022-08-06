@@ -13,6 +13,9 @@ public interface ITemplate {
 	public void setYLabel(String yLabel);
 	public void setModeType(ModeType modeType);
 	public void setPlotType(PlotType plotType);
+	public void setWidth(int width);
+	public void setHeight(int height);
+	public void setLegend(boolean onOff);
 	
 	public void injectDefault();
 	
