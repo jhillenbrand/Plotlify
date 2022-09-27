@@ -1,14 +1,13 @@
 package net.sytes.botg.plotlify.templates;
 
-import java.io.File;
-
 import net.sytes.botg.plotlify.PlotlifyUtils.ModeType;
 import net.sytes.botg.plotlify.PlotlifyUtils.PlotType;
 
 public class XYTemplate extends Template {
 
 	static {
-		TEMPLATE_FILE = "res" + File.separator + "html" + File.separator + "XY_TEMPLATE.html";
+		//TEMPLATE_FILE = "res" + File.separator + "html" + File.separator + "XY_TEMPLATE.html";
+		TEMPLATE_FILE = "XY_TEMPLATE.html";
 	}
 
 	/**

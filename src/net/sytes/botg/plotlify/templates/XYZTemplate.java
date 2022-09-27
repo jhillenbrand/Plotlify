@@ -10,7 +10,7 @@ import net.sytes.botg.plotlify.PlotlifyUtils.PlotType;
 public class XYZTemplate extends XYTemplate implements ITemplate3D {
 
 	static {
-		TEMPLATE_FILE = "res" + File.separator + "html" + File.separator + "XYZ_TEMPLATE.html";
+		TEMPLATE_FILE = "XYZ_TEMPLATE.html";
 	}
 	
 	protected static final String ZDATA_ID = "#ZDATA";

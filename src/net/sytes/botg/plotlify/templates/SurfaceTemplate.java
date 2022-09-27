@@ -8,7 +8,7 @@ import net.sytes.botg.plotlify.PlotlifyUtils.PlotType;
 public class SurfaceTemplate extends XYZTemplate implements ITemplateSurface {
 	
 	static {
-		TEMPLATE_FILE = "res" + File.separator + "html" + File.separator + "SURFACE_TEMPLATE.html";
+		TEMPLATE_FILE = "SURFACE_TEMPLATE.html";
 	}
 	
 	@Override

@@ -1,6 +1,10 @@
 package net.sytes.botg.plotlify.templates;
 
+import java.io.InputStream;
 import java.util.Arrays;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.sytes.botg.plotlify.PlotlifyUtils;
 import net.sytes.botg.plotlify.PlotlifyUtils.ModeType;
@@ -27,14 +31,17 @@ public abstract class Template implements ITemplate, ITemplate2D {
 	
 	protected String loadedTemplate = null;
 	protected int numberOfTraces = 1;
-		
+	
+	protected final static Logger logger = LoggerFactory.getLogger(Template.class);
+	
 	protected void inject(String id, String txt) {
 		this.loadedTemplate = this.loadedTemplate.replace(id, txt);
 	}
 	
 	@Override
 	public void load() {
-		this.loadedTemplate = TextParser.readTxtFile(TEMPLATE_FILE);
+		InputStream is = this.getClass().getResourceAsStream(TEMPLATE_FILE);		
+		this.loadedTemplate = TextParser.readInputStream(is);		
 	}
 	
 	@Override
