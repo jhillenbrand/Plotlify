@@ -1,5 +1,8 @@
 package net.sytes.botg.plotlify.templates;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Arrays;
 
@@ -9,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import net.sytes.botg.plotlify.PlotlifyUtils;
 import net.sytes.botg.plotlify.PlotlifyUtils.ModeType;
 import net.sytes.botg.plotlify.PlotlifyUtils.PlotType;
+import net.sytes.botg.string.StringUtilities;
 import net.sytes.botg.text.TextParser;
 
 public abstract class Template implements ITemplate, ITemplate2D {
@@ -20,6 +24,7 @@ public abstract class Template implements ITemplate, ITemplate2D {
 	protected static final String TRACE_NAME_ID = "#TRACE_NAME";
 	protected static final String MORE_TRACES_ID = "//#MORE_TRACES";
 	protected static final String TRACES_ID = "];//#TRACES";
+	protected static final String TRACE_DECLARATION_ID = "var trace";
 	protected static final String MARKER_TYPE_ID = "#MARKER_TYPE";
 	protected static final String PLOT_TYPE_ID = "#PLOT_TYPE";
 	protected static final String XAXIS_TITLE = "#XAXIS_TITLE";
@@ -42,6 +47,25 @@ public abstract class Template implements ITemplate, ITemplate2D {
 	public void load() {
 		InputStream is = this.getClass().getResourceAsStream(TEMPLATE_FILE);		
 		this.loadedTemplate = TextParser.readInputStream(is);		
+	}
+	
+	@Override
+	public void load(String filePath) {
+		if (new File(filePath).exists()) {
+			try {
+				InputStream is = new FileInputStream(new File(filePath));
+				this.loadedTemplate = TextParser.readInputStream(is);
+				// count number of traces, already added
+				int traceCount = StringUtilities.getStringInStringCount(TRACE_DECLARATION_ID, this.loadedTemplate);
+				this.numberOfTraces = traceCount;
+			} catch (FileNotFoundException e) {
+				logger.error("Could not load " + filePath, e);
+				logger.warn("Loading template instead");
+				this.load();
+			}
+		} else {
+			this.load();
+		}
 	}
 	
 	@Override
@@ -73,7 +97,7 @@ public abstract class Template implements ITemplate, ITemplate2D {
 	}
 
 	@Override
-	public void addData(double[] x, double[] y, String name) {
+	public void addData(double[] x, double[] y, String name, ModeType modeType, PlotType plotType) {
 		PlotlifyUtils.checkDimensions(x, y, null);
 		if (x != null && y != null) {
 			++this.numberOfTraces;			
@@ -82,11 +106,11 @@ public abstract class Template implements ITemplate, ITemplate2D {
 			}
 			// create the text for new trace
 			StringBuilder sb1 = new StringBuilder();
-			sb1.append("\t\t\tvar trace").append(this.numberOfTraces).append(" = {\n")
+			sb1.append("var trace").append(this.numberOfTraces).append(" = {\n")
 				.append("\t\t\t\tx: ").append(Arrays.toString(x)).append(",\n")
 				.append("\t\t\t\ty: ").append(Arrays.toString(y)).append(",\n")
-				.append("\t\t\t\tmode: '").append(MARKER_TYPE_ID).append("',\n")
-				.append("\t\t\t\ttype: '").append(PLOT_TYPE_ID).append("',\n")
+				.append("\t\t\t\tmode: '").append(modeType.toString()).append("',\n")
+				.append("\t\t\t\ttype: '").append(plotType.toString()).append("',\n")
 				.append("\t\t\t\tname: '").append(name).append("'\n")
 				.append("\t\t\t};\n")
 				.append("\n")

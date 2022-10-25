@@ -45,5 +45,36 @@ public class UnitTest_Plotlify {
 		
 	}
 	
+	@Test
+	public void test030() {
+		
+		double[] x = ArUtils.linspace(10);
+		double[] y = ArUtils.rand(10);
+
+		double[] y2 = ArUtils.rand(10);
+		
+		String filePath = "test.html";
+				
+		Plotlify.line(filePath, x, y);
+		
+		Plotlify.addLine(filePath, x, y2);
+		
+	}
+	
+	@Test
+	public void test040() {
+		
+		double[] x = ArUtils.linspace(10);
+		double[] y = ArUtils.rand(10);
+
+		double[] y2 = ArUtils.rand(10);
+		
+		String filePath = "test.html";
+				
+		Plotlify.line(filePath, x, y);
+		
+		Plotlify.addScatter(filePath, x, y2);
+		
+	}
 	
 }

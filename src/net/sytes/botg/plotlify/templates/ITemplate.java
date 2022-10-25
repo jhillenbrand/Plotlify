@@ -6,6 +6,7 @@ import net.sytes.botg.plotlify.PlotlifyUtils.PlotType;
 public interface ITemplate {
 
 	public void load();
+	public void load(String filePath);
 	public void export(String filePath);
 		
 	public void setTitle(String title);

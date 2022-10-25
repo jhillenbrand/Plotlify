@@ -97,7 +97,7 @@ public class XYZTemplate extends XYTemplate implements ITemplate3D {
 	}
 
 	@Override
-	public void addData(double[] x, double[] y, String name) {
+	public void addData(double[] x, double[] y, String name, ModeType modeType, PlotType plotType) {
 		throw new UnsupportedOperationException("setData for 2D input is not applicable for 3D plot Template");
 	}
 }

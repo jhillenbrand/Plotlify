@@ -1,5 +1,8 @@
 package net.sytes.botg.plotlify;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import net.sytes.botg.array.ArUtils;
 import net.sytes.botg.plotlify.PlotlifyUtils.ModeType;
 import net.sytes.botg.plotlify.PlotlifyUtils.PlotType;
@@ -61,7 +64,44 @@ public class Plotlify {
 		template.export(filePath);
 		PlotlifyUtils.openInBrowser(filePath);
 	}
+	
+	/**
+	 * adds a new line trace to plot html and opens the file in browser
+	 * @param filePath
+	 * @param x
+	 * @param y
+	 */
+	public static void addLine(String filePath, double[] x, double[] y) {
+		addLine(filePath, x, y, "trace-" + new SimpleDateFormat("HHmmss").format(new Date()), null, null, null);
+	}
 
+	/**
+	 * adds a new line trace to plot html and opens the file in browser
+	 * @param filePath
+	 * @param x
+	 * @param y
+	 * @param traceName
+	 * @param title
+	 * @param xLabel
+	 * @param yLabel
+	 */
+	public static void addLine(String filePath, double[] x, double[] y, String traceName, String title, String xLabel, String yLabel) {
+		XYTemplate template = new XYTemplate();
+		template.load(filePath);
+		template.addData(x, y, traceName, ModeType.LINES, PlotType.SCATTER);
+		if (title != null) {
+			template.setTitle(title);
+		}
+		if (xLabel != null) {
+			template.setXLabel(xLabel);
+		}
+		if (yLabel != null) {
+			template.setYLabel(yLabel);
+		}
+		template.export(filePath);
+		PlotlifyUtils.openInBrowser(filePath);
+	}
+	
 	/**
 	 * creates a scatter plot based on the double arrays passed with {@code x} and {@code y} and exports it as html file under specified {@code filePath}
 	 * @param filePath
@@ -109,6 +149,43 @@ public class Plotlify {
 		template.export(filePath);
 		PlotlifyUtils.openInBrowser(filePath);
 	}
+	
+	/**
+	 * adds a new scatter trace to plot html and opens the file in browser
+	 * @param filePath
+	 * @param x
+	 * @param y
+	 */
+	public static void addScatter(String filePath, double[] x, double[] y) {
+		addScatter(filePath, x, y, "trace-" + new SimpleDateFormat("HHmmss").format(new Date()), null, null, null);
+	}
+	
+	/**
+	 * adds a new scatter trace to plot html and opens the file in browser
+	 * @param filePath
+	 * @param x
+	 * @param y
+	 * @param traceName
+	 * @param title
+	 * @param xLabel
+	 * @param yLabel
+	 */
+	public static void addScatter(String filePath, double[] x, double[] y, String traceName, String title, String xLabel, String yLabel) {
+		XYTemplate template = new XYTemplate();
+		template.load(filePath);
+		template.addData(x, y, traceName, ModeType.MARKERS, PlotType.SCATTER);
+		if (title != null) {
+			template.setTitle(title);
+		}
+		if (xLabel != null) {
+			template.setXLabel(xLabel);
+		}
+		if (yLabel != null) {
+			template.setYLabel(yLabel);
+		}
+		template.export(filePath);
+		PlotlifyUtils.openInBrowser(filePath);
+	}	
 
 	/**
 	 * creates a scatter 3D plot based on the double arrays passed with {@code x}, {@code y} and {@code z} and exports it as html file under specified {@code filePath}
