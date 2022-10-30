@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import net.sytes.botg.array.ArUtils;
+import net.sytes.botg.array.geometry.SemiSphere;
 import net.sytes.botg.plotlify.PlotlifyUtils.ModeType;
 import net.sytes.botg.plotlify.PlotlifyUtils.PlotType;
 import net.sytes.botg.plotlify.templates.SurfaceTemplate;
@@ -376,4 +377,62 @@ public class Plotlify {
 		template.export(filePath);
 		PlotlifyUtils.openInBrowser(filePath);
 	}
+	
+	public static void mesh3d(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) {
+		SurfaceTemplate template = new SurfaceTemplate();
+		template.load();
+		template.setPlotType(PlotType.MESH3D);
+		template.setData(x, y, z, traceName);
+		template.setTitle(title);
+		template.setXLabel(xLabel);
+		template.setYLabel(yLabel);
+		template.setYLabel(zLabel);
+		template.export(filePath);
+		PlotlifyUtils.openInBrowser(filePath);
+	}
+	
+	public static void sphere(String filePath, double D, double x_0, double y_0, double z_0, int res) {
+		
+		SemiSphere ss1 = new SemiSphere.Builder()
+				.D(D)
+				.x_0(x_0)
+				.y_0(y_0)
+				.z_0(z_0)
+				.top(true)
+				.build();
+		
+		SemiSphere ss2 = new SemiSphere.Builder()
+				.D(D)
+				.x_0(x_0)
+				.y_0(y_0)
+				.z_0(z_0)
+				.top(false)
+				.build();
+		
+		double[] t1 = ArUtils.linspace(0.0, 1.0, res);
+		double[] t2 = ArUtils.linspace(0.0, 1.0, res);
+		
+		ss1.create(t1, t2);
+		ss2.create(t1, t2);
+		
+		double[] x1 = ss1.x();
+		double[] y1 = ss1.y();
+		double[] z1 = ss1.z();
+		
+		double[] x2 = ss2.x();
+		double[] y2 = ss2.y();
+		double[] z2 = ss2.z();
+		
+		SurfaceTemplate template = new SurfaceTemplate();
+		template.load();
+		template.setPlotType(PlotType.MESH3D);
+		template.setData(x1, y1, z1, "");
+		template.addData(x2, y2, z2, "", null, PlotType.MESH3D);
+		template.setXLabel("X");
+		template.setYLabel("Y");
+		template.setYLabel("Z");
+		template.export(filePath);
+		PlotlifyUtils.openInBrowser(filePath);
+	}
+	
 }

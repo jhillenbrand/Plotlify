@@ -13,6 +13,8 @@ public class SurfaceTemplate extends XYZTemplate implements ITemplateSurface {
 	
 	@Override
 	public void injectDefault() {
+		this.setHeight(DEFAULT_HEIGHT);
+		this.setWidth(DEFAULT_WIDTH);
 		this.setPlotType(PlotType.SURFACE);
 		this.setXLabel("X");
 		this.setYLabel("Y");
@@ -25,12 +27,40 @@ public class SurfaceTemplate extends XYZTemplate implements ITemplateSurface {
 	
 	@Override
 	public void setData(double[] x, double[] y, double[] z, String name) {
-		throw new UnsupportedOperationException("setData(double[] x, double[] y, double[] z, String name) is not implemented for " + this.getClass().getSimpleName());
+		this.inject(XDATA_ID, Arrays.toString(x));
+		this.inject(YDATA_ID, Arrays.toString(y));
+		this.inject(ZDATA_ID, Arrays.toString(z));
+		if (name == null) {
+			name = "trace1";
+		}
+		this.inject(TRACE_NAME_ID, name);
 	}
 
 	@Override
 	public void addData(double[] x, double[] y, double[] z, String traceName, ModeType modeType, PlotType plotType) {
-		throw new UnsupportedOperationException("addData(double[] x, double[] y, double[] z, String name) is not implemented for " + this.getClass().getSimpleName());
+		if (x != null && y != null && z != null) {
+			++this.numberOfTraces;			
+			if (traceName == null) {
+				traceName = "trace" + this.numberOfTraces;
+			}
+			// create the text for new trace
+			StringBuilder sb1 = new StringBuilder();
+			sb1.append("var trace").append(this.numberOfTraces).append(" = {\n")
+				.append("\t\t\t\tx: ").append(Arrays.toString(x)).append(",\n")
+				.append("\t\t\t\ty: ").append(Arrays.toString(y)).append(",\n")
+				.append("\t\t\t\tz: ").append(Arrays.toString(z)).append(",\n")
+				.append("\t\t\t\ttype: '").append(plotType.toString()).append("',\n")
+				.append("\t\t\t\tname: '").append(traceName).append("'\n")
+				.append("\t\t\t};\n")
+				.append("\n")
+				.append("\t\t\t").append(MORE_TRACES_ID);
+						
+			this.inject(MORE_TRACES_ID, sb1.toString());
+			
+			StringBuilder sb2 = new StringBuilder();
+			sb2.append(", trace").append(this.numberOfTraces).append(TRACES_ID);
+			this.inject(TRACES_ID, sb2.toString());
+		}
 	}
 
 	@Override
@@ -52,7 +82,7 @@ public class SurfaceTemplate extends XYZTemplate implements ITemplateSurface {
 			}
 			// create the text for new trace
 			StringBuilder sb1 = new StringBuilder();
-			sb1.append("\t\t\tvar trace").append(this.numberOfTraces).append(" = {\n")
+			sb1.append("var trace").append(this.numberOfTraces).append(" = {\n")
 				.append("\t\t\t\tx: ").append(Arrays.toString(x)).append(",\n")
 				.append("\t\t\t\ty: ").append(Arrays.toString(y)).append(",\n")
 				.append("\t\t\t\tz: ").append(Arrays.deepToString(z)).append(",\n")
