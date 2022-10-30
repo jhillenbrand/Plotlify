@@ -1,6 +1,5 @@
 package net.sytes.botg.plotlify.templates;
 
-import java.io.File;
 import java.util.Arrays;
 
 import net.sytes.botg.plotlify.PlotlifyUtils;
@@ -32,7 +31,7 @@ public class XYZTemplate extends XYTemplate implements ITemplate3D {
 		if (z == null) {
 			this.inject(ZDATA_ID, "[]");
 		} else {
-			this.inject(ZDATA_ID, Arrays.toString(y));
+			this.inject(ZDATA_ID, Arrays.toString(z));
 		}
 		if (name == null) {
 			this.inject(TRACE_NAME_ID, "trace" + this.numberOfTraces);
@@ -42,22 +41,22 @@ public class XYZTemplate extends XYTemplate implements ITemplate3D {
 	}
 
 	@Override
-	public void addData(double[] x, double[] y, double[] z, String name) {
+	public void addData(double[] x, double[] y, double[] z, String traceName, ModeType modeType, PlotType plotType) {
 		PlotlifyUtils.checkDimensions(x, y, z);
 		if (x != null && y != null && z != null) {
 			++this.numberOfTraces;			
-			if (name == null) {
-				name = "trace" + this.numberOfTraces;
+			if (traceName == null) {
+				traceName = "trace" + this.numberOfTraces;
 			}
 			// create the text for new trace
 			StringBuilder sb1 = new StringBuilder();
-			sb1.append("\t\t\tvar trace").append(this.numberOfTraces).append(" = {\n")
+			sb1.append("var trace").append(this.numberOfTraces).append(" = {\n")
 				.append("\t\t\t\tx: ").append(Arrays.toString(x)).append(",\n")
 				.append("\t\t\t\ty: ").append(Arrays.toString(y)).append(",\n")
 				.append("\t\t\t\tz: ").append(Arrays.toString(z)).append(",\n")
-				.append("\t\t\t\tmode: '").append(MARKER_TYPE_ID).append("',\n")
-				.append("\t\t\t\ttype: '").append(PLOT_TYPE_ID).append("',\n")
-				.append("\t\t\t\tname: '").append(name).append("'\n")
+				.append("\t\t\t\tmode: '").append(modeType.toString()).append("',\n")
+				.append("\t\t\t\ttype: '").append(plotType.toString()).append("',\n")
+				.append("\t\t\t\tname: '").append(traceName).append("'\n")
 				.append("\t\t\t};\n")
 				.append("\n")
 				.append("\t\t\t").append(MORE_TRACES_ID);
@@ -89,6 +88,8 @@ public class XYZTemplate extends XYTemplate implements ITemplate3D {
 		this.setYLabel("Y");
 		this.setZLabel("Z");
 		this.setTitle("trace" + this.numberOfTraces);
+		this.setHeight(DEFAULT_HEIGHT);
+		this.setWidth(DEFAULT_WIDTH);
 	}
 	
 	@Override

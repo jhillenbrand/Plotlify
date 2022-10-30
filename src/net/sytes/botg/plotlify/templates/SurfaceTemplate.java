@@ -1,8 +1,8 @@
 package net.sytes.botg.plotlify.templates;
 
-import java.io.File;
 import java.util.Arrays;
 
+import net.sytes.botg.plotlify.PlotlifyUtils.ModeType;
 import net.sytes.botg.plotlify.PlotlifyUtils.PlotType;
 
 public class SurfaceTemplate extends XYZTemplate implements ITemplateSurface {
@@ -29,7 +29,7 @@ public class SurfaceTemplate extends XYZTemplate implements ITemplateSurface {
 	}
 
 	@Override
-	public void addData(double[] x, double[] y, double[] z, String name) {
+	public void addData(double[] x, double[] y, double[] z, String traceName, ModeType modeType, PlotType plotType) {
 		throw new UnsupportedOperationException("addData(double[] x, double[] y, double[] z, String name) is not implemented for " + this.getClass().getSimpleName());
 	}
 

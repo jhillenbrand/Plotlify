@@ -33,6 +33,8 @@ public abstract class Template implements ITemplate, ITemplate2D {
 	protected static final String LEGEND_ON_OFF_ID = "#LEGEND_ON_OFF";
 	protected static final String HEIGHT_ID = "#HEIGHT";
 	protected static final String WIDTH_ID = "#WIDTH";
+	protected static final int DEFAULT_WIDTH = 700;
+	protected static final int DEFAULT_HEIGHT = 500;
 	
 	protected String loadedTemplate = null;
 	protected int numberOfTraces = 1;
@@ -122,6 +124,13 @@ public abstract class Template implements ITemplate, ITemplate2D {
 			sb2.append(", trace").append(this.numberOfTraces).append(TRACES_ID);
 			this.inject(TRACES_ID, sb2.toString());
 		}
+	}
+	
+	@Override
+	public void injectDefault() {
+		// set default width and height
+		this.setHeight(DEFAULT_HEIGHT);
+		this.setWidth(DEFAULT_WIDTH);
 	}
 	
 	@Override

@@ -11,7 +11,7 @@ import net.sytes.botg.plotlify.templates.XYTemplate;
 import net.sytes.botg.plotlify.templates.XYZTemplate;
 
 public class Plotlify {
-
+	
 	public static void line(String filePath, double[] y) {
 		double[] x = ArUtils.linspace(y.length);
 		line(filePath, x, y, null, null, null, null);
@@ -66,6 +66,64 @@ public class Plotlify {
 	}
 	
 	/**
+	 * create 3D line plot based on the double arrays passed with {@code x}, {@code y} and {@code z} and exports it as html file under specified {@code filePath}
+	 * <br>{@code traceName} can be used to specify the legend entry for the specified data
+	 * <br>{@code title} can be used to specify the plot's title
+	 * <br>{@code xLabel}, {@code xLabel} and {@code zLabel} can be used to specify the plot's axis labels
+	 * @param fil ePath
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param traceName
+	 * @param title
+	 * @param xLabel
+	 * @param yLabel
+	 * @param zLabel
+	 */
+	public static void line(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) {
+		XYZTemplate template = new XYZTemplate();
+		template.load();
+		template.setData(x, y, z, traceName);
+		template.setTitle(title);
+		template.setXLabel(xLabel);
+		template.setYLabel(yLabel);
+		template.setZLabel(zLabel);
+		template.setPlotType(PlotType.SCATTER3D);
+		template.setModeType(ModeType.LINES);
+		template.export(filePath);
+		PlotlifyUtils.openInBrowser(filePath);
+	}
+	
+	/**
+	 * create 3D line plot based on the double arrays passed with {@code x}, {@code y} and {@code z} and exports it as html file under specified {@code filePath}
+	 * <br>{@code traceName} can be used to specify the legend entry for the specified data
+	 * <br>{@code title} can be used to specify the plot's title
+	 * <br>{@code xLabel}, {@code xLabel} and {@code zLabel} can be used to specify the plot's axis labels
+	 * @param fil ePath
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param traceName
+	 * @param title
+	 * @param xLabel
+	 * @param yLabel
+	 * @param zLabel
+	 */
+	public static void line(String filePath, double[] x, double[] y, double[] z, String traceName) {
+		XYZTemplate template = new XYZTemplate();
+		template.load();
+		template.setData(x, y, z, traceName);
+		template.setTitle("3D Line");
+		template.setXLabel("X");
+		template.setYLabel("Y");
+		template.setZLabel("Z");
+		template.setPlotType(PlotType.SCATTER3D);
+		template.setModeType(ModeType.LINES);
+		template.export(filePath);
+		PlotlifyUtils.openInBrowser(filePath);
+	}
+	
+	/**
 	 * adds a new line trace to plot html and opens the file in browser
 	 * @param filePath
 	 * @param x
@@ -101,6 +159,50 @@ public class Plotlify {
 		template.export(filePath);
 		PlotlifyUtils.openInBrowser(filePath);
 	}
+	
+	/**
+	 * adds a new line trace to 3d plot html and opens the file in browser
+	 * @param filePath
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param traceName
+	 */
+	public static void addLine(String filePath, double[] x, double[] y, double[] z, String traceName) {
+		addLine(filePath, x, y, z, traceName, null, null, null, null);
+	}
+	
+	/**
+	 * adds a new line trace to 3d plot html and opens the file in browser
+	 * @param filePath
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param traceName
+	 * @param title
+	 * @param xLabel
+	 * @param yLabel
+	 */
+	public static void addLine(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) {
+		XYZTemplate template = new XYZTemplate();
+		template.load(filePath);
+		template.addData(x, y, z, traceName, ModeType.LINES, PlotType.SCATTER3D);
+		if (title != null) {
+			template.setTitle(title);
+		}
+		if (xLabel != null) {
+			template.setXLabel(xLabel);
+		}
+		if (yLabel != null) {
+			template.setYLabel(yLabel);
+		}
+		if (zLabel != null) {
+			template.setZLabel(zLabel);
+		}
+		template.export(filePath);
+		PlotlifyUtils.openInBrowser(filePath);
+	}
+	
 	
 	/**
 	 * creates a scatter plot based on the double arrays passed with {@code x} and {@code y} and exports it as html file under specified {@code filePath}
