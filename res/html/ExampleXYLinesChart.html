@@ -9,15 +9,15 @@
 			var plotDiv = document.getElementById('plot1');
 			
 			var trace1 = {
-					x: [1, 2, 3, 4, 5],
-					y: [1, 2, 4, 8, 16],
+					x: [1, 2, 3, undefined, 4, 5],
+					y: [1, 2, 4, undefined, 8, 16],
 					mode: 'lines+markers',
 					type: 'scatter'					
 			};
 			
 			var trace2 = {
-					x: [1, 2, 3, 4, 5],
-					y: [2, 3, 3, 5, 11],
+					x: [1, 2, NaN, 3, 4, 5],
+					y: [2, 3, NaN, 3, 5, 11],
 					mode: 'lines+markers',
 					type: 'scatter'					
 			};
