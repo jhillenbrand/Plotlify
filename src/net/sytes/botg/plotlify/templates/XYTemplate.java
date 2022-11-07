@@ -15,11 +15,9 @@ public class XYTemplate extends Template {
 	 */
 	@Override
 	public void injectDefault() {
+		super.injectDefault();
 		this.setData(null, null, "trace" + this.numberOfTraces);
 		this.setPlotType(PlotType.SCATTER);
 		this.setModeType(ModeType.LINES);
-		this.setXLabel("X");
-		this.setYLabel("Y");
-		this.setTitle("trace" + this.numberOfTraces);
 	}
 }

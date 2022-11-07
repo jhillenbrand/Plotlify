@@ -56,12 +56,12 @@ public class Plotlify {
 	public static void line(String filePath, double[] x, double[] y, String traceName, String title, String xLabel, String yLabel) {
 		XYTemplate template = new XYTemplate();
 		template.load();
-		template.setData(x, y, traceName);
 		template.setTitle(title);
 		template.setXLabel(xLabel);
 		template.setYLabel(yLabel);
 		template.setPlotType(PlotType.SCATTER);
 		template.setModeType(ModeType.LINES);
+		template.setData(x, y, traceName);
 		template.export(filePath);
 		PlotlifyUtils.openInBrowser(filePath);
 	}

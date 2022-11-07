@@ -128,6 +128,10 @@ public abstract class Template implements ITemplate, ITemplate2D {
 	
 	@Override
 	public void injectDefault() {
+		// set default labels and title
+		this.setXLabel("X");
+		this.setYLabel("Y");
+		this.setTitle("trace" + this.numberOfTraces);
 		// set default width and height
 		this.setHeight(DEFAULT_HEIGHT);
 		this.setWidth(DEFAULT_WIDTH);

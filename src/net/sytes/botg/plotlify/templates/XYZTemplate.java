@@ -81,15 +81,11 @@ public class XYZTemplate extends XYTemplate implements ITemplate3D {
 	 */
 	@Override
 	public void injectDefault() {
+		super.injectDefault();
 		this.setData(null, null, null, "trace" + this.numberOfTraces);
 		this.setPlotType(PlotType.SCATTER3D);
 		this.setModeType(ModeType.MARKERS);
-		this.setXLabel("X");
-		this.setYLabel("Y");
-		this.setZLabel("Z");
-		this.setTitle("trace" + this.numberOfTraces);
-		this.setHeight(DEFAULT_HEIGHT);
-		this.setWidth(DEFAULT_WIDTH);
+		this.setZLabel("Z");		
 	}
 	
 	@Override
