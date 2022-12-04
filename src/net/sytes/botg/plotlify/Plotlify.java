@@ -11,7 +11,7 @@ import net.sytes.botg.plotlify.templates.SurfaceTemplate;
 import net.sytes.botg.plotlify.templates.XYTemplate;
 import net.sytes.botg.plotlify.templates.XYZTemplate;
 
-public class Plotlify {
+public class Plotlify { 
 	
 	public static void line(String filePath, double[] y) {
 		double[] x = ArUtils.linspace(y.length);
