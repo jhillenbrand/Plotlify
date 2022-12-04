@@ -24,7 +24,7 @@ public class Trace {
 	private Marker marker = null;
 	
 	private static int TRACE_NUM = 0;
-	
+		
 	public Trace() {
 		++TRACE_NUM;
 		this.name = "trace" + TRACE_NUM;

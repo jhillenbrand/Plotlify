@@ -13,37 +13,6 @@ public class PlotlifyUtils {
 	public static final String PLOTLY_NAME = "plotly";
 	public static final String VERSION = "latest";
 	public static final String CDN_LINK = "https://cdn.plot.ly/plotly-" + VERSION + ".min.js";
-		
-	public enum ModeType {
-		MARKERS ("markers"), LINES ("lines"), LINES_MARKERS ("lines+markers");
-		
-		private final String type;
-		
-		private ModeType(String type) {
-			this.type = type;
-		}
-		
-		@Override
-		public String toString() {
-			return this.type;
-		}
-	}
-	
-	public enum PlotType {
-		
-		SCATTER("scatter"), BAR("bar"), PIE("pie"), SCATTER3D("scatter3d"), SURFACE("surface"), MESH3D("mesh3d"); 
-		
-		private final String type;
-		
-		private PlotType(String type) {
-			this.type = type;
-		}
-		
-		@Override
-		public String toString() {
-			return this.type;
-		}
-	}
 	
 	public static void downloadPlotlyLibrary(String folderPath) {
 		URL url = null;

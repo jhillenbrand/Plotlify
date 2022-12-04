@@ -23,12 +23,9 @@ public class Plotly {
 	
 	private static final Logger logger = LoggerFactory.getLogger(Plotly.class);
 	
-	public Plotly(String id) {
-		if (id == null) {
-			throw new IllegalArgumentException("id of " + this.getClass().getSimpleName() + " must not be null");
-		}
-		this.plotId = id;
+	public Plotly() {
 		++PLOTLY_NUM;
+		this.plotId = "plot" + PLOTLY_NUM;
 	}
 
 	/**

@@ -9,6 +9,7 @@ public class Layout {
 
 	private Axis xaxis = null;
 	private Axis yaxis = null;
+	private Axis zaxis = null;
 	
 	private int height = 0;
 	private int width = 0;
@@ -75,6 +76,22 @@ public class Layout {
 
 	public void setYAxis(Axis yAxis) {
 		this.yaxis = yAxis;
+	}
+	
+	/**
+	 * return this {@code Axis}
+	 * <br>if no {@code Axis} was specified yet, a new one is created and returned
+	 * @return
+	 */
+	public Axis getZAxis() {
+		if (this.zaxis == null) {
+			this.zaxis = new Axis();
+		}
+		return this.zaxis;
+	}
+
+	public void setZAxis(Axis zAxis) {
+		this.zaxis = zAxis;
 	}
 
 	public Legend getLegend() {

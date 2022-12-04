@@ -1,21 +1,16 @@
 package net.sytes.botg.plotlify;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.IOException;
 
 import net.sytes.botg.array.ArUtils;
 import net.sytes.botg.array.geometry.SemiSphere;
-import net.sytes.botg.plotlify.PlotlifyUtils.ModeType;
-import net.sytes.botg.plotlify.PlotlifyUtils.PlotType;
 import net.sytes.botg.plotlify.templates.SurfaceTemplate;
-import net.sytes.botg.plotlify.templates.XYTemplate;
-import net.sytes.botg.plotlify.templates.XYZTemplate;
 
 public class Plotlify { 
-	
-	public static void line(String filePath, double[] y) {
+		
+	public static void line(String filePath, double[] y) throws IOException {
 		double[] x = ArUtils.linspace(y.length);
-		line(filePath, x, y, null, null, null, null);
+		line(filePath, x, y, "trace1", null, null, null);
 	}
 	
 	/**
@@ -23,9 +18,10 @@ public class Plotlify {
 	 * @param filePath
 	 * @param x
 	 * @param y
+	 * @throws IOException 
 	 */
-	public static void line(String filePath, double[] x, double[] y) {
-		line(filePath, x, y, null, null, null, null);
+	public static void line(String filePath, double[] x, double[] y) throws IOException {
+		line(filePath, x, y, "trace1", null, null, null);
 	}
 	
 	/**
@@ -35,9 +31,10 @@ public class Plotlify {
 	 * @param x
 	 * @param y
 	 * @param title
+	 * @throws IOException 
 	 */
-	public static void line(String filePath, double[] x, double[] y, String title) {
-		line(filePath, x, y, null, title, null, null);
+	public static void line(String filePath, double[] x, double[] y, String title) throws IOException {
+		line(filePath, x, y, "trace1", title, null, null);
 	}
 	
 	/**
@@ -52,17 +49,26 @@ public class Plotlify {
 	 * @param title
 	 * @param xLabel
 	 * @param yLabel
+	 * @throws IOException 
 	 */
-	public static void line(String filePath, double[] x, double[] y, String traceName, String title, String xLabel, String yLabel) {
-		XYTemplate template = new XYTemplate();
-		template.load();
-		template.setTitle(title);
-		template.setXLabel(xLabel);
-		template.setYLabel(yLabel);
-		template.setPlotType(PlotType.SCATTER);
-		template.setModeType(ModeType.LINES);
-		template.setData(x, y, traceName);
-		template.export(filePath);
+	public static void line(String filePath, double[] x, double[] y, String traceName, String title, String xLabel, String yLabel) throws IOException {
+		
+		Plotly p = new Plotly();
+		
+		p.getLayout().setTitle(title);
+		p.getLayout().getXAxis().setTitle(yLabel);
+		p.getLayout().getYAxis().setTitle(yLabel);
+		
+		p.getTrace(traceName).setType(PlotType.SCATTER);
+		p.getTrace(traceName).setMode(Mode.LINES);
+		p.getTrace(traceName).setX(x);
+		p.getTrace(traceName).setY(y);
+		
+		PlotlyDocument pDoc = new PlotlyDocument();
+		pDoc.addPlotly(p);
+		
+		pDoc.toFile(filePath);
+		
 		PlotlifyUtils.openInBrowser(filePath);
 	}
 	
@@ -80,19 +86,10 @@ public class Plotlify {
 	 * @param xLabel
 	 * @param yLabel
 	 * @param zLabel
+	 * @throws IOException 
 	 */
-	public static void line(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) {
-		XYZTemplate template = new XYZTemplate();
-		template.load();
-		template.setData(x, y, z, traceName);
-		template.setTitle(title);
-		template.setXLabel(xLabel);
-		template.setYLabel(yLabel);
-		template.setZLabel(zLabel);
-		template.setPlotType(PlotType.SCATTER3D);
-		template.setModeType(ModeType.LINES);
-		template.export(filePath);
-		PlotlifyUtils.openInBrowser(filePath);
+	public static void line(String filePath, double[] x, double[] y, double[] z, String traceName) throws IOException {
+		line(filePath, x, y, z, traceName, null, null, null, null);
 	}
 	
 	/**
@@ -109,110 +106,40 @@ public class Plotlify {
 	 * @param xLabel
 	 * @param yLabel
 	 * @param zLabel
+	 * @throws IOException 
 	 */
-	public static void line(String filePath, double[] x, double[] y, double[] z, String traceName) {
-		XYZTemplate template = new XYZTemplate();
-		template.load();
-		template.setData(x, y, z, traceName);
-		template.setTitle("3D Line");
-		template.setXLabel("X");
-		template.setYLabel("Y");
-		template.setZLabel("Z");
-		template.setPlotType(PlotType.SCATTER3D);
-		template.setModeType(ModeType.LINES);
-		template.export(filePath);
-		PlotlifyUtils.openInBrowser(filePath);
-	}
-	
-	/**
-	 * adds a new line trace to plot html and opens the file in browser
-	 * @param filePath
-	 * @param x
-	 * @param y
-	 */
-	public static void addLine(String filePath, double[] x, double[] y) {
-		addLine(filePath, x, y, "trace-" + new SimpleDateFormat("HHmmss").format(new Date()), null, null, null);
-	}
+	public static void line(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
 
-	/**
-	 * adds a new line trace to plot html and opens the file in browser
-	 * @param filePath
-	 * @param x
-	 * @param y
-	 * @param traceName
-	 * @param title
-	 * @param xLabel
-	 * @param yLabel
-	 */
-	public static void addLine(String filePath, double[] x, double[] y, String traceName, String title, String xLabel, String yLabel) {
-		XYTemplate template = new XYTemplate();
-		template.load(filePath);
-		template.addData(x, y, traceName, ModeType.LINES, PlotType.SCATTER);
-		if (title != null) {
-			template.setTitle(title);
-		}
-		if (xLabel != null) {
-			template.setXLabel(xLabel);
-		}
-		if (yLabel != null) {
-			template.setYLabel(yLabel);
-		}
-		template.export(filePath);
+		Plotly p = new Plotly();
+		
+		p.getLayout().setTitle(title);
+		p.getLayout().getXAxis().setTitle(xLabel);
+		p.getLayout().getYAxis().setTitle(yLabel);
+		p.getLayout().getZAxis().setTitle(zLabel);
+		
+		p.getTrace(traceName).setType(PlotType.SCATTER3D);
+		p.getTrace(traceName).setMode(Mode.LINES);
+		p.getTrace(traceName).setX(x);
+		p.getTrace(traceName).setY(y);
+		p.getTrace(traceName).setZ(z);		
+		
+		PlotlyDocument pDoc = new PlotlyDocument();
+		pDoc.addPlotly(p);
+		
+		pDoc.toFile(filePath);
+		
 		PlotlifyUtils.openInBrowser(filePath);
 	}
-	
-	/**
-	 * adds a new line trace to 3d plot html and opens the file in browser
-	 * @param filePath
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @param traceName
-	 */
-	public static void addLine(String filePath, double[] x, double[] y, double[] z, String traceName) {
-		addLine(filePath, x, y, z, traceName, null, null, null, null);
-	}
-	
-	/**
-	 * adds a new line trace to 3d plot html and opens the file in browser
-	 * @param filePath
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @param traceName
-	 * @param title
-	 * @param xLabel
-	 * @param yLabel
-	 */
-	public static void addLine(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) {
-		XYZTemplate template = new XYZTemplate();
-		template.load(filePath);
-		template.addData(x, y, z, traceName, ModeType.LINES, PlotType.SCATTER3D);
-		if (title != null) {
-			template.setTitle(title);
-		}
-		if (xLabel != null) {
-			template.setXLabel(xLabel);
-		}
-		if (yLabel != null) {
-			template.setYLabel(yLabel);
-		}
-		if (zLabel != null) {
-			template.setZLabel(zLabel);
-		}
-		template.export(filePath);
-		PlotlifyUtils.openInBrowser(filePath);
-	}
-	
 	
 	/**
 	 * creates a scatter plot based on the double arrays passed with {@code x} and {@code y} and exports it as html file under specified {@code filePath}
 	 * @param filePath
 	 * @param x
 	 * @param y
+	 * @throws IOException 
 	 */
-	public static void scatter(String filePath, double[] x, double[] y) {
-		scatter(filePath, x, y, null, null, null, null);
+	public static void scatter(String filePath, double[] x, double[] y) throws IOException {
+		scatter(filePath, x, y, "trace1", null, null, null);
 	}
 	
 	/**
@@ -222,9 +149,10 @@ public class Plotlify {
 	 * @param x
 	 * @param y
 	 * @param title
+	 * @throws IOException 
 	 */
-	public static void scatter(String filePath, double[] x, double[] y, String title) {
-		scatter(filePath, x, y, null, title, null, null);
+	public static void scatter(String filePath, double[] x, double[] y, String title) throws IOException {
+		scatter(filePath, x, y, "trace1", title, null, null);
 	}
 	
 	/**
@@ -239,66 +167,39 @@ public class Plotlify {
 	 * @param title
 	 * @param xLabel
 	 * @param yLabel
+	 * @throws IOException 
 	 */
-	public static void scatter(String filePath, double[] x, double[] y, String traceName, String title, String xLabel, String yLabel) {
-		XYTemplate template = new XYTemplate();
-		template.load();
-		template.setData(x, y, traceName);
-		template.setTitle(title);
-		template.setXLabel(xLabel);
-		template.setYLabel(yLabel);
-		template.setPlotType(PlotType.SCATTER);
-		template.setModeType(ModeType.MARKERS);
-		template.export(filePath);
+	public static void scatter(String filePath, double[] x, double[] y, String traceName, String title, String xLabel, String yLabel) throws IOException {
+		
+		Plotly p = new Plotly();
+		
+		p.getLayout().setTitle(title);
+		p.getLayout().getXAxis().setTitle(xLabel);
+		p.getLayout().getYAxis().setTitle(yLabel);
+		
+		p.getTrace(traceName).setType(PlotType.SCATTER);
+		p.getTrace(traceName).setMode(Mode.MARKERS);
+		p.getTrace(traceName).setX(x);
+		p.getTrace(traceName).setY(y);
+		
+		PlotlyDocument pDoc = new PlotlyDocument();
+		pDoc.addPlotly(p);
+		
+		pDoc.toFile(filePath);
+		
 		PlotlifyUtils.openInBrowser(filePath);
 	}
 	
-	/**
-	 * adds a new scatter trace to plot html and opens the file in browser
-	 * @param filePath
-	 * @param x
-	 * @param y
-	 */
-	public static void addScatter(String filePath, double[] x, double[] y) {
-		addScatter(filePath, x, y, "trace-" + new SimpleDateFormat("HHmmss").format(new Date()), null, null, null);
-	}
-	
-	/**
-	 * adds a new scatter trace to plot html and opens the file in browser
-	 * @param filePath
-	 * @param x
-	 * @param y
-	 * @param traceName
-	 * @param title
-	 * @param xLabel
-	 * @param yLabel
-	 */
-	public static void addScatter(String filePath, double[] x, double[] y, String traceName, String title, String xLabel, String yLabel) {
-		XYTemplate template = new XYTemplate();
-		template.load(filePath);
-		template.addData(x, y, traceName, ModeType.MARKERS, PlotType.SCATTER);
-		if (title != null) {
-			template.setTitle(title);
-		}
-		if (xLabel != null) {
-			template.setXLabel(xLabel);
-		}
-		if (yLabel != null) {
-			template.setYLabel(yLabel);
-		}
-		template.export(filePath);
-		PlotlifyUtils.openInBrowser(filePath);
-	}	
-
 	/**
 	 * creates a scatter 3D plot based on the double arrays passed with {@code x}, {@code y} and {@code z} and exports it as html file under specified {@code filePath}
 	 * @param filePath
 	 * @param x
 	 * @param y
 	 * @param z
+	 * @throws IOException 
 	 */
-	public static void scatter3D(String filePath, double[] x, double[] y, double[] z) {
-		scatter3D(filePath, x, y, z, null, null, null, null, null);
+	public static void scatter3D(String filePath, double[] x, double[] y, double[] z) throws IOException {
+		scatter3D(filePath, x, y, z, "trace1", null, null, null, null);
 	}
 	
 	/**
@@ -309,9 +210,10 @@ public class Plotlify {
 	 * @param y
 	 * @param z
 	 * @param title
+	 * @throws IOException 
 	 */
-	public static void scatter3D(String filePath, double[] x, double[] y, double[] z, String title) {
-		scatter3D(filePath, x, y, z, null, title, null, null, null);
+	public static void scatter3D(String filePath, double[] x, double[] y, double[] z, String title) throws IOException {
+		scatter3D(filePath, x, y, z, "trace1", title, null, null, null);
 	}
 	
 	/**
@@ -328,19 +230,30 @@ public class Plotlify {
 	 * @param xLabel
 	 * @param yLabel
 	 * @param zLabel
+	 * @throws IOException 
 	 */
-	public static void scatter3D(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) {
-		XYZTemplate template = new XYZTemplate();
-		template.load();
-		template.setData(x, y, z, traceName);
-		template.setTitle(title);
-		template.setXLabel(xLabel);
-		template.setYLabel(yLabel);
-		template.setYLabel(zLabel);
-		//template.setPlotType(PlotType.SCATTER3D);
-		//template.setModeType(ModeType.MARKERS);
-		template.export(filePath);
+	public static void scatter3D(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
+		
+		Plotly p = new Plotly();
+		
+		p.getLayout().setTitle(title);
+		p.getLayout().getXAxis().setTitle(xLabel);
+		p.getLayout().getYAxis().setTitle(yLabel);
+		p.getLayout().getZAxis().setTitle(zLabel);
+		
+		p.getTrace(traceName).setType(PlotType.SCATTER3D);
+		p.getTrace(traceName).setMode(Mode.MARKERS);
+		p.getTrace(traceName).setX(x);
+		p.getTrace(traceName).setY(y);
+		p.getTrace(traceName).setZ(z);		
+		
+		PlotlyDocument pDoc = new PlotlyDocument();
+		pDoc.addPlotly(p);
+		
+		pDoc.toFile(filePath);
+		
 		PlotlifyUtils.openInBrowser(filePath);
+		
 	}
 	
 	/**
@@ -378,17 +291,27 @@ public class Plotlify {
 		PlotlifyUtils.openInBrowser(filePath);
 	}
 	
-	public static void mesh3d(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) {
-		SurfaceTemplate template = new SurfaceTemplate();
-		template.load();
-		template.setPlotType(PlotType.MESH3D);
-		template.setData(x, y, z, traceName);
-		template.setTitle(title);
-		template.setXLabel(xLabel);
-		template.setYLabel(yLabel);
-		template.setYLabel(zLabel);
-		template.export(filePath);
+	public static void mesh3d(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
+		
+		Plotly p = new Plotly();
+		
+		p.getLayout().setTitle(title);
+		p.getLayout().getXAxis().setTitle(xLabel);
+		p.getLayout().getYAxis().setTitle(yLabel);
+		p.getLayout().getZAxis().setTitle(zLabel);
+		
+		p.getTrace(traceName).setType(PlotType.MESH3D);
+		p.getTrace(traceName).setX(x);
+		p.getTrace(traceName).setY(y);
+		p.getTrace(traceName).setZ(z);		
+		
+		PlotlyDocument pDoc = new PlotlyDocument();
+		pDoc.addPlotly(p);
+		
+		pDoc.toFile(filePath);
+		
 		PlotlifyUtils.openInBrowser(filePath);
+		
 	}
 	
 	public static void sphere(String filePath, double D, double x_0, double y_0, double z_0, int res) {

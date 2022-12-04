@@ -39,7 +39,7 @@ public class UnitTest_Plotly {
 	@Test
 	public void test010() {
 		
-		Plotly p = new Plotly("plot1");
+		Plotly p = new Plotly();
 	
 		Trace t = new Trace();
 		
@@ -56,7 +56,7 @@ public class UnitTest_Plotly {
 	@Test
 	public void test020() throws IOException {
 		
-		Plotly p = new Plotly("plot1");
+		Plotly p = new Plotly();
 	
 		Trace t = new Trace();
 		
@@ -80,7 +80,7 @@ public class UnitTest_Plotly {
 	@Test
 	public void test021() throws IOException {
 		
-		Plotly p = new Plotly("plot1");
+		Plotly p = new Plotly();
 		
 		Trace t = new Trace();
 		
@@ -126,7 +126,7 @@ public class UnitTest_Plotly {
 		double[] x = c.x();
 		double[] y = c.y();
 		
-		Plotly p = new Plotly("plot1");
+		Plotly p = new Plotly();
 		
 		Trace tr = new Trace();
 		
@@ -165,7 +165,7 @@ public class UnitTest_Plotly {
 		double[] x = c.x();
 		double[] y = c.y();
 		
-		Plotly p = new Plotly("plot1");
+		Plotly p = new Plotly();
 		
 		Trace tr = new Trace();
 		
