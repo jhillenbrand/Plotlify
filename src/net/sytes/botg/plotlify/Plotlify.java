@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import net.sytes.botg.array.ArUtils;
 import net.sytes.botg.array.geometry.SemiSphere;
-import net.sytes.botg.plotlify.templates.SurfaceTemplate;
 
 public class Plotlify { 
 		
@@ -262,8 +261,9 @@ public class Plotlify {
 	 * @param x
 	 * @param y
 	 * @param z
+	 * @throws IOException 
 	 */
-	public static void surface(String filePath, double[] x, double[] y, double[][] z) {
+	public static void surface(String filePath, double[] x, double[] y, double[][] z) throws IOException {
 		surface(filePath, x, y, z, "surf1", "Surface Plot", "X", "Y", "Z");
 	}
 	
@@ -278,17 +278,29 @@ public class Plotlify {
 	 * @param xLabel
 	 * @param yLabel
 	 * @param zLabel
+	 * @throws IOException 
 	 */
-	public static void surface(String filePath, double[] x, double[] y, double[][] z, String traceName, String title, String xLabel, String yLabel, String zLabel) {
-		SurfaceTemplate template = new SurfaceTemplate();
-		template.load();
-		template.setData(x, y, z, traceName);
-		template.setTitle(title);
-		template.setXLabel(xLabel);
-		template.setYLabel(yLabel);
-		template.setYLabel(zLabel);
-		template.export(filePath);
+	public static void surface(String filePath, double[] x, double[] y, double[][] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
+		
+		Plotly p = new Plotly();
+		
+		p.getLayout().setTitle(title);
+		p.getLayout().getXAxis().setTitle(xLabel);
+		p.getLayout().getYAxis().setTitle(yLabel);
+		p.getLayout().getZAxis().setTitle(zLabel);
+		
+		p.getTrace(traceName).setType(PlotType.SURFACE);
+		p.getTrace(traceName).setX(x);
+		p.getTrace(traceName).setY(y);
+		p.getTrace(traceName).setZ(z);		
+		
+		PlotlyDocument pDoc = new PlotlyDocument();
+		pDoc.addPlotly(p);
+		
+		pDoc.toFile(filePath);
+		
 		PlotlifyUtils.openInBrowser(filePath);
+		
 	}
 	
 	public static void mesh3d(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
@@ -314,7 +326,7 @@ public class Plotlify {
 		
 	}
 	
-	public static void sphere(String filePath, double D, double x_0, double y_0, double z_0, int res) {
+	public static void sphere(String filePath, double D, double x_0, double y_0, double z_0, int res) throws IOException {
 		
 		SemiSphere ss1 = new SemiSphere.Builder()
 				.D(D)
@@ -346,16 +358,28 @@ public class Plotlify {
 		double[] y2 = ss2.y();
 		double[] z2 = ss2.z();
 		
-		SurfaceTemplate template = new SurfaceTemplate();
-		template.load();
-		template.setPlotType(PlotType.MESH3D);
-		template.setData(x1, y1, z1, "");
-		template.addData(x2, y2, z2, "", null, PlotType.MESH3D);
-		template.setXLabel("X");
-		template.setYLabel("Y");
-		template.setYLabel("Z");
-		template.export(filePath);
+		Plotly p = new Plotly();
+		
+		p.getLayout().getXAxis().setTitle("X");
+		p.getLayout().getYAxis().setTitle("Y");
+				
+		p.getTrace("s1").setType(PlotType.MESH3D);
+		p.getTrace("s1").setX(x1);
+		p.getTrace("s1").setY(y1);
+		p.getTrace("s1").setZ(z1);
+		
+		p.getTrace("s2").setType(PlotType.MESH3D);
+		p.getTrace("s2").setX(x2);
+		p.getTrace("s2").setY(y2);
+		p.getTrace("s2").setZ(z2);
+		
+		PlotlyDocument pDoc = new PlotlyDocument();
+		pDoc.addPlotly(p);
+		
+		pDoc.toFile(filePath);
+		
 		PlotlifyUtils.openInBrowser(filePath);
+		
 	}
 	
 }

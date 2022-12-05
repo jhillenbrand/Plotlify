@@ -58,7 +58,7 @@ public class UnitTest_Plotlify {
 		String filePath = "test.html";
 				
 		Plotlify.line(filePath, x, y);
-		
+		 
 		//Plotlify.addLine(filePath, x, y2);
 		
 	}
