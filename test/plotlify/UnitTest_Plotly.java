@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import net.sytes.botg.array.ArUtils;
 import net.sytes.botg.array.geometry.Circle;
-import net.sytes.botg.json.JSONClient;
+import net.sytes.botg.json.JSONParser;
 import net.sytes.botg.plotlify.Layout;
 import net.sytes.botg.plotlify.Mode;
 import net.sytes.botg.plotlify.PlotType;
@@ -26,14 +26,14 @@ public class UnitTest_Plotly {
 		t.setX(new double[] {1.0, 2.0, 3.0, 4.0});
 		t.setY(new double[] {1.0, 1.1, 1.2, 1.3});
 		
-		System.out.println(JSONClient.convertObjectToJSON(t));
+		System.out.println(JSONParser.convertObjectToJSON(t));
 		
 		Trace t2 = new Trace();
 	
 		t2.setX(new double[] {1.0, 2.0, 3.0, 4.0});
 		t2.setY(new double[] {1.0, 1.1, 1.2, 1.3});
 		
-		System.out.println(JSONClient.convertObjectToJSON(t2));
+		System.out.println(JSONParser.convertObjectToJSON(t2));
 	}
 	
 	@Test
