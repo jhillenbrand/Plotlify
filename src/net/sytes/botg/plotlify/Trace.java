@@ -34,92 +34,105 @@ public class Trace {
 		return x;
 	}
 
-	public void setX(Object[] x) {
+	public Trace setX(Object[] x) {
 		this.x = x;
+		return this;
 	}
 	
-	public void setX(double[] x) {
+	public Trace setX(double[] x) {
 		this.x = ConvertArray.wrap(x);
+		return this;
 	}
 
 	public Object[] getY() {
 		return y;
 	}
 
-	public void setY(Object[] y) {
+	public Trace setY(Object[] y) {
 		this.y = y;
+		return this;
 	}
 	
-	public void setY(double[] y) {
+	public Trace setY(double[] y) {
 		this.y = ConvertArray.wrap(y);
+		return this;
 	}
 
 	public Object[] getZ() {
 		return z;
 	}
 
-	public void setZ(Object[] z) {
+	public Trace setZ(Object[] z) {
 		this.z = z;
+		return this;
 	}
 	
-	public void setZ(double[] z) {
+	public Trace setZ(double[] z) {
 		this.z = ConvertArray.wrap(z);
+		return this;
 	}
 
 	public String getMode() {
 		return this.mode;
 	}
 
-	public void setMode(Mode mode) {
+	public Trace setMode(Mode mode) {
 		this.mode = mode.toString();
+		return this;
 	}
 
 	public String getType() {
 		return type;
 	}
 
-	public void setType(PlotType type) {
+	public Trace setType(PlotType type) {
 		this.type = type.toString();
+		return this;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public Trace setName(String name) {
 		this.name = name;
+		return this;
 	}
 
 	public String[] getText() {
 		return text;
 	}
 
-	public void setText(String[] text) {
+	public Trace setText(String[] text) {
 		this.text = text;
+		return this;
 	}
 
 	public TextFont getFont() {
 		return font;
 	}
 
-	public void setFont(TextFont font) {
+	public Trace setFont(TextFont font) {
 		this.font = font;
+		return this;
 	}
 
 	public String getTextPosition() {
 		return textposition;
 	}
 
-	public void setTextPosition(String textposition) {
+	public Trace setTextPosition(String textposition) {
 		this.textposition = textposition;
+		return this;
 	}
 
 	public Marker getMarker() {
 		return marker;
 	}
 
-	public void setMarker(Marker marker) {
+	public Trace setMarker(Marker marker) {
 		this.marker = marker;
+		return this;
 	}
 	
 	public String toJson() {
