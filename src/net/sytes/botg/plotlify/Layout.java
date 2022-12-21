@@ -1,8 +1,5 @@
 package net.sytes.botg.plotlify;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
 import com.google.gson.Gson;
 
 public class Layout {
