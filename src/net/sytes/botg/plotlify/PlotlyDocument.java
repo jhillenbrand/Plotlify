@@ -19,16 +19,22 @@ public class PlotlyDocument {
 	private static final String PLOTLY_TEMPLATE = "PLOTLY_TEMPLATE.html";
 	
 	public PlotlyDocument() throws IOException {
+		this(null);
+	}
+	
+	public PlotlyDocument(Plotly plotly) throws IOException{
 		InputStream is = this.getClass().getResourceAsStream(PLOTLY_TEMPLATE);		
 		String html = TextParser.readInputStream(is);
 		this.doc = Jsoup.parse(html, "UTF-16");
 		if (this.doc == null) {
 			throw new IOException("Could not find HTML Template " + PLOTLY_TEMPLATE);
 		}
+		if (plotly != null) {
+			this.addPlotly(plotly);
+		}
 	}
 
 	public void addPlotly(Plotly plotly) {
-		
 		// set doc title if available
 		if (plotly.getLayout() != null) {
 			if (plotly.getLayout().getTitle() != null) {
@@ -45,13 +51,19 @@ public class PlotlyDocument {
 		// create script tag
 		Element script = this.doc.body().appendElement("script");
 		script.html(plotly.toString());
-		
 	}
 	
 	public void toFile(String filePath) throws IOException {
+		this.toFile(filePath, true);
+	}
+	
+	public void toFile(String filePath, boolean openInBrowser) throws IOException {
 		FileWriter fw = new FileWriter(new File(filePath));
 		fw.write(this.doc.toString());
 		fw.close();
+		if (openInBrowser) {
+			PlotlifyUtils.openInBrowser(filePath);
+		}
 	}
 	
 }
