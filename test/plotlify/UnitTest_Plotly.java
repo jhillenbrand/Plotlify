@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 
-import net.sytes.botg.array.ArUtils;
 import net.sytes.botg.array.geometry.Circle;
+import net.sytes.botg.array.math.Vec;
 import net.sytes.botg.json.JSONParser;
 import net.sytes.botg.plotlify.Layout;
 import net.sytes.botg.plotlify.Mode;
@@ -119,7 +119,7 @@ public class UnitTest_Plotly {
 				.y_0(5.0)
 				.build();
 		
-		double[] t = ArUtils.linspace(0.0, 1.0, 100);
+		double[] t = Vec.linspace(0.0, 1.0, 100);
 		
 		c.create(t);
 		
@@ -158,7 +158,7 @@ public class UnitTest_Plotly {
 				.y_0(5.0)
 				.build();
 		
-		double[] t = ArUtils.linspace(0.0, 1.0, 100);
+		double[] t = Vec.linspace(0.0, 1.0, 100);
 		
 		c.create(t);
 		
@@ -183,7 +183,7 @@ public class UnitTest_Plotly {
 				.y_0(8.0)
 				.build();
 		
-		double[] t2 = ArUtils.linspace(0.0, 1.0, 100);
+		double[] t2 = Vec.linspace(0.0, 1.0, 100);
 		
 		c2.create(t2);
 		

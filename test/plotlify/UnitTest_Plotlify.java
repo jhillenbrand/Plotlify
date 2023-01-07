@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import net.sytes.botg.array.ArUtils;
+import net.sytes.botg.array.math.Vec;
 import net.sytes.botg.plotlify.Plotlify;
 
 public class UnitTest_Plotlify {
@@ -39,7 +39,7 @@ public class UnitTest_Plotlify {
 	@Test
 	public void test02() throws IOException {
 		
-		double[] y = ArUtils.rand(100_000);
+		double[] y = Vec.rand(100_000);
 		
 		String filePath = "test.html";
 		
@@ -50,10 +50,10 @@ public class UnitTest_Plotlify {
 	@Test
 	public void test030() throws IOException {
 		
-		double[] x = ArUtils.linspace(10);
-		double[] y = ArUtils.rand(10);
+		double[] x = Vec.linspace(10);
+		double[] y = Vec.rand(10);
 
-		double[] y2 = ArUtils.rand(10);
+		double[] y2 = Vec.rand(10);
 		
 		String filePath = "test.html";
 				
@@ -66,10 +66,10 @@ public class UnitTest_Plotlify {
 	@Test
 	public void test040() throws IOException {
 		
-		double[] x = ArUtils.linspace(10);
-		double[] y = ArUtils.rand(10);
+		double[] x = Vec.linspace(10);
+		double[] y = Vec.rand(10);
 
-		double[] y2 = ArUtils.rand(10);
+		double[] y2 = Vec.rand(10);
 		
 		String filePath = "test.html";
 				

@@ -2,13 +2,13 @@ package net.sytes.botg.plotlify;
 
 import java.io.IOException;
 
-import net.sytes.botg.array.ArUtils;
 import net.sytes.botg.array.geometry.SemiSphere;
+import net.sytes.botg.array.math.Vec;
 
 public class Plotlify { 
 		
 	public static void line(String filePath, double[] y) throws IOException {
-		double[] x = ArUtils.linspace(y.length);
+		double[] x = Vec.linspace(y.length);
 		line(filePath, x, y, "trace1", null, null, null);
 	}
 	
@@ -344,8 +344,8 @@ public class Plotlify {
 				.top(false)
 				.build();
 		
-		double[] t1 = ArUtils.linspace(0.0, 1.0, res);
-		double[] t2 = ArUtils.linspace(0.0, 1.0, res);
+		double[] t1 = Vec.linspace(0.0, 1.0, res);
+		double[] t2 = Vec.linspace(0.0, 1.0, res);
 		
 		ss1.create(t1, t2);
 		ss2.create(t1, t2);
