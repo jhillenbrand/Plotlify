@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,6 +17,8 @@ import net.sytes.botg.text.TextParser;
 public class PlotlyDocument {
 
 	private Document doc = null;
+	
+	private List<Plotly> plotlys = new ArrayList<Plotly>();
 	
 	private static final String PLOTLY_TEMPLATE = "PLOTLY_TEMPLATE.html";
 	
@@ -51,6 +55,9 @@ public class PlotlyDocument {
 		// create script tag
 		Element script = this.doc.body().appendElement("script");
 		script.html(plotly.toString());
+		
+		// add to list
+		this.plotlys.add(plotly);
 	}
 	
 	public void toFile(String filePath) throws IOException {

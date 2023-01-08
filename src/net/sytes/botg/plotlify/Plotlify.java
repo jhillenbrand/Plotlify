@@ -8,8 +8,7 @@ import net.sytes.botg.array.math.Vec;
 public class Plotlify { 
 		
 	public static void line(String filePath, double[] y) throws IOException {
-		double[] x = Vec.linspace(y.length);
-		line(filePath, x, y, "trace1", null, null, null);
+		line(filePath, null, y, "trace1", null, null, null);
 	}
 	
 	/**
