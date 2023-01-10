@@ -39,8 +39,15 @@ public class Layout {
 		if (this.yaxis == null) {
 			this.yaxis = new Axis();
 		}
+		//if (this.zaxis == null) {
+		//	this.zaxis = new Axis();
+		//}
+		
 		this.yaxis.setScaleAnchor("x");
 		this.yaxis.setScaleRatio(1);
+		
+		//this.zaxis.setScaleAnchor("x");
+		//this.zaxis.setScaleRatio(1);
 	}
 	
 	/**
