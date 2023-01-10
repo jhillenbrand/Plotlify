@@ -66,8 +66,6 @@ public class Plotlify {
 		pDoc.addPlotly(p);
 		
 		pDoc.toFile(filePath);
-		
-		PlotlifyUtils.openInBrowser(filePath);
 	}
 	
 	/**
@@ -125,8 +123,6 @@ public class Plotlify {
 		pDoc.addPlotly(p);
 		
 		pDoc.toFile(filePath);
-		
-		PlotlifyUtils.openInBrowser(filePath);
 	}
 	
 	/**
@@ -184,8 +180,6 @@ public class Plotlify {
 		pDoc.addPlotly(p);
 		
 		pDoc.toFile(filePath);
-		
-		PlotlifyUtils.openInBrowser(filePath);
 	}
 	
 	/**
@@ -250,8 +244,6 @@ public class Plotlify {
 		
 		pDoc.toFile(filePath);
 		
-		PlotlifyUtils.openInBrowser(filePath);
-		
 	}
 	
 	/**
@@ -298,8 +290,6 @@ public class Plotlify {
 		
 		pDoc.toFile(filePath);
 		
-		PlotlifyUtils.openInBrowser(filePath);
-		
 	}
 	
 	public static void mesh3d(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
@@ -320,8 +310,6 @@ public class Plotlify {
 		pDoc.addPlotly(p);
 		
 		pDoc.toFile(filePath);
-		
-		PlotlifyUtils.openInBrowser(filePath);
 		
 	}
 	
@@ -376,8 +364,6 @@ public class Plotlify {
 		pDoc.addPlotly(p);
 		
 		pDoc.toFile(filePath);
-		
-		PlotlifyUtils.openInBrowser(filePath);
 		
 	}
 	
