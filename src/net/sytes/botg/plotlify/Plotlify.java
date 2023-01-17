@@ -3,10 +3,36 @@ package net.sytes.botg.plotlify;
 import java.io.IOException;
 
 import net.sytes.botg.array.geometry.SemiSphere;
+import net.sytes.botg.array.math.Mat;
 import net.sytes.botg.array.math.Vec;
 
 public class Plotlify { 
-		
+	
+	/**
+	 * creates a line plot based on the double array passed with {@code y} and exports it as html file under current path as plotly.html
+	 * @param y
+	 * @throws IOException
+	 */
+	public static void line(double[] y) throws IOException {
+		line("plotly.html", null, y, "trace1", null, null, null);
+	}
+	
+	/**
+	 * creates a line plot based on the double arrays passed with {@code x} and {@code y} and exports it as html file under current path as plotly.html
+	 * @param x
+	 * @param y
+	 * @throws IOException 
+	 */
+	public static void line(double[] x, double[] y) throws IOException {
+		line("plotly.html", x, y, "trace1", null, null, null);
+	}
+	
+	/**
+	 * creates a line plot based on the double array passed with {@code y} and exports it as html file under specified {@code filePath}
+	 * @param filePath
+	 * @param y
+	 * @throws IOException
+	 */
 	public static void line(String filePath, double[] y) throws IOException {
 		line(filePath, null, y, "trace1", null, null, null);
 	}
@@ -122,6 +148,88 @@ public class Plotlify {
 		PlotlyDocument pDoc = new PlotlyDocument();
 		pDoc.addPlotly(p);
 		
+		pDoc.toFile(filePath);
+	}
+	
+	/**
+	 * plots multiple lines {@code y}
+	 * @param y multiple double[] arrays of same length
+	 * @throws IOException 
+	 */
+	public static void lines(double[] ... y) throws IOException {		
+		lines("plotly.html", null, y, null, "Plotly", null, null);
+	}
+	
+	/**
+	 * plots multiple lines {@code y}
+	 * @param y multiple double[] arrays of same length
+	 * @throws IOException 
+	 */
+	public static void lines(double[][] x, double[][] y) throws IOException {		
+		lines("plotly.html", x, y, null, "Plotly", null, null);
+	}
+	
+	/**
+	 * plots multiple lines defined by coordinates {@code x} and {@code y} and exports it as html file under specified {@code filePath}
+	 * <br>{@code traceNames} can be used to specify the legend entries for the specified lines
+	 * <br>{@code title} can be used to specify the plot's title
+	 * <br>{@code xLabel} and {@code xLabel} can be used to specify the plot's axis labels
+	 * @param filePath
+	 * @param x
+	 * @param y
+	 * @param traceNames
+	 * @param title
+	 * @param xLabel
+	 * @param yLabel
+	 * @throws IOException
+	 */
+	public static void lines(String filePath, double[][] x, double[][] y, String[] traceNames, String title, String xLabel, String yLabel) throws IOException {
+		if (x != null) {
+			// check for correct dimensions
+			// a) same rows
+			if (x.length != y.length) {
+				throw new IllegalArgumentException("coordinate arrays x(" + x.length + ") and y(" + y.length + ") do not have same number of rows");
+			}
+			// b) same number of entries per row
+			for (int i = 0; i < x.length; i++) {
+				if (x[i].length != y[i].length) {
+					throw new IllegalArgumentException("row " + i + " (" + x[i].length + ") of x does not have the same number of entries as row " + i + " (" + y[i].length + ") in y.");
+				}
+			}
+		}
+		if (x == null) {
+			Vec.checkForEqualDimensions(y);
+		}
+		// populate traceNames if nothing specified
+		if (traceNames == null) {
+			traceNames = new String[y.length];
+			for (int t = 0; t < y.length; t++) {
+				traceNames[t] = "trace" + t;
+			}
+		}
+		if (traceNames.length != y.length) {
+			throw new IllegalArgumentException("specified traceNames (" + traceNames.length + ") and specified line coordinate dimensions (" + y.length + ") not match");
+		}
+		
+		Plotly p = new Plotly();
+		
+		p.getLayout().setTitle(title);
+		p.getLayout().getXAxis().setTitle(yLabel);
+		p.getLayout().getYAxis().setTitle(yLabel);
+		
+		int m = y.length;
+		for (int i = 0; i < m; i++) {
+			p.getTrace(traceNames[i])
+				.setType(PlotType.SCATTER)
+				.setMode(Mode.LINES)
+				.setY(y[i]);
+			if (x != null) {
+				p.getTrace(traceNames[i]).setX(x[i]);
+			}
+		}
+				
+		PlotlyDocument pDoc = new PlotlyDocument();
+		pDoc.addPlotly(p);
 		pDoc.toFile(filePath);
 	}
 	

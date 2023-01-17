@@ -27,24 +27,27 @@ public class Axis {
 		return range;
 	}
 
-	public void setRange(double[] range) {
+	public Axis setRange(double[] range) {
 		this.range = range;
+		return this;
 	}
 
 	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(String title) {
+	public Axis setTitle(String title) {
 		this.title = title;
+		return this;
 	}
 	
 	public boolean isAutotick() {
 		return autotick;
 	}
 
-	public void setAutotick(boolean autotick) {
+	public Axis setAutotick(boolean autotick) {
 		this.autotick = autotick;
+		return this;
 	}
 
 	public boolean isZeroline() {

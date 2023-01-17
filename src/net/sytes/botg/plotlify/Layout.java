@@ -78,8 +78,9 @@ public class Layout {
 		return this.yaxis;
 	}
 
-	public void setYAxis(Axis yAxis) {
+	public Layout setYAxis(Axis yAxis) {
 		this.yaxis = yAxis;
+		return this;
 	}
 	
 	/**
@@ -94,48 +95,54 @@ public class Layout {
 		return this.zaxis;
 	}
 
-	public void setZAxis(Axis zAxis) {
+	public Layout setZAxis(Axis zAxis) {
 		this.zaxis = zAxis;
+		return this;
 	}
 
 	public Legend getLegend() {
 		return legend;
 	}
 
-	public void setLegend(Legend legend) {
+	public Layout setLegend(Legend legend) {
 		this.legend = legend;
+		return this;
 	}
 
 	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(String title) {
+	public Layout setTitle(String title) {
 		this.title = title;
+		return this;
 	}
 	
 	public int getHeight() {
 		return this.height;
 	}
 
-	public void setHeight(int height) {
+	public Layout setHeight(int height) {
 		this.height = height;
+		return this;
 	}
 
 	public int getWidth() {
 		return this.width;
 	}
 
-	public void setWidth(int width) {
+	public Layout setWidth(int width) {
 		this.width = width;
+		return this;
 	}
 
 	public boolean isShowlegend() {
 		return showlegend;
 	}
 
-	public void setShowlegend(boolean showlegend) {
+	public Layout setShowlegend(boolean showlegend) {
 		this.showlegend = showlegend;
+		return this;
 	}
 
 	/**
@@ -150,8 +157,9 @@ public class Layout {
 		return this.grid;
 	}
 
-	public void setGrid(Grid grid) {
+	public Layout setGrid(Grid grid) {
 		this.grid = grid;
+		return this;
 	}
 
 	/**
@@ -166,16 +174,18 @@ public class Layout {
 		return this.margin;
 	}
 
-	public void setMargin(Margin margin) {
+	public Layout setMargin(Margin margin) {
 		this.margin = margin;
+		return this;
 	}
 
 	public boolean isAutosize() {
 		return autosize;
 	}
 
-	public void setAutosize(boolean autosize) {
+	public Layout setAutosize(boolean autosize) {
 		this.autosize = autosize;
+		return this;
 	}
 
 	public String toJson() {
