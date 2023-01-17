@@ -73,8 +73,6 @@ public class UnitTest_Plotly {
 		
 		pDoc.toFile("test3.html");
 		
-		PlotlifyUtils.openInBrowser("test3.html");
-		
 	}
 	
 	@Test
@@ -105,8 +103,6 @@ public class UnitTest_Plotly {
 		pDoc.addPlotly(p);
 		
 		pDoc.toFile("test3.html");
-		
-		PlotlifyUtils.openInBrowser("test3.html");
 		
 	}
 	
@@ -145,8 +141,6 @@ public class UnitTest_Plotly {
 		pDoc.addPlotly(p);
 		
 		pDoc.toFile("test3.html");
-		
-		PlotlifyUtils.openInBrowser("test3.html");
 	}
 	
 	@Test
@@ -207,8 +201,6 @@ public class UnitTest_Plotly {
 		pDoc.addPlotly(p);
 		
 		pDoc.toFile("test3.html");
-		
-		PlotlifyUtils.openInBrowser("test3.html");
 	}
 	
 	
