@@ -1,18 +1,19 @@
 package net.sytes.botg.plotlify;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-
-import net.sytes.botg.html.HTMLParser;
-import net.sytes.botg.text.TextParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PlotlyDocument {
 
@@ -22,13 +23,22 @@ public class PlotlyDocument {
 	
 	private static final String PLOTLY_TEMPLATE = "PLOTLY_TEMPLATE.html";
 	
+	private static final Logger logger = LoggerFactory.getLogger(PlotlyDocument.class);
+	
 	public PlotlyDocument() throws IOException {
 		this(null);
 	}
 	
 	public PlotlyDocument(Plotly plotly) throws IOException{
-		InputStream is = this.getClass().getResourceAsStream(PLOTLY_TEMPLATE);		
-		String html = TextParser.readInputStream(is);
+		InputStream is = this.getClass().getResourceAsStream(PLOTLY_TEMPLATE);
+		String html = null;
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		String line;
+		StringBuilder sb = new StringBuilder();
+		while ((line = br.readLine()) != null) {
+			sb.append(line + System.lineSeparator());
+		}
+		html = sb.toString();
 		this.doc = Jsoup.parse(html, "UTF-16");
 		if (this.doc == null) {
 			throw new IOException("Could not find HTML Template " + PLOTLY_TEMPLATE);
@@ -42,7 +52,7 @@ public class PlotlyDocument {
 		// set doc title if available
 		if (plotly.getLayout() != null) {
 			if (plotly.getLayout().getTitle() != null) {
-				Element titleElem = HTMLParser.getElementByTag(this.doc.head(), "title");
+				Element titleElem = getElementByTag(this.doc.head(), "title", false);
 				titleElem.text(plotly.getLayout().getTitle());
 			}
 		}
@@ -71,6 +81,30 @@ public class PlotlyDocument {
 		if (openInBrowser) {
 			PlotlifyUtils.openInBrowser(filePath);
 		}
+	}
+	
+	private static Element getElementByTag(Element elem, String tagName, boolean recursive) {
+		//System.out.println(elem.html());
+		Element foundElem = null;
+		if (elem.tagName().contentEquals(tagName)) {
+			return elem;
+		} else {
+			if (recursive) {
+				for (Element childElem : elem.children()) {
+					foundElem = getElementByTag(childElem, tagName, true);
+					if (foundElem != null) {
+						return foundElem;
+					}
+				}
+			} else {
+				for (Element childElem : elem.children()) {
+					if (childElem.tagName().contentEquals(tagName)) {
+						return childElem;
+					}
+				}
+			}
+		}
+		return null;
 	}
 	
 }

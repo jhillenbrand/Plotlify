@@ -4,13 +4,13 @@ import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 
+import com.google.gson.Gson;
+
 import net.sytes.botg.array.geometry.Circle;
 import net.sytes.botg.array.math.Vec;
-import net.sytes.botg.json.JSONParser;
 import net.sytes.botg.plotlify.Layout;
 import net.sytes.botg.plotlify.Mode;
 import net.sytes.botg.plotlify.PlotType;
-import net.sytes.botg.plotlify.PlotlifyUtils;
 import net.sytes.botg.plotlify.Plotly;
 import net.sytes.botg.plotlify.PlotlyDocument;
 import net.sytes.botg.plotlify.Trace;
@@ -26,14 +26,15 @@ public class UnitTest_Plotly {
 		t.setX(new double[] {1.0, 2.0, 3.0, 4.0});
 		t.setY(new double[] {1.0, 1.1, 1.2, 1.3});
 		
-		System.out.println(JSONParser.convertObjectToJSON(t));
+		System.out.println(new Gson().toJson(t));
 		
 		Trace t2 = new Trace();
 	
 		t2.setX(new double[] {1.0, 2.0, 3.0, 4.0});
 		t2.setY(new double[] {1.0, 1.1, 1.2, 1.3});
 		
-		System.out.println(JSONParser.convertObjectToJSON(t2));
+		System.out.println(new Gson().toJson(t2));
+		//System.out.println(t2.toString());
 	}
 	
 	@Test

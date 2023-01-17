@@ -1,12 +1,15 @@
 package net.sytes.botg.plotlify;
 
+import java.awt.Desktop;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.awt.Desktop;
 
-import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PlotlifyUtils {
 
@@ -14,20 +17,35 @@ public class PlotlifyUtils {
 	public static final String VERSION = "latest";
 	public static final String CDN_LINK = "https://cdn.plot.ly/plotly-" + VERSION + ".min.js";
 	
+	private static final Logger logger = LoggerFactory.getLogger(PlotlifyUtils.class);
+	
 	public static void downloadPlotlyLibrary(String folderPath) {
 		URL url = null;
 		try {
 			url = new URL(CDN_LINK);
-		} catch (MalformedURLException e1) {
-			e1.printStackTrace();
+			String filePath = folderPath + File.separator + PLOTLY_NAME + "-" + VERSION + ".min.js";
+			File f = new File(filePath);
+			try (BufferedInputStream in = new BufferedInputStream(url.openStream());
+				FileOutputStream fileOutputStream = new FileOutputStream(f)) {
+			    byte dataBuffer[] = new byte[1024];
+			    int bytesRead;
+			    while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
+			        fileOutputStream.write(dataBuffer, 0, bytesRead);
+			    }
+			} catch (IOException ie) {
+			    logger.error("Could not read from " + BufferedInputStream.class.getSimpleName(), ie);
+			}
+		} catch (MalformedURLException mue) {
+			logger.error("Could not download plotly.js from " + url.toString(), mue);
 		}
-		String filePath = folderPath + File.separator + PLOTLY_NAME + "-" + VERSION + ".min.js";
-    		File f = new File(filePath);
-    		try {
+		
+		/*
+		try {
 			FileUtils.copyURLToFile(url, f);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		*/
 	}
 	
 	public static void openInBrowser(String filePath) {
