@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 
 public class Layout {
 
+	private Scene scene = null;	// required for 3D charts, containing the axis definitions, code change at least since v2.18.0
+	
 	private Axis xaxis = null;
 	private Axis yaxis = null;
 	private Axis zaxis = null;
@@ -62,8 +64,9 @@ public class Layout {
 		return this.xaxis;
 	}
 
-	public void setXAxis(Axis xAxis) {
+	public Layout setXAxis(Axis xAxis) {
 		this.xaxis = xAxis;
+		return this;
 	}
 
 	/**
@@ -98,6 +101,13 @@ public class Layout {
 	public Layout setZAxis(Axis zAxis) {
 		this.zaxis = zAxis;
 		return this;
+	}
+	
+	public Scene getScene() {
+		if (this.scene == null) {
+			this.scene = new Scene();
+		} 
+		return this.scene;
 	}
 
 	public Legend getLegend() {

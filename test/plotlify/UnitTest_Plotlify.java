@@ -79,4 +79,35 @@ public class UnitTest_Plotlify {
 		
 	}
 	
+	@Test
+	public void test050() throws IOException {
+		
+		double[] x = Vec.linspace(10);
+		double[] y = Vec.rand(10);
+
+		double[] y2 = Vec.rand(10);
+		
+		String filePath = "test2.html";
+				
+		Plotlify.line(filePath, x, y, "t2", "t2", "x1", "x2");
+		
+		//Plotlify.addScatter(filePath, x, y2);
+		
+	}
+	
+	@Test
+	public void test051() throws IOException {
+		
+		double[] x = Vec.linspace(10);
+		double[] y = Vec.rand(10);
+		double[] z = Vec.rand(10);
+		
+		String filePath = "test.html";
+				
+		Plotlify.line(filePath, x, y, z, "t1", "t1", "x1", "x2", "x3");
+		
+		//Plotlify.addScatter(filePath, x, y2);
+		
+	}
+	
 }

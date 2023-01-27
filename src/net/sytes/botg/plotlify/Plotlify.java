@@ -80,7 +80,7 @@ public class Plotlify {
 		Plotly p = new Plotly();
 		
 		p.getLayout().setTitle(title);
-		p.getLayout().getXAxis().setTitle(yLabel);
+		p.getLayout().getXAxis().setTitle(xLabel);
 		p.getLayout().getYAxis().setTitle(yLabel);
 		
 		p.getTrace(traceName).setType(PlotType.SCATTER);
@@ -135,9 +135,9 @@ public class Plotlify {
 		Plotly p = new Plotly();
 		
 		p.getLayout().setTitle(title);
-		p.getLayout().getXAxis().setTitle(xLabel);
-		p.getLayout().getYAxis().setTitle(yLabel);
-		p.getLayout().getZAxis().setTitle(zLabel);
+		p.getLayout().getScene().getXAxis().setTitle(xLabel);
+		p.getLayout().getScene().getYAxis().setTitle(yLabel);
+		p.getLayout().getScene().getZAxis().setTitle(zLabel);
 		
 		p.getTrace(traceName).setType(PlotType.SCATTER3D);
 		p.getTrace(traceName).setMode(Mode.LINES);
@@ -291,6 +291,18 @@ public class Plotlify {
 	}
 	
 	/**
+	 * creates a scatter 3D plot based on the double arrays passed with {@code x}, {@code y} and {@code z} and exports it as plotly.html in current directory
+	 * @param filePath
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @throws IOException 
+	 */
+	public static void scatter3D(double[] x, double[] y, double[] z) throws IOException {
+		scatter3D("plotly.html", x, y, z, "trace1", null, null, null, null);
+	}
+	
+	/**
 	 * creates a scatter 3D plot based on the double arrays passed with {@code x}, {@code y} and {@code z} and exports it as html file under specified {@code filePath}
 	 * @param filePath
 	 * @param x
@@ -337,9 +349,9 @@ public class Plotlify {
 		Plotly p = new Plotly();
 		
 		p.getLayout().setTitle(title);
-		p.getLayout().getXAxis().setTitle(xLabel);
-		p.getLayout().getYAxis().setTitle(yLabel);
-		p.getLayout().getZAxis().setTitle(zLabel);
+		p.getLayout().getScene().getXAxis().setTitle(xLabel);
+		p.getLayout().getScene().getYAxis().setTitle(yLabel);
+		p.getLayout().getScene().getZAxis().setTitle(zLabel);
 		
 		p.getTrace(traceName).setType(PlotType.SCATTER3D);
 		p.getTrace(traceName).setMode(Mode.MARKERS);
@@ -384,9 +396,9 @@ public class Plotlify {
 		Plotly p = new Plotly();
 		
 		p.getLayout().setTitle(title);
-		p.getLayout().getXAxis().setTitle(xLabel);
-		p.getLayout().getYAxis().setTitle(yLabel);
-		p.getLayout().getZAxis().setTitle(zLabel);
+		p.getLayout().getScene().getXAxis().setTitle(xLabel);
+		p.getLayout().getScene().getYAxis().setTitle(yLabel);
+		p.getLayout().getScene().getZAxis().setTitle(zLabel);
 		
 		p.getTrace(traceName).setType(PlotType.SURFACE);
 		p.getTrace(traceName).setX(x);
@@ -405,9 +417,9 @@ public class Plotlify {
 		Plotly p = new Plotly();
 		
 		p.getLayout().setTitle(title);
-		p.getLayout().getXAxis().setTitle(xLabel);
-		p.getLayout().getYAxis().setTitle(yLabel);
-		p.getLayout().getZAxis().setTitle(zLabel);
+		p.getLayout().getScene().getXAxis().setTitle(xLabel);
+		p.getLayout().getScene().getYAxis().setTitle(yLabel);
+		p.getLayout().getScene().getZAxis().setTitle(zLabel);
 		
 		p.getTrace(traceName).setType(PlotType.MESH3D);
 		p.getTrace(traceName).setX(x);
