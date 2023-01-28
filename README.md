@@ -37,7 +37,7 @@ public void test01() {
 }
 ```
 
-[readme_img](res/img/readme_img.png)
+![readme_img](res/img/readme_img.png)
 
 ## Releases
 
