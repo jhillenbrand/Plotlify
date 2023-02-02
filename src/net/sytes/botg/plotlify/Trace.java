@@ -23,6 +23,8 @@ public class Trace {
 	
 	private Marker marker = null;
 	
+	private double opacity = 0.0;
+	
 	private static int TRACE_NUM = 0;
 		
 	public Trace() {
@@ -70,6 +72,14 @@ public class Trace {
 	public Trace setZ(double[] z) {
 		this.z = ConvertArray.wrap(z);
 		return this;
+	}
+	
+	public Trace setZ(double[][] z) {
+		this.z = new Object[z.length];
+		for (int i = 0; i < z.length; i++) {
+			this.z[i] = ConvertArray.toObjects(ConvertArray.wrap(z[i])); 
+		}
+		return this;		
 	}
 
 	public String getMode() {
@@ -132,6 +142,18 @@ public class Trace {
 
 	public Trace setMarker(Marker marker) {
 		this.marker = marker;
+		return this;
+	}
+	
+	public double getOpacity() {
+		return this.opacity; 
+	}
+	
+	public Trace setOpacity(double opacity) {
+		if (opacity > 1.0 || opacity < 0.0) {
+			throw new IllegalArgumentException("opacity must be in range of 0.0 to 1.0");
+		}
+		this.opacity = opacity;
 		return this;
 	}
 	

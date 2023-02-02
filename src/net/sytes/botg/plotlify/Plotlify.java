@@ -412,7 +412,48 @@ public class Plotlify {
 		
 	}
 	
+	/**
+	 * creates a 3D mesh of the inserted coordinates {@code x, y, z}
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @throws IOException 
+	 */
+	public static void mesh3d(double[] x, double[] y, double[] z) throws IOException {
+		mesh3d("plotly.html", x, y, z, null, null, null, null, null);
+	}
+	
+	/**
+	 * creates a 3D mesh of the inserted coordinates {@code x, y, z} with {@code traceName} and {@code title} and exports it under {@code filePath}
+	 * <br>axis labels are specified by {@code xLabel, yLabel, zLabel}
+	 * @param filePath
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param traceName
+	 * @param title
+	 * @param xLabel
+	 * @param yLabel
+	 * @param zLabel
+	 * @throws IOException
+	 */
 	public static void mesh3d(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
+		
+		if (traceName == null) {
+			traceName = "mesh0";
+		}
+		if (title == null) {
+			title = "Mesh";
+		}
+		if (xLabel == null) {
+			xLabel = "x";
+		}
+		if (yLabel == null) {
+			yLabel = "y";
+		}
+		if (zLabel == null) {
+			zLabel = "z";
+		}
 		
 		Plotly p = new Plotly();
 		

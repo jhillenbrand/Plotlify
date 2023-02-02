@@ -134,6 +134,7 @@ public class Layout {
 
 	public Layout setHeight(int height) {
 		this.height = height;
+		this.autosize = false;
 		return this;
 	}
 
@@ -143,6 +144,7 @@ public class Layout {
 
 	public Layout setWidth(int width) {
 		this.width = width;
+		this.autosize = false;
 		return this;
 	}
 

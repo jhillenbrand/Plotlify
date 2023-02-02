@@ -6,6 +6,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sytes.botg.array.ConvertArray;
+
 /**
  * Wrapper class for javascript's plotly library
  * <br><a href='https://plotly.com/javascript/'>Plotly.js</a>
@@ -47,6 +49,34 @@ public class Plotly {
 		StringBuilder traceSb = new StringBuilder();
 		int i = 1;
 		for (Trace t : this.traces) {
+			// do data manipulation if required for specific plotType
+			switch (PlotType.valueOf(t.getType().toUpperCase())) {
+				case SURFACE:
+					if (t.getX() != null) {
+						// increase matrix by one row and column at the beginning to store the x and y coordinates					
+						Object[] z_old = t.getZ();
+						int m = z_old.length;
+						Object[] row0 = (Object[]) z_old[0];
+						int n = row0.length;
+						Object[][] z_new = new Object[m + 1][n + 1];
+						// populate array
+						z_new[0][0] = null;
+						for (int j = 0; j < m; j++) {
+							Object[] row = (Object[]) z_old[j];
+							for (int k = 0; k < n; k++) {
+								if (j == 0) {
+									z_new[0][k + 1] = t.getX()[k];
+								}
+								z_new[j + 1][k + 1] = row[k];
+							}
+							z_new[j + 1][0] = t.getY()[j];
+						}
+						t.setZ(z_new);
+						t.setX(new double[0]);
+						t.setY(new double[0]);
+					}
+					break;
+			}
 			if (i == this.traces.size() && i != 1) {
 				traceSb.append(", trace").append(i);
 			} else if(i != 1) {
