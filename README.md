@@ -1,6 +1,8 @@
 # Plotlify
 
 is a Java Utility Project for visualizing data generated in Java in Plotly.js plots
+<br>[Plotly](https://plotly.com/javascript/)
+<br>this project was tested under Plotly v2.18.0
 
 ## Function
 
