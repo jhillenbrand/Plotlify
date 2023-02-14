@@ -9,7 +9,7 @@ is a Java Utility Project for visualizing data generated in Java in Plotly.js pl
 based on a HTML Template for plotly.js, the Plotlify.java Class contains static methods for<br>
 populating this template with actual data and to export those templates to a HTML file, that can be shared with and viewed by anybody with a browser.
 
-```javascript
+```java
 @Test
 public void test00() {
 		
