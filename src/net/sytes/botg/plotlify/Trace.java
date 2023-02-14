@@ -23,7 +23,7 @@ public class Trace {
 	
 	private Marker marker = null;
 	
-	private double opacity = 0.0;
+	private double opacity = 1.0;
 	
 	private static int TRACE_NUM = 0;
 		
@@ -149,6 +149,11 @@ public class Trace {
 		return this.opacity; 
 	}
 	
+
+	/**
+	 * sets the transparency of a trace
+	 * <br>opacity = 0.0, completely transparent / invisible
+	 */
 	public Trace setOpacity(double opacity) {
 		if (opacity > 1.0 || opacity < 0.0) {
 			throw new IllegalArgumentException("opacity must be in range of 0.0 to 1.0");
