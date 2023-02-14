@@ -149,7 +149,6 @@ public class Trace {
 		return this.opacity; 
 	}
 	
-
 	/**
 	 * sets the transparency of a trace
 	 * <br>opacity = 0.0, completely transparent / invisible
