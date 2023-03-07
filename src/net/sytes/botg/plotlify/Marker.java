@@ -19,8 +19,8 @@ public class Marker {
 		return color;
 	}
 
-	public void setColor(String color) {
-		this.color = color;
+	public void setColor(Color color) {
+		this.color = color.toString();
 	}
 	
 	public String toJson() {

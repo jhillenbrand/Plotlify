@@ -16,6 +16,8 @@ public class Trace {
 	
 	private String name = null;
 	
+	private Line line = null;
+	
 	private String[] text = null;
 	
 	private TextFont font = null;
@@ -92,60 +94,83 @@ public class Trace {
 	}
 
 	public String getType() {
-		return type;
+		return this.type;
 	}
 
-	public Trace setType(PlotType type) {
+	public Trace type(PlotType type) {
 		this.type = type.toString();
 		return this;
 	}
 
-	public String getName() {
-		return name;
+	public String name() {
+		return this.name;
 	}
 
-	public Trace setName(String name) {
+	public Trace name(String name) {
 		this.name = name;
 		return this;
 	}
 
-	public String[] getText() {
+	public String[] text() {
 		return text;
 	}
 
-	public Trace setText(String[] text) {
+	public Trace text(String[] text) {
 		this.text = text;
 		return this;
 	}
 
-	public TextFont getFont() {
+	public TextFont font() {
+		if (this.font == null) {
+			this.font = new TextFont();
+		}
 		return font;
 	}
 
-	public Trace setFont(TextFont font) {
+	public Trace font(TextFont font) {
 		this.font = font;
 		return this;
 	}
 
-	public String getTextPosition() {
+	public String textPosition() {
 		return textposition;
 	}
 
-	public Trace setTextPosition(String textposition) {
+	public Trace textPosition(String textposition) {
 		this.textposition = textposition;
 		return this;
 	}
 
-	public Marker getMarker() {
+	/**
+	 * returns the {@code Line} object within {@code Trace},
+	 * <br>if no {@code Line} was created so far, a new one is instantiated and returned
+	 * @return
+	 */
+	public Line line() {
+		if (this.line == null) {
+			this.line = new Line();
+		}
+		return this.line;
+	}
+	
+	public Trace line(Line line) {
+		this.line = line;
+		return this;
+	}
+	
+	public Marker marker() {
+		if (this.marker == null) {
+			this.marker = new Marker();
+		}
 		return marker;
 	}
 
-	public Trace setMarker(Marker marker) {
+	public Trace marker(Marker marker) {
 		this.marker = marker;
 		return this;
 	}
 	
-	public double getOpacity() {
+	public double opacity() {
 		return this.opacity; 
 	}
 	
@@ -153,7 +178,7 @@ public class Trace {
 	 * sets the transparency of a trace
 	 * <br>opacity = 0.0, completely transparent / invisible
 	 */
-	public Trace setOpacity(double opacity) {
+	public Trace opacity(double opacity) {
 		if (opacity > 1.0 || opacity < 0.0) {
 			throw new IllegalArgumentException("opacity must be in range of 0.0 to 1.0");
 		}

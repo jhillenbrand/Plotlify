@@ -86,7 +86,7 @@ public class UnitTest_Plotly {
 		t.setX(new double[] {1.0, 2.0, 3.0, 4.0});
 		t.setY(new double[] {1.0, 1.1, 1.2, 1.3});
 		
-		t.setType(PlotType.SCATTER);
+		t.type(PlotType.SCATTER);
 		t.setMode(Mode.LINES_MARKERS);
 		
 		p.getTraces().add(t);
@@ -130,7 +130,7 @@ public class UnitTest_Plotly {
 		tr.setX(x);
 		tr.setY(y);
 		
-		tr.setType(PlotType.SCATTER);
+		tr.type(PlotType.SCATTER);
 		tr.setMode(Mode.LINES_MARKERS);
 		
 		p.getTraces().add(tr);
@@ -167,7 +167,7 @@ public class UnitTest_Plotly {
 		tr.setX(x);
 		tr.setY(y);
 		
-		tr.setType(PlotType.SCATTER);
+		tr.type(PlotType.SCATTER);
 		tr.setMode(Mode.LINES_MARKERS);
 		
 		p.getTraces().add(tr);
@@ -190,7 +190,7 @@ public class UnitTest_Plotly {
 		tr2.setX(x2);
 		tr2.setY(y2);
 		
-		tr2.setType(PlotType.SCATTER);
+		tr2.type(PlotType.SCATTER);
 		tr2.setMode(Mode.LINES_MARKERS);
 		
 		p.getTraces().add(tr2);

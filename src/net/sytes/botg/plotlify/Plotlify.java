@@ -83,7 +83,7 @@ public class Plotlify {
 		p.getLayout().getXAxis().setTitle(xLabel);
 		p.getLayout().getYAxis().setTitle(yLabel);
 		
-		p.getTrace(traceName).setType(PlotType.SCATTER);
+		p.getTrace(traceName).type(PlotType.SCATTER);
 		p.getTrace(traceName).setMode(Mode.LINES);
 		p.getTrace(traceName).setX(x);
 		p.getTrace(traceName).setY(y);
@@ -139,7 +139,7 @@ public class Plotlify {
 		p.getLayout().getScene().getYAxis().setTitle(yLabel);
 		p.getLayout().getScene().getZAxis().setTitle(zLabel);
 		
-		p.getTrace(traceName).setType(PlotType.SCATTER3D);
+		p.getTrace(traceName).type(PlotType.SCATTER3D);
 		p.getTrace(traceName).setMode(Mode.LINES);
 		p.getTrace(traceName).setX(x);
 		p.getTrace(traceName).setY(y);
@@ -220,7 +220,7 @@ public class Plotlify {
 		int m = y.length;
 		for (int i = 0; i < m; i++) {
 			p.getTrace(traceNames[i])
-				.setType(PlotType.SCATTER)
+				.type(PlotType.SCATTER)
 				.setMode(Mode.LINES)
 				.setY(y[i]);
 			if (x != null) {
@@ -279,7 +279,7 @@ public class Plotlify {
 		p.getLayout().getXAxis().setTitle(xLabel);
 		p.getLayout().getYAxis().setTitle(yLabel);
 		
-		p.getTrace(traceName).setType(PlotType.SCATTER);
+		p.getTrace(traceName).type(PlotType.SCATTER);
 		p.getTrace(traceName).setMode(Mode.MARKERS);
 		p.getTrace(traceName).setX(x);
 		p.getTrace(traceName).setY(y);
@@ -353,7 +353,7 @@ public class Plotlify {
 		p.getLayout().getScene().getYAxis().setTitle(yLabel);
 		p.getLayout().getScene().getZAxis().setTitle(zLabel);
 		
-		p.getTrace(traceName).setType(PlotType.SCATTER3D);
+		p.getTrace(traceName).type(PlotType.SCATTER3D);
 		p.getTrace(traceName).setMode(Mode.MARKERS);
 		p.getTrace(traceName).setX(x);
 		p.getTrace(traceName).setY(y);
@@ -400,7 +400,7 @@ public class Plotlify {
 		p.getLayout().getScene().getYAxis().setTitle(yLabel);
 		p.getLayout().getScene().getZAxis().setTitle(zLabel);
 		
-		p.getTrace(traceName).setType(PlotType.SURFACE);
+		p.getTrace(traceName).type(PlotType.SURFACE);
 		p.getTrace(traceName).setX(x);
 		p.getTrace(traceName).setY(y);
 		p.getTrace(traceName).setZ(z);		
@@ -462,7 +462,7 @@ public class Plotlify {
 		p.getLayout().getScene().getYAxis().setTitle(yLabel);
 		p.getLayout().getScene().getZAxis().setTitle(zLabel);
 		
-		p.getTrace(traceName).setType(PlotType.MESH3D);
+		p.getTrace(traceName).type(PlotType.MESH3D);
 		p.getTrace(traceName).setX(x);
 		p.getTrace(traceName).setY(y);
 		p.getTrace(traceName).setZ(z);		
@@ -511,12 +511,12 @@ public class Plotlify {
 		p.getLayout().getXAxis().setTitle("X");
 		p.getLayout().getYAxis().setTitle("Y");
 				
-		p.getTrace("s1").setType(PlotType.MESH3D);
+		p.getTrace("s1").type(PlotType.MESH3D);
 		p.getTrace("s1").setX(x1);
 		p.getTrace("s1").setY(y1);
 		p.getTrace("s1").setZ(z1);
 		
-		p.getTrace("s2").setType(PlotType.MESH3D);
+		p.getTrace("s2").type(PlotType.MESH3D);
 		p.getTrace("s2").setX(x2);
 		p.getTrace("s2").setY(y2);
 		p.getTrace("s2").setZ(z2);

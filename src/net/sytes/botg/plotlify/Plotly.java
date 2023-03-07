@@ -118,12 +118,12 @@ public class Plotly {
 	 */
 	public Trace getTrace(String name) {
 		for (Trace t : this.traces) {
-			if (t.getName().contentEquals(name)) {
+			if (t.name().contentEquals(name)) {
 				return t;
 			}
 		}
 		Trace t = new Trace();
-		t.setName(name);
+		t.name(name);
 		this.traces.add(t);
 		return this.getTrace(name);
 	}
@@ -131,7 +131,7 @@ public class Plotly {
 	public void setTrace(String name, Trace t) {
 		int i = 0;
 		for (Trace tr : this.traces) {
-			if (tr.getName().contentEquals(name)) {
+			if (tr.name().contentEquals(name)) {
 				this.traces.remove(i);
 				this.traces.add(i, t);
 				return;
