@@ -79,14 +79,14 @@ public class Plotlify {
 		
 		Plotly p = new Plotly();
 		
-		p.getLayout().setTitle(title);
-		p.getLayout().getXAxis().setTitle(xLabel);
-		p.getLayout().getYAxis().setTitle(yLabel);
+		p.layout().title(title);
+		p.layout().xAxis().setTitle(xLabel);
+		p.layout().yAxis().setTitle(yLabel);
 		
-		p.getTrace(traceName).type(PlotType.SCATTER);
-		p.getTrace(traceName).setMode(Mode.LINES);
-		p.getTrace(traceName).setX(x);
-		p.getTrace(traceName).setY(y);
+		p.trace(traceName).type(PlotType.SCATTER);
+		p.trace(traceName).mode(Mode.LINES);
+		p.trace(traceName).x(x);
+		p.trace(traceName).y(y);
 		
 		PlotlyDocument pDoc = new PlotlyDocument();
 		pDoc.addPlotly(p);
@@ -134,16 +134,16 @@ public class Plotlify {
 
 		Plotly p = new Plotly();
 		
-		p.getLayout().setTitle(title);
-		p.getLayout().getScene().getXAxis().setTitle(xLabel);
-		p.getLayout().getScene().getYAxis().setTitle(yLabel);
-		p.getLayout().getScene().getZAxis().setTitle(zLabel);
+		p.layout().title(title);
+		p.layout().scene().getXAxis().setTitle(xLabel);
+		p.layout().scene().getYAxis().setTitle(yLabel);
+		p.layout().scene().getZAxis().setTitle(zLabel);
 		
-		p.getTrace(traceName).type(PlotType.SCATTER3D);
-		p.getTrace(traceName).setMode(Mode.LINES);
-		p.getTrace(traceName).setX(x);
-		p.getTrace(traceName).setY(y);
-		p.getTrace(traceName).setZ(z);		
+		p.trace(traceName).type(PlotType.SCATTER3D);
+		p.trace(traceName).mode(Mode.LINES);
+		p.trace(traceName).x(x);
+		p.trace(traceName).y(y);
+		p.trace(traceName).z(z);		
 		
 		PlotlyDocument pDoc = new PlotlyDocument();
 		pDoc.addPlotly(p);
@@ -213,18 +213,18 @@ public class Plotlify {
 		
 		Plotly p = new Plotly();
 		
-		p.getLayout().setTitle(title);
-		p.getLayout().getXAxis().setTitle(yLabel);
-		p.getLayout().getYAxis().setTitle(yLabel);
+		p.layout().title(title);
+		p.layout().xAxis().setTitle(yLabel);
+		p.layout().yAxis().setTitle(yLabel);
 		
 		int m = y.length;
 		for (int i = 0; i < m; i++) {
-			p.getTrace(traceNames[i])
+			p.trace(traceNames[i])
 				.type(PlotType.SCATTER)
-				.setMode(Mode.LINES)
-				.setY(y[i]);
+				.mode(Mode.LINES)
+				.y(y[i]);
 			if (x != null) {
-				p.getTrace(traceNames[i]).setX(x[i]);
+				p.trace(traceNames[i]).x(x[i]);
 			}
 		}
 				
@@ -275,14 +275,14 @@ public class Plotlify {
 		
 		Plotly p = new Plotly();
 		
-		p.getLayout().setTitle(title);
-		p.getLayout().getXAxis().setTitle(xLabel);
-		p.getLayout().getYAxis().setTitle(yLabel);
+		p.layout().title(title);
+		p.layout().xAxis().setTitle(xLabel);
+		p.layout().yAxis().setTitle(yLabel);
 		
-		p.getTrace(traceName).type(PlotType.SCATTER);
-		p.getTrace(traceName).setMode(Mode.MARKERS);
-		p.getTrace(traceName).setX(x);
-		p.getTrace(traceName).setY(y);
+		p.trace(traceName).type(PlotType.SCATTER);
+		p.trace(traceName).mode(Mode.MARKERS);
+		p.trace(traceName).x(x);
+		p.trace(traceName).y(y);
 		
 		PlotlyDocument pDoc = new PlotlyDocument();
 		pDoc.addPlotly(p);
@@ -348,16 +348,16 @@ public class Plotlify {
 		
 		Plotly p = new Plotly();
 		
-		p.getLayout().setTitle(title);
-		p.getLayout().getScene().getXAxis().setTitle(xLabel);
-		p.getLayout().getScene().getYAxis().setTitle(yLabel);
-		p.getLayout().getScene().getZAxis().setTitle(zLabel);
+		p.layout().title(title);
+		p.layout().scene().getXAxis().setTitle(xLabel);
+		p.layout().scene().getYAxis().setTitle(yLabel);
+		p.layout().scene().getZAxis().setTitle(zLabel);
 		
-		p.getTrace(traceName).type(PlotType.SCATTER3D);
-		p.getTrace(traceName).setMode(Mode.MARKERS);
-		p.getTrace(traceName).setX(x);
-		p.getTrace(traceName).setY(y);
-		p.getTrace(traceName).setZ(z);		
+		p.trace(traceName).type(PlotType.SCATTER3D);
+		p.trace(traceName).mode(Mode.MARKERS);
+		p.trace(traceName).x(x);
+		p.trace(traceName).y(y);
+		p.trace(traceName).z(z);		
 		
 		PlotlyDocument pDoc = new PlotlyDocument();
 		pDoc.addPlotly(p);
@@ -395,15 +395,15 @@ public class Plotlify {
 		
 		Plotly p = new Plotly();
 		
-		p.getLayout().setTitle(title);
-		p.getLayout().getScene().getXAxis().setTitle(xLabel);
-		p.getLayout().getScene().getYAxis().setTitle(yLabel);
-		p.getLayout().getScene().getZAxis().setTitle(zLabel);
+		p.layout().title(title);
+		p.layout().scene().getXAxis().setTitle(xLabel);
+		p.layout().scene().getYAxis().setTitle(yLabel);
+		p.layout().scene().getZAxis().setTitle(zLabel);
 		
-		p.getTrace(traceName).type(PlotType.SURFACE);
-		p.getTrace(traceName).setX(x);
-		p.getTrace(traceName).setY(y);
-		p.getTrace(traceName).setZ(z);		
+		p.trace(traceName).type(PlotType.SURFACE);
+		p.trace(traceName).x(x);
+		p.trace(traceName).y(y);
+		p.trace(traceName).z(z);		
 		
 		PlotlyDocument pDoc = new PlotlyDocument();
 		pDoc.addPlotly(p);
@@ -457,15 +457,15 @@ public class Plotlify {
 		
 		Plotly p = new Plotly();
 		
-		p.getLayout().setTitle(title);
-		p.getLayout().getScene().getXAxis().setTitle(xLabel);
-		p.getLayout().getScene().getYAxis().setTitle(yLabel);
-		p.getLayout().getScene().getZAxis().setTitle(zLabel);
+		p.layout().title(title);
+		p.layout().scene().getXAxis().setTitle(xLabel);
+		p.layout().scene().getYAxis().setTitle(yLabel);
+		p.layout().scene().getZAxis().setTitle(zLabel);
 		
-		p.getTrace(traceName).type(PlotType.MESH3D);
-		p.getTrace(traceName).setX(x);
-		p.getTrace(traceName).setY(y);
-		p.getTrace(traceName).setZ(z);		
+		p.trace(traceName).type(PlotType.MESH3D);
+		p.trace(traceName).x(x);
+		p.trace(traceName).y(y);
+		p.trace(traceName).z(z);		
 		
 		PlotlyDocument pDoc = new PlotlyDocument();
 		pDoc.addPlotly(p);
@@ -508,18 +508,18 @@ public class Plotlify {
 		
 		Plotly p = new Plotly();
 		
-		p.getLayout().getXAxis().setTitle("X");
-		p.getLayout().getYAxis().setTitle("Y");
+		p.layout().xAxis().setTitle("X");
+		p.layout().yAxis().setTitle("Y");
 				
-		p.getTrace("s1").type(PlotType.MESH3D);
-		p.getTrace("s1").setX(x1);
-		p.getTrace("s1").setY(y1);
-		p.getTrace("s1").setZ(z1);
+		p.trace("s1").type(PlotType.MESH3D);
+		p.trace("s1").x(x1);
+		p.trace("s1").y(y1);
+		p.trace("s1").z(z1);
 		
-		p.getTrace("s2").type(PlotType.MESH3D);
-		p.getTrace("s2").setX(x2);
-		p.getTrace("s2").setY(y2);
-		p.getTrace("s2").setZ(z2);
+		p.trace("s2").type(PlotType.MESH3D);
+		p.trace("s2").x(x2);
+		p.trace("s2").y(y2);
+		p.trace("s2").z(z2);
 		
 		PlotlyDocument pDoc = new PlotlyDocument();
 		pDoc.addPlotly(p);

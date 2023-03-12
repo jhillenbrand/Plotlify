@@ -15,32 +15,36 @@ public class Line {
 		return this.dash;
 	}
 	
-	public void dash(DashType dashType) {
+	public Line dash(DashType dashType) {
 		this.dash = dashType.toString();
+		return this;
 	}
 	
 	public int width() {
 		return this.width;
 	}
 	
-	public void width(int width) {
+	public Line width(int width) {
 		this.width = width;
+		return this;
 	}
 	
 	public String shape() {
 		return this.shape;
 	}
 	
-	public void shape(LineShape lineShape) {
+	public Line shape(LineShape lineShape) {
 		this.shape = lineShape.toString();
+		return this;
 	}
 	
 	public String color() {
 		return this.color;
 	}
 	
-	public void color(Color color) {
+	public Line color(Color color) {
 		this.color = color.toString();
+		return this;
 	}
 	
 }

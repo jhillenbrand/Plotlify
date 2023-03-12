@@ -50,12 +50,12 @@ public class Plotly {
 		int i = 1;
 		for (Trace t : this.traces) {
 			// do data manipulation if required for specific plotType
-			if (t.getType() != null) {
-				switch (PlotType.valueOf(t.getType().toUpperCase())) {
+			if (t.type() != null) {
+				switch (PlotType.valueOf(t.type().toUpperCase())) {
 					case SURFACE:
-						if (t.getX() != null) {
+						if (t.x() != null) {
 							// increase matrix by one row and column at the beginning to store the x and y coordinates					
-							Object[] z_old = t.getZ();
+							Object[] z_old = t.z();
 							int m = z_old.length;
 							Object[] row0 = (Object[]) z_old[0];
 							int n = row0.length;
@@ -66,15 +66,15 @@ public class Plotly {
 								Object[] row = (Object[]) z_old[j];
 								for (int k = 0; k < n; k++) {
 									if (j == 0) {
-										z_new[0][k + 1] = t.getX()[k];
+										z_new[0][k + 1] = t.x()[k];
 									}
 									z_new[j + 1][k + 1] = row[k];
 								}
-								z_new[j + 1][0] = t.getY()[j];
+								z_new[j + 1][0] = t.x()[j];
 							}
-							t.setZ(z_new);
-							t.setX(new double[0]);
-							t.setY(new double[0]);
+							t.z(z_new);
+							t.x(new double[0]);
+							t.y(new double[0]);
 						}
 						break;
 				}
@@ -116,7 +116,7 @@ public class Plotly {
 	 * @param name
 	 * @return
 	 */
-	public Trace getTrace(String name) {
+	public Trace trace(String name) {
 		for (Trace t : this.traces) {
 			if (t.name().contentEquals(name)) {
 				return t;
@@ -125,27 +125,28 @@ public class Plotly {
 		Trace t = new Trace();
 		t.name(name);
 		this.traces.add(t);
-		return this.getTrace(name);
+		return this.trace(name);
 	}
 	
-	public void setTrace(String name, Trace t) {
+	public Plotly trace(String name, Trace t) {
 		int i = 0;
 		for (Trace tr : this.traces) {
 			if (tr.name().contentEquals(name)) {
 				this.traces.remove(i);
 				this.traces.add(i, t);
-				return;
+				return this;
 			}
 			++i;
 		}
 		logger.warn("Could not find " + t.toJson() + " in this " + this.getClass().getSimpleName());
+		return this;
 	}
 	
-	public List<Trace> getTraces() {
+	public List<Trace> traces() {
 		return this.traces;
 	}
 	
-	public void setTraces(List<Trace> traces) {
+	public void traces(List<Trace> traces) {
 		this.traces = traces;
 	}
 	
@@ -154,18 +155,18 @@ public class Plotly {
 	 * <br>if no {@code Layout} was specified yet, a new one is created and returned
 	 * @return
 	 */
-	public Layout getLayout() {
+	public Layout layout() {
 		if (this.layout == null) {
 			this.layout = new Layout();
 		}
 		return this.layout;
 	}
 	
-	public void setLayout(Layout layout) {
+	public void layout(Layout layout) {
 		this.layout = layout;
 	}
 
-	public String getPlotId() {
+	public String plotId() {
 		return this.plotId;
 	}	
 }

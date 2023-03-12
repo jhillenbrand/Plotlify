@@ -50,16 +50,16 @@ public class PlotlyDocument {
 
 	public void addPlotly(Plotly plotly) {
 		// set doc title if available
-		if (plotly.getLayout() != null) {
-			if (plotly.getLayout().getTitle() != null) {
+		if (plotly.layout() != null) {
+			if (plotly.layout().title() != null) {
 				Element titleElem = getElementByTag(this.doc.head(), "title", false);
-				titleElem.text(plotly.getLayout().getTitle());
+				titleElem.text(plotly.layout().title());
 			}
 		}
 		
 		// create div tag with plot id and attributes
 		Element plotDiv = this.doc.body().appendElement("div");
-		plotDiv.attributes().put("id", plotly.getPlotId());
+		plotDiv.attributes().put("id", plotly.plotId());
 		plotDiv.attributes().put("style", "width:100%; height:100%;");
 		
 		// create script tag

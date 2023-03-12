@@ -23,15 +23,15 @@ public class UnitTest_Plotly {
 		Trace t = new Trace();
 		
 		//t.setName("t1");
-		t.setX(new double[] {1.0, 2.0, 3.0, 4.0});
-		t.setY(new double[] {1.0, 1.1, 1.2, 1.3});
+		t.x(new double[] {1.0, 2.0, 3.0, 4.0});
+		t.y(new double[] {1.0, 1.1, 1.2, 1.3});
 		
 		System.out.println(new Gson().toJson(t));
 		
 		Trace t2 = new Trace();
 	
-		t2.setX(new double[] {1.0, 2.0, 3.0, 4.0});
-		t2.setY(new double[] {1.0, 1.1, 1.2, 1.3});
+		t2.x(new double[] {1.0, 2.0, 3.0, 4.0});
+		t2.y(new double[] {1.0, 1.1, 1.2, 1.3});
 		
 		System.out.println(new Gson().toJson(t2));
 		//System.out.println(t2.toString());
@@ -44,10 +44,10 @@ public class UnitTest_Plotly {
 	
 		Trace t = new Trace();
 		
-		t.setX(new double[] {1.0, 2.0, 3.0, 4.0});
-		t.setY(new double[] {1.0, 1.1, 1.2, 1.3});
+		t.x(new double[] {1.0, 2.0, 3.0, 4.0});
+		t.y(new double[] {1.0, 1.1, 1.2, 1.3});
 		
-		p.getTraces().add(t);
+		p.traces().add(t);
 		
 		System.out.println(p.toString());
 		
@@ -61,10 +61,10 @@ public class UnitTest_Plotly {
 	
 		Trace t = new Trace();
 		
-		t.setX(new double[] {1.0, 2.0, 3.0, 4.0});
-		t.setY(new double[] {1.0, 1.1, 1.2, 1.3});
+		t.x(new double[] {1.0, 2.0, 3.0, 4.0});
+		t.y(new double[] {1.0, 1.1, 1.2, 1.3});
 		
-		p.getTraces().add(t);
+		p.traces().add(t);
 		
 		System.out.println(p.toString());
 		
@@ -83,19 +83,19 @@ public class UnitTest_Plotly {
 		
 		Trace t = new Trace();
 		
-		t.setX(new double[] {1.0, 2.0, 3.0, 4.0});
-		t.setY(new double[] {1.0, 1.1, 1.2, 1.3});
+		t.x(new double[] {1.0, 2.0, 3.0, 4.0});
+		t.y(new double[] {1.0, 1.1, 1.2, 1.3});
 		
 		t.type(PlotType.SCATTER);
-		t.setMode(Mode.LINES_MARKERS);
+		t.mode(Mode.LINES_MARKERS);
 		
-		p.getTraces().add(t);
+		p.traces().add(t);
 		
 		Layout layout = new Layout();
-		layout.setHeight(800); 
-		layout.setWidth(1600);
+		layout.height(800); 
+		layout.width(1600);
 		
-		p.setLayout(layout);
+		p.layout(layout);
 		
 		System.out.println(p.toString());
 		
@@ -127,15 +127,15 @@ public class UnitTest_Plotly {
 		
 		Trace tr = new Trace();
 		
-		tr.setX(x);
-		tr.setY(y);
+		tr.x(x);
+		tr.y(y);
 		
 		tr.type(PlotType.SCATTER);
-		tr.setMode(Mode.LINES_MARKERS);
+		tr.mode(Mode.LINES_MARKERS);
 		
-		p.getTraces().add(tr);
+		p.traces().add(tr);
 		
-		p.getLayout().equalAxis();
+		p.layout().equalAxis();
 		
 		PlotlyDocument pDoc = new PlotlyDocument();
 		
@@ -164,13 +164,13 @@ public class UnitTest_Plotly {
 		
 		Trace tr = new Trace();
 		
-		tr.setX(x);
-		tr.setY(y);
+		tr.x(x);
+		tr.y(y);
 		
 		tr.type(PlotType.SCATTER);
-		tr.setMode(Mode.LINES_MARKERS);
+		tr.mode(Mode.LINES_MARKERS);
 		
-		p.getTraces().add(tr);
+		p.traces().add(tr);
 		
 		Circle c2 = new Circle.Builder()
 				.D(10.0)
@@ -187,15 +187,15 @@ public class UnitTest_Plotly {
 				
 		Trace tr2 = new Trace();
 		
-		tr2.setX(x2);
-		tr2.setY(y2);
+		tr2.x(x2);
+		tr2.y(y2);
 		
 		tr2.type(PlotType.SCATTER);
-		tr2.setMode(Mode.LINES_MARKERS);
+		tr2.mode(Mode.LINES_MARKERS);
 		
-		p.getTraces().add(tr2);
+		p.traces().add(tr2);
 		
-		p.getLayout().equalAxis();
+		p.layout().equalAxis();
 		
 		PlotlyDocument pDoc = new PlotlyDocument();
 		

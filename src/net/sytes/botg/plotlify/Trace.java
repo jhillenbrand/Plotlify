@@ -34,49 +34,49 @@ public class Trace {
 		this.name = "trace" + TRACE_NUM;
 	}
 	
-	public Object[] getX() {
+	public Object[] x() {
 		return x;
 	}
 
-	public Trace setX(Object[] x) {
+	public Trace x(Object[] x) {
 		this.x = x;
 		return this;
 	}
 	
-	public Trace setX(double[] x) {
+	public Trace x(double[] x) {
 		this.x = ConvertArray.wrap(x);
 		return this;
 	}
 
-	public Object[] getY() {
+	public Object[] y() {
 		return y;
 	}
 
-	public Trace setY(Object[] y) {
+	public Trace y(Object[] y) {
 		this.y = y;
 		return this;
 	}
 	
-	public Trace setY(double[] y) {
+	public Trace y(double[] y) {
 		this.y = ConvertArray.wrap(y);
 		return this;
 	}
 
-	public Object[] getZ() {
+	public Object[] z() {
 		return z;
 	}
 
-	public Trace setZ(Object[] z) {
+	public Trace z(Object[] z) {
 		this.z = z;
 		return this;
 	}
 	
-	public Trace setZ(double[] z) {
+	public Trace z(double[] z) {
 		this.z = ConvertArray.wrap(z);
 		return this;
 	}
 	
-	public Trace setZ(double[][] z) {
+	public Trace z(double[][] z) {
 		this.z = new Object[z.length];
 		for (int i = 0; i < z.length; i++) {
 			this.z[i] = ConvertArray.toObjects(ConvertArray.wrap(z[i])); 
@@ -84,16 +84,16 @@ public class Trace {
 		return this;		
 	}
 
-	public String getMode() {
+	public String mode() {
 		return this.mode;
 	}
 
-	public Trace setMode(Mode mode) {
+	public Trace mode(Mode mode) {
 		this.mode = mode.toString();
 		return this;
 	}
 
-	public String getType() {
+	public String type() {
 		return this.type;
 	}
 
