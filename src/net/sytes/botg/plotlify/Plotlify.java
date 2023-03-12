@@ -2,6 +2,7 @@ package net.sytes.botg.plotlify;
 
 import java.io.IOException;
 
+import net.sytes.botg.array.geometry.Plane;
 import net.sytes.botg.array.geometry.SemiSphere;
 import net.sytes.botg.array.math.Vec;
 
@@ -470,7 +471,7 @@ public class Plotlify {
 		return pDoc;
 	}
 	
-	public static PlotlyDocument sphere(String filePath, double D, double x_0, double y_0, double z_0, int res) throws IOException {
+	public static PlotlyDocument sphere(double D, double x_0, double y_0, double z_0, int res) throws IOException {
 		
 		SemiSphere ss1 = new SemiSphere.Builder()
 				.D(D)
@@ -521,6 +522,52 @@ public class Plotlify {
 		pDoc.addPlotly(p);
 		
 		//pDoc.toFile(filePath);
+		return pDoc;
+	}
+	
+	/**
+	 * creates a 3D plane defined by normal vector {@code n} and {@code r0} a point on the plane
+	 * @param n Example: n = new double[]{ 1, 1, 1};
+	 * @param r0 Example: r0 = new double[]{ 0, 0, 1};
+	 * @return
+	 * @throws IOException
+	 */
+	public static PlotlyDocument plane(double[] n, double[] r0, double width, double length) throws IOException {
+		if (n.length != 3 || r0.length != 3) {
+			throw new IllegalArgumentException("vectors n and r0 must be of length 3");
+		}
+		
+		Plane plane = new Plane.Builder()
+				.nx(n[0])
+				.ny(n[1])
+				.nz(n[2])
+				.x0(r0[0])
+				.y0(r0[1])
+				.z0(r0[2])
+				.xmin(r0[0] - width / 2.0)
+				.xmax(r0[0] + width / 2.0)
+				.ymin(r0[1] - length / 2.0)
+				.ymax(r0[1] + length / 2.0)
+				.build();
+		
+		double[] t1 = Vec.linspace(0.0, 1.0, 2);
+		double[] t2 = Vec.linspace(0.0, 1.0, 2);
+		
+		plane.create(t1, t2);
+		
+		Plotly p = new Plotly();
+		
+		p.layout().xAxis().setTitle("X");
+		p.layout().yAxis().setTitle("Y");
+		p.layout().zAxis().setTitle("Z");
+				
+		p.trace("plane1").type(PlotType.MESH3D);
+		p.trace("plane1").x(plane.x());
+		p.trace("plane1").y(plane.y());
+		p.trace("plane1").z(plane.z());
+		
+		PlotlyDocument pDoc = new PlotlyDocument();
+		pDoc.addPlotly(p);
 		return pDoc;
 	}
 	

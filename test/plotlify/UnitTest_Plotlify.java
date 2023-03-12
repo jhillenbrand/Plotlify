@@ -110,4 +110,11 @@ public class UnitTest_Plotlify {
 		
 	}
 	
+	@Test
+	public void test060() throws IOException {
+		
+		Plotlify.plane(new double[] {1, 1, 1}, new double[] {-1, 1 ,1}, 10.0, 10.0).toFile();
+		
+	}
+	
 }
