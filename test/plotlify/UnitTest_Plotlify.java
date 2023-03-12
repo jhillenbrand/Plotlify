@@ -18,7 +18,7 @@ public class UnitTest_Plotlify {
 		String filePath = "test.html";
 		String title = "Test1";
 		
-		Plotlify.line(filePath, x, y, title);
+		Plotlify.line(x, y, title).toFile(filePath);
 		
 	}
 	
@@ -32,7 +32,7 @@ public class UnitTest_Plotlify {
 		String filePath = "test.html";
 		String title = "Test1";
 		
-		Plotlify.scatter3D(filePath, x, y, z, title);
+		Plotlify.scatter3D(filePath, x, y, z, title).toFile(filePath);
 		
 	}
 	
@@ -43,7 +43,7 @@ public class UnitTest_Plotlify {
 		
 		String filePath = "test.html";
 		
-		Plotlify.line(filePath, y);
+		Plotlify.line(filePath, y).toFile(filePath);
 		
 	}
 	
@@ -57,7 +57,7 @@ public class UnitTest_Plotlify {
 		
 		String filePath = "test.html";
 				
-		Plotlify.line(filePath, x, y);
+		Plotlify.line(x, y).toFile(filePath);
 		 
 		//Plotlify.addLine(filePath, x, y2);
 		
@@ -73,7 +73,7 @@ public class UnitTest_Plotlify {
 		
 		String filePath = "test.html";
 				
-		Plotlify.line(filePath, x, y);
+		Plotlify.line(x, y).toFile(filePath);
 		
 		//Plotlify.addScatter(filePath, x, y2);
 		
@@ -89,7 +89,7 @@ public class UnitTest_Plotlify {
 		
 		String filePath = "test2.html";
 				
-		Plotlify.line(filePath, x, y, "t2", "t2", "x1", "x2");
+		Plotlify.line(x, y, "t2", "t2", "x1", "x2").toFile(filePath);
 		
 		//Plotlify.addScatter(filePath, x, y2);
 		

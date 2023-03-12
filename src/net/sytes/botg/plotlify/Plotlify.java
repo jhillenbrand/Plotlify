@@ -3,70 +3,56 @@ package net.sytes.botg.plotlify;
 import java.io.IOException;
 
 import net.sytes.botg.array.geometry.SemiSphere;
-import net.sytes.botg.array.math.Mat;
 import net.sytes.botg.array.math.Vec;
 
 public class Plotlify { 
 	
 	/**
-	 * creates a line plot based on the double array passed with {@code y} and exports it as html file under current path as plotly.html
+	 * creates a line plot based on the double array passed with {@code y}
 	 * @param y
 	 * @throws IOException
 	 */
-	public static void line(double[] y) throws IOException {
-		line("plotly.html", null, y, "trace1", null, null, null);
+	public static PlotlyDocument line(double[] y) throws IOException {
+		return line(null, y, "trace1", null, null, null);
 	}
-	
+		
 	/**
-	 * creates a line plot based on the double arrays passed with {@code x} and {@code y} and exports it as html file under current path as plotly.html
-	 * @param x
-	 * @param y
-	 * @throws IOException 
-	 */
-	public static void line(double[] x, double[] y) throws IOException {
-		line("plotly.html", x, y, "trace1", null, null, null);
-	}
-	
-	/**
-	 * creates a line plot based on the double array passed with {@code y} and exports it as html file under specified {@code filePath}
+	 * creates a line plot based on the double array passed with {@code y}
 	 * @param filePath
 	 * @param y
 	 * @throws IOException
 	 */
-	public static void line(String filePath, double[] y) throws IOException {
-		line(filePath, null, y, "trace1", null, null, null);
+	public static PlotlyDocument line(String filePath, double[] y) throws IOException {
+		return line(null, y, "trace1", null, null, null);
 	}
 	
 	/**
-	 * creates a line plot based on the double arrays passed with {@code x} and {@code y} and exports it as html file under specified {@code filePath}
-	 * @param filePath
+	 * creates a line plot based on the double arrays passed with {@code x} and {@code y}
 	 * @param x
 	 * @param y
 	 * @throws IOException 
 	 */
-	public static void line(String filePath, double[] x, double[] y) throws IOException {
-		line(filePath, x, y, "trace1", null, null, null);
+	public static PlotlyDocument line(double[] x, double[] y) throws IOException {
+		return line(x, y, "trace1", null, null, null);
 	}
 	
 	/**
-	 * creates a line plot based on the double arrays passed with {@code x} and {@code y} and exports it as html file under specified {@code filePath}
+	 * creates a line plot based on the double arrays passed with {@code x} and {@code y}
 	 * <br>{@code title} can be used to specify the plot's title
-	 * @param filePath
 	 * @param x
 	 * @param y
 	 * @param title
 	 * @throws IOException 
 	 */
-	public static void line(String filePath, double[] x, double[] y, String title) throws IOException {
-		line(filePath, x, y, "trace1", title, null, null);
+	public static PlotlyDocument line(double[] x, double[] y, String title) throws IOException {
+		return line(x, y, "trace1", title, null, null);
 	}
 	
 	/**
-	 * creates a line plot based on the double arrays passed with {@code x} and {@code y} and exports it as html file under specified {@code filePath}
+	 * creates a line plot based on the double arrays passed with {@code x} and {@code y}
 	 * <br>{@code traceName} can be used to specify the legend entry for the specified data
 	 * <br>{@code title} can be used to specify the plot's title
 	 * <br>{@code xLabel} and {@code xLabel} can be used to specify the plot's axis labels
-	 * @param filePath
 	 * @param x
 	 * @param y
 	 * @param traceName
@@ -75,7 +61,7 @@ public class Plotlify {
 	 * @param yLabel
 	 * @throws IOException 
 	 */
-	public static void line(String filePath, double[] x, double[] y, String traceName, String title, String xLabel, String yLabel) throws IOException {
+	public static PlotlyDocument line(double[] x, double[] y, String traceName, String title, String xLabel, String yLabel) throws IOException {
 		
 		Plotly p = new Plotly();
 		
@@ -91,7 +77,9 @@ public class Plotlify {
 		PlotlyDocument pDoc = new PlotlyDocument();
 		pDoc.addPlotly(p);
 		
-		pDoc.toFile(filePath);
+		//pDoc.toFile(filePath);
+		
+		return pDoc;
 	}
 	
 	/**
@@ -110,8 +98,8 @@ public class Plotlify {
 	 * @param zLabel
 	 * @throws IOException 
 	 */
-	public static void line(String filePath, double[] x, double[] y, double[] z, String traceName) throws IOException {
-		line(filePath, x, y, z, traceName, null, null, null, null);
+	public static PlotlyDocument line(String filePath, double[] x, double[] y, double[] z, String traceName) throws IOException {
+		return line(filePath, x, y, z, traceName, null, null, null, null);
 	}
 	
 	/**
@@ -130,7 +118,7 @@ public class Plotlify {
 	 * @param zLabel
 	 * @throws IOException 
 	 */
-	public static void line(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
+	public static PlotlyDocument line(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
 
 		Plotly p = new Plotly();
 		
@@ -148,7 +136,9 @@ public class Plotlify {
 		PlotlyDocument pDoc = new PlotlyDocument();
 		pDoc.addPlotly(p);
 		
-		pDoc.toFile(filePath);
+		//pDoc.toFile(filePath);
+		
+		return pDoc;
 	}
 	
 	/**
@@ -156,8 +146,8 @@ public class Plotlify {
 	 * @param y multiple double[] arrays of same length
 	 * @throws IOException 
 	 */
-	public static void lines(double[] ... y) throws IOException {		
-		lines("plotly.html", null, y, null, "Plotly", null, null);
+	public static PlotlyDocument lines(double[] ... y) throws IOException {		
+		return lines("plotly.html", null, y, null, "Plotly", null, null);
 	}
 	
 	/**
@@ -165,8 +155,8 @@ public class Plotlify {
 	 * @param y multiple double[] arrays of same length
 	 * @throws IOException 
 	 */
-	public static void lines(double[][] x, double[][] y) throws IOException {		
-		lines("plotly.html", x, y, null, "Plotly", null, null);
+	public static PlotlyDocument lines(double[][] x, double[][] y) throws IOException {		
+		return lines("plotly.html", x, y, null, "Plotly", null, null);
 	}
 	
 	/**
@@ -183,7 +173,7 @@ public class Plotlify {
 	 * @param yLabel
 	 * @throws IOException
 	 */
-	public static void lines(String filePath, double[][] x, double[][] y, String[] traceNames, String title, String xLabel, String yLabel) throws IOException {
+	public static PlotlyDocument lines(String filePath, double[][] x, double[][] y, String[] traceNames, String title, String xLabel, String yLabel) throws IOException {
 		if (x != null) {
 			// check for correct dimensions
 			// a) same rows
@@ -230,7 +220,10 @@ public class Plotlify {
 				
 		PlotlyDocument pDoc = new PlotlyDocument();
 		pDoc.addPlotly(p);
-		pDoc.toFile(filePath);
+		
+		//pDoc.toFile(filePath);
+		
+		return pDoc;
 	}
 	
 	/**
@@ -240,8 +233,8 @@ public class Plotlify {
 	 * @param y
 	 * @throws IOException 
 	 */
-	public static void scatter(String filePath, double[] x, double[] y) throws IOException {
-		scatter(filePath, x, y, "trace1", null, null, null);
+	public static PlotlyDocument scatter(String filePath, double[] x, double[] y) throws IOException {
+		return scatter(filePath, x, y, "trace1", null, null, null);
 	}
 	
 	/**
@@ -253,8 +246,8 @@ public class Plotlify {
 	 * @param title
 	 * @throws IOException 
 	 */
-	public static void scatter(String filePath, double[] x, double[] y, String title) throws IOException {
-		scatter(filePath, x, y, "trace1", title, null, null);
+	public static PlotlyDocument scatter(String filePath, double[] x, double[] y, String title) throws IOException {
+		return scatter(filePath, x, y, "trace1", title, null, null);
 	}
 	
 	/**
@@ -271,7 +264,7 @@ public class Plotlify {
 	 * @param yLabel
 	 * @throws IOException 
 	 */
-	public static void scatter(String filePath, double[] x, double[] y, String traceName, String title, String xLabel, String yLabel) throws IOException {
+	public static PlotlyDocument scatter(String filePath, double[] x, double[] y, String traceName, String title, String xLabel, String yLabel) throws IOException {
 		
 		Plotly p = new Plotly();
 		
@@ -287,7 +280,9 @@ public class Plotlify {
 		PlotlyDocument pDoc = new PlotlyDocument();
 		pDoc.addPlotly(p);
 		
-		pDoc.toFile(filePath);
+		//pDoc.toFile(filePath);
+		
+		return pDoc;
 	}
 	
 	/**
@@ -298,8 +293,8 @@ public class Plotlify {
 	 * @param z
 	 * @throws IOException 
 	 */
-	public static void scatter3D(double[] x, double[] y, double[] z) throws IOException {
-		scatter3D("plotly.html", x, y, z, "trace1", null, null, null, null);
+	public static PlotlyDocument scatter3D(double[] x, double[] y, double[] z) throws IOException {
+		return scatter3D("plotly.html", x, y, z, "trace1", null, null, null, null);
 	}
 	
 	/**
@@ -310,8 +305,8 @@ public class Plotlify {
 	 * @param z
 	 * @throws IOException 
 	 */
-	public static void scatter3D(String filePath, double[] x, double[] y, double[] z) throws IOException {
-		scatter3D(filePath, x, y, z, "trace1", null, null, null, null);
+	public static PlotlyDocument scatter3D(String filePath, double[] x, double[] y, double[] z) throws IOException {
+		return scatter3D(filePath, x, y, z, "trace1", null, null, null, null);
 	}
 	
 	/**
@@ -324,8 +319,8 @@ public class Plotlify {
 	 * @param title
 	 * @throws IOException 
 	 */
-	public static void scatter3D(String filePath, double[] x, double[] y, double[] z, String title) throws IOException {
-		scatter3D(filePath, x, y, z, "trace1", title, null, null, null);
+	public static PlotlyDocument scatter3D(String filePath, double[] x, double[] y, double[] z, String title) throws IOException {
+		return scatter3D(filePath, x, y, z, "trace1", title, null, null, null);
 	}
 	
 	/**
@@ -344,7 +339,7 @@ public class Plotlify {
 	 * @param zLabel
 	 * @throws IOException 
 	 */
-	public static void scatter3D(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
+	public static PlotlyDocument scatter3D(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
 		
 		Plotly p = new Plotly();
 		
@@ -362,8 +357,9 @@ public class Plotlify {
 		PlotlyDocument pDoc = new PlotlyDocument();
 		pDoc.addPlotly(p);
 		
-		pDoc.toFile(filePath);
+		//pDoc.toFile(filePath);
 		
+		return pDoc;
 	}
 	
 	/**
@@ -374,8 +370,8 @@ public class Plotlify {
 	 * @param z
 	 * @throws IOException 
 	 */
-	public static void surface(String filePath, double[] x, double[] y, double[][] z) throws IOException {
-		surface(filePath, x, y, z, "surf1", "Surface Plot", "X", "Y", "Z");
+	public static PlotlyDocument surface(String filePath, double[] x, double[] y, double[][] z) throws IOException {
+		return surface(filePath, x, y, z, "surf1", "Surface Plot", "X", "Y", "Z");
 	}
 	
 	/**
@@ -391,7 +387,7 @@ public class Plotlify {
 	 * @param zLabel
 	 * @throws IOException 
 	 */
-	public static void surface(String filePath, double[] x, double[] y, double[][] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
+	public static PlotlyDocument surface(String filePath, double[] x, double[] y, double[][] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
 		
 		Plotly p = new Plotly();
 		
@@ -408,8 +404,8 @@ public class Plotlify {
 		PlotlyDocument pDoc = new PlotlyDocument();
 		pDoc.addPlotly(p);
 		
-		pDoc.toFile(filePath);
-		
+		//pDoc.toFile(filePath);
+		return pDoc;
 	}
 	
 	/**
@@ -419,8 +415,8 @@ public class Plotlify {
 	 * @param z
 	 * @throws IOException 
 	 */
-	public static void mesh3d(double[] x, double[] y, double[] z) throws IOException {
-		mesh3d("plotly.html", x, y, z, null, null, null, null, null);
+	public static PlotlyDocument mesh3d(double[] x, double[] y, double[] z) throws IOException {
+		return mesh3d("plotly.html", x, y, z, null, null, null, null, null);
 	}
 	
 	/**
@@ -437,7 +433,7 @@ public class Plotlify {
 	 * @param zLabel
 	 * @throws IOException
 	 */
-	public static void mesh3d(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
+	public static PlotlyDocument mesh3d(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
 		
 		if (traceName == null) {
 			traceName = "mesh0";
@@ -470,11 +466,11 @@ public class Plotlify {
 		PlotlyDocument pDoc = new PlotlyDocument();
 		pDoc.addPlotly(p);
 		
-		pDoc.toFile(filePath);
-		
+		//pDoc.toFile(filePath);
+		return pDoc;
 	}
 	
-	public static void sphere(String filePath, double D, double x_0, double y_0, double z_0, int res) throws IOException {
+	public static PlotlyDocument sphere(String filePath, double D, double x_0, double y_0, double z_0, int res) throws IOException {
 		
 		SemiSphere ss1 = new SemiSphere.Builder()
 				.D(D)
@@ -524,8 +520,8 @@ public class Plotlify {
 		PlotlyDocument pDoc = new PlotlyDocument();
 		pDoc.addPlotly(p);
 		
-		pDoc.toFile(filePath);
-		
+		//pDoc.toFile(filePath);
+		return pDoc;
 	}
 	
 }

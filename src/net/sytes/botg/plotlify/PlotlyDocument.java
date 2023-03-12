@@ -70,6 +70,10 @@ public class PlotlyDocument {
 		this.plotlys.add(plotly);
 	}
 	
+	public void toFile() throws IOException {
+		this.toFile("plotly.html", true);
+	}
+	
 	public void toFile(String filePath) throws IOException {
 		this.toFile(filePath, true);
 	}
