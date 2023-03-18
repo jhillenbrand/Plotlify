@@ -19,7 +19,7 @@ public void test00() {
 	String filePath = "test.html";
 	String title = "Test0";
 		
-	Plotlify.line(filePath, x, y, title);
+	Plotlify.line(x, y, title).toFile(filePath);
 		
 }
 
@@ -34,7 +34,7 @@ public void test01() {
 	String filePath = "test.html";
 	String title = "Test1";
 		
-	Plotlify.scatter3D(filePath, x, y, z, title);
+	Plotlify.scatter3D(x, y, z, title).toFile(filePath);
 		
 }
 ```
