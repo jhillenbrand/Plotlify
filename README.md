@@ -50,4 +50,4 @@ the project also depends on [JavaArray](https://github.com/jhillenbrand/JavaArra
 ```
 git clone https://github.com/jhillenbrand/JavaArray.git
 ```
-or use one of its releases to include it into your project workspace, when building Plotlify
+or use one of the Plotlify releases to include it into your project workspace when building an application
