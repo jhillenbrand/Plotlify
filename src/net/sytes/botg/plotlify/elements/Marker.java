@@ -1,4 +1,4 @@
-package net.sytes.botg.plotlify;
+package net.sytes.botg.plotlify.elements;
 
 import com.google.gson.Gson;
 

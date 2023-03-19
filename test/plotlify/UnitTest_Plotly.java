@@ -8,12 +8,12 @@ import com.google.gson.Gson;
 
 import net.sytes.botg.array.geometry.Circle;
 import net.sytes.botg.array.math.Vec;
-import net.sytes.botg.plotlify.Layout;
-import net.sytes.botg.plotlify.Mode;
-import net.sytes.botg.plotlify.PlotType;
-import net.sytes.botg.plotlify.Plotly;
 import net.sytes.botg.plotlify.PlotlyDocument;
-import net.sytes.botg.plotlify.Trace;
+import net.sytes.botg.plotlify.elements.Layout;
+import net.sytes.botg.plotlify.elements.Mode;
+import net.sytes.botg.plotlify.elements.PlotType;
+import net.sytes.botg.plotlify.elements.Plotly;
+import net.sytes.botg.plotlify.elements.Trace;
 
 public class UnitTest_Plotly {
 
@@ -70,8 +70,6 @@ public class UnitTest_Plotly {
 		
 		PlotlyDocument pDoc = new PlotlyDocument();
 		
-		pDoc.addPlotly(p);
-		
 		pDoc.toFile("test3.html");
 		
 	}
@@ -100,8 +98,6 @@ public class UnitTest_Plotly {
 		System.out.println(p.toString());
 		
 		PlotlyDocument pDoc = new PlotlyDocument();
-		
-		pDoc.addPlotly(p);
 		
 		pDoc.toFile("test3.html");
 		
@@ -138,9 +134,7 @@ public class UnitTest_Plotly {
 		p.layout().equalAxis();
 		
 		PlotlyDocument pDoc = new PlotlyDocument();
-		
-		pDoc.addPlotly(p);
-		
+				
 		pDoc.toFile("test3.html");
 	}
 	
@@ -198,9 +192,7 @@ public class UnitTest_Plotly {
 		p.layout().equalAxis();
 		
 		PlotlyDocument pDoc = new PlotlyDocument();
-		
-		pDoc.addPlotly(p);
-		
+				
 		pDoc.toFile("test3.html");
 	}
 	

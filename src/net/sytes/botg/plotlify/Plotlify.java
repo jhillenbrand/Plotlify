@@ -5,6 +5,9 @@ import java.io.IOException;
 import net.sytes.botg.array.geometry.Plane;
 import net.sytes.botg.array.geometry.SemiSphere;
 import net.sytes.botg.array.math.Vec;
+import net.sytes.botg.plotlify.elements.Mode;
+import net.sytes.botg.plotlify.elements.PlotType;
+import net.sytes.botg.plotlify.elements.Plotly;
 
 public class Plotlify { 
 	
@@ -75,8 +78,7 @@ public class Plotlify {
 		p.trace(traceName).x(x);
 		p.trace(traceName).y(y);
 		
-		PlotlyDocument pDoc = new PlotlyDocument();
-		pDoc.addPlotly(p);
+		PlotlyDocument pDoc = new PlotlyDocument(p);
 		
 		//pDoc.toFile(filePath);
 		
@@ -134,8 +136,7 @@ public class Plotlify {
 		p.trace(traceName).y(y);
 		p.trace(traceName).z(z);		
 		
-		PlotlyDocument pDoc = new PlotlyDocument();
-		pDoc.addPlotly(p);
+		PlotlyDocument pDoc = new PlotlyDocument(p);
 		
 		//pDoc.toFile(filePath);
 		
@@ -219,8 +220,7 @@ public class Plotlify {
 			}
 		}
 				
-		PlotlyDocument pDoc = new PlotlyDocument();
-		pDoc.addPlotly(p);
+		PlotlyDocument pDoc = new PlotlyDocument(p);
 		
 		//pDoc.toFile(filePath);
 		
@@ -278,11 +278,8 @@ public class Plotlify {
 		p.trace(traceName).x(x);
 		p.trace(traceName).y(y);
 		
-		PlotlyDocument pDoc = new PlotlyDocument();
-		pDoc.addPlotly(p);
-		
-		//pDoc.toFile(filePath);
-		
+		PlotlyDocument pDoc = new PlotlyDocument(p);
+				
 		return pDoc;
 	}
 	
@@ -355,11 +352,8 @@ public class Plotlify {
 		p.trace(traceName).y(y);
 		p.trace(traceName).z(z);		
 		
-		PlotlyDocument pDoc = new PlotlyDocument();
-		pDoc.addPlotly(p);
-		
-		//pDoc.toFile(filePath);
-		
+		PlotlyDocument pDoc = new PlotlyDocument(p);
+				
 		return pDoc;
 	}
 	
@@ -402,10 +396,7 @@ public class Plotlify {
 		p.trace(traceName).y(y);
 		p.trace(traceName).z(z);		
 		
-		PlotlyDocument pDoc = new PlotlyDocument();
-		pDoc.addPlotly(p);
-		
-		//pDoc.toFile(filePath);
+		PlotlyDocument pDoc = new PlotlyDocument(p);
 		return pDoc;
 	}
 	
@@ -464,10 +455,8 @@ public class Plotlify {
 		p.trace(traceName).y(y);
 		p.trace(traceName).z(z);		
 		
-		PlotlyDocument pDoc = new PlotlyDocument();
-		pDoc.addPlotly(p);
+		PlotlyDocument pDoc = new PlotlyDocument(p);
 		
-		//pDoc.toFile(filePath);
 		return pDoc;
 	}
 	
@@ -518,10 +507,8 @@ public class Plotlify {
 		p.trace("s2").y(y2);
 		p.trace("s2").z(z2);
 		
-		PlotlyDocument pDoc = new PlotlyDocument();
-		pDoc.addPlotly(p);
+		PlotlyDocument pDoc = new PlotlyDocument(p);
 		
-		//pDoc.toFile(filePath);
 		return pDoc;
 	}
 	
@@ -566,8 +553,7 @@ public class Plotlify {
 		p.trace("plane1").y(plane.y());
 		p.trace("plane1").z(plane.z());
 		
-		PlotlyDocument pDoc = new PlotlyDocument();
-		pDoc.addPlotly(p);
+		PlotlyDocument pDoc = new PlotlyDocument(p);
 		return pDoc;
 	}
 	

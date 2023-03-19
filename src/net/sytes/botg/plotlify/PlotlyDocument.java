@@ -15,18 +15,24 @@ import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sytes.botg.plotlify.elements.Animation;
+import net.sytes.botg.plotlify.elements.Plotly;
+
 public class PlotlyDocument {
 
 	private Document doc = null;
 	
 	private List<Plotly> plotlys = new ArrayList<Plotly>();
 	
+	//private List<Animation> animations = new ArrayList<Animation>(); 
+	Animation animation = null;
+	
 	private static final String PLOTLY_TEMPLATE = "PLOTLY_TEMPLATE.html";
 	
 	private static final Logger logger = LoggerFactory.getLogger(PlotlyDocument.class);
 	
 	public PlotlyDocument() throws IOException {
-		this(null);
+		this(new Plotly());
 	}
 	
 	public PlotlyDocument(Plotly plotly) throws IOException{
@@ -43,31 +49,38 @@ public class PlotlyDocument {
 		if (this.doc == null) {
 			throw new IOException("Could not find HTML Template " + PLOTLY_TEMPLATE);
 		}
-		if (plotly != null) {
-			this.addPlotly(plotly);
-		}
+		this.addPlotly(plotly);
 	}
 
 	public void addPlotly(Plotly plotly) {
-		// set doc title if available
-		if (plotly.layout() != null) {
-			if (plotly.layout().title() != null) {
-				Element titleElem = getElementByTag(this.doc.head(), "title", false);
-				titleElem.text(plotly.layout().title());
-			}
+		if (plotly != null) {
+			this.plotlys.add(plotly);
+		} else {
+			throw new IllegalArgumentException("Specified plotly was NULL");
 		}
+	}
+	
+	private void generateDoc() {
+		for (Plotly plotly : this.plotlys) {
+			
+			// set doc title if available
+			if (plotly.layout() != null) {
+				if (plotly.layout().title() != null) {
+					Element titleElem = getElementByTag(this.doc.head(), "title", false);
+					titleElem.text(plotly.layout().title());
+				}
+			}
+			
+			// create div tag with plot id and attributes
+			Element plotDiv = this.doc.body().appendElement("div");
+			plotDiv.attributes().put("id", plotly.plotId());
+			plotDiv.attributes().put("style", "width:100%; height:100%;");
+			
+			// create script tag
+			Element script = this.doc.body().appendElement("script");
+			script.html(plotly.toString());
 		
-		// create div tag with plot id and attributes
-		Element plotDiv = this.doc.body().appendElement("div");
-		plotDiv.attributes().put("id", plotly.plotId());
-		plotDiv.attributes().put("style", "width:100%; height:100%;");
-		
-		// create script tag
-		Element script = this.doc.body().appendElement("script");
-		script.html(plotly.toString());
-		
-		// add to list
-		this.plotlys.add(plotly);
+		}
 	}
 	
 	public void toFile() throws IOException {
@@ -79,6 +92,7 @@ public class PlotlyDocument {
 	}
 	
 	public void toFile(String filePath, boolean openInBrowser) throws IOException {
+		this.generateDoc();
 		FileWriter fw = new FileWriter(new File(filePath));
 		fw.write(this.doc.toString());
 		fw.close();
@@ -109,6 +123,10 @@ public class PlotlyDocument {
 			}
 		}
 		return null;
+	}
+
+	public List<Plotly> plotlys() {
+		return this.plotlys;
 	}
 	
 }

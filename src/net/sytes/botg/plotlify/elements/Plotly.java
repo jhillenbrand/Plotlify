@@ -1,4 +1,4 @@
-package net.sytes.botg.plotlify;
+package net.sytes.botg.plotlify.elements;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package net.sytes.botg.plotlify;
+package net.sytes.botg.plotlify.elements;
 
 public enum Mode {
 	MARKERS ("markers"), LINES ("lines"), LINES_MARKERS ("lines+markers");
