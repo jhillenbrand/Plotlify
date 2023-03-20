@@ -7,9 +7,11 @@ public class Animation {
 
 	private List<Frame> frames = new ArrayList<Frame>();
 	private String plotId;
+	private int traceNum;
 	
-	public Animation(String plotId) {
+	public Animation(String plotId, int traceNum) {
 		this.plotId = plotId;
+		this.traceNum = traceNum;
 	}
 	
 	public void add(Frame frame) {
@@ -19,27 +21,8 @@ public class Animation {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		
-		sb.append("var animationData = ").append(frames.toString()).append(";\n")
-			.append("var f = 0;")
-			.append("function update(){\n\t")
-			.append("Plotly.animate('").append(this.plotId).append("', {\n\t\t")
-			.append("data: [animationData[f]]\n\t")
-			.append("}, {\n\t\t")
-			.append("transition: {\n\t\t")
-			.append("duration: 0\n\t")
-			.append("},\n\t)")
-			.append("frame: {\n\t\t")
-			.append("duration: 0,\n\t\t")
-			.append("redraw: false\n\t")
-			.append("}\n\t")
-			.append("});\n")
-			.append("f = f + 1;\n")
-			.append("\n")
-			.append("requestAnimationFrame(update);\n")
-			.append("}\n")
-			.append("requestAnimationFrame(update);");
-		
+		sb.append("var traceNum = " + this.traceNum + ";\n");
+		sb.append("var animationData = ").append(this.frames.toString()).append(";\n");		
 		return sb.toString();
 	}
 	

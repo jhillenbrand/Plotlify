@@ -28,27 +28,14 @@ public class PlotlyDocument {
 	Animation animation = null;
 	
 	private static final String PLOTLY_TEMPLATE = "PLOTLY_TEMPLATE.html";
+	private static final String PLOTLY_ANIMATION_TEMPLATE = "PLOTLY_ANIMATION_TEMPLATE.html";
 	
 	private static final Logger logger = LoggerFactory.getLogger(PlotlyDocument.class);
 	
-	public PlotlyDocument() throws IOException {
-		this(new Plotly());
+	public PlotlyDocument() {
 	}
 	
-	public PlotlyDocument(Plotly plotly) throws IOException{
-		InputStream is = this.getClass().getResourceAsStream(PLOTLY_TEMPLATE);
-		String html = null;
-		BufferedReader br = new BufferedReader(new InputStreamReader(is));
-		String line;
-		StringBuilder sb = new StringBuilder();
-		while ((line = br.readLine()) != null) {
-			sb.append(line + System.lineSeparator());
-		}
-		html = sb.toString();
-		this.doc = Jsoup.parse(html, "UTF-16");
-		if (this.doc == null) {
-			throw new IOException("Could not find HTML Template " + PLOTLY_TEMPLATE);
-		}
+	public PlotlyDocument(Plotly plotly) {
 		this.addPlotly(plotly);
 	}
 
@@ -60,7 +47,25 @@ public class PlotlyDocument {
 		}
 	}
 	
-	private void generateDoc() {
+	private void generateDoc() throws IOException {
+		InputStream is;
+		if (this.animation != null) {
+			is = this.getClass().getResourceAsStream(PLOTLY_ANIMATION_TEMPLATE);
+		} else {
+			is = this.getClass().getResourceAsStream(PLOTLY_TEMPLATE);
+		}
+		String html = null;
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		String line;
+		StringBuilder sb = new StringBuilder();
+		while ((line = br.readLine()) != null) {
+			sb.append(line + System.lineSeparator());
+		}
+		html = sb.toString();
+		this.doc = Jsoup.parse(html, "UTF-16");
+		if (this.doc == null) {
+			throw new IOException("Could not find Plotly HTML Template");
+		}		
 		for (Plotly plotly : this.plotlys) {
 			
 			// set doc title if available
@@ -81,6 +86,13 @@ public class PlotlyDocument {
 			script.html(plotly.toString());
 		
 		}
+		
+		if (this.animation != null) {
+			Element script = this.doc.createElement("script");
+			script.html(this.animation.toString());
+			this.doc.body().lastElementChild().before(script);
+		}
+		
 	}
 	
 	public void toFile() throws IOException {
@@ -127,6 +139,14 @@ public class PlotlyDocument {
 
 	public List<Plotly> plotlys() {
 		return this.plotlys;
+	}
+
+	public Animation animation() {
+		return this.animation;
+	}
+
+	public void animation(Animation animation) {
+		this.animation = animation;
 	}
 	
 }

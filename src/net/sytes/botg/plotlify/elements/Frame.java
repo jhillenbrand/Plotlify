@@ -28,6 +28,11 @@ public class Frame {
 		this.z = new Object[] {z};
 	}
 	
+	@Override
+	public String toString() {
+		return this.toJson();
+	}
+	
 	public String toJson() {
 		return new Gson().toJson(this);
 	}
