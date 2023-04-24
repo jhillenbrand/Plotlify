@@ -68,7 +68,7 @@ public class UnitTest_Plotly {
 		
 		System.out.println(p.toString());
 		
-		PlotlyDocument pDoc = new PlotlyDocument();
+		PlotlyDocument pDoc = new PlotlyDocument(p);
 		
 		pDoc.toFile("test3.html");
 		
@@ -97,7 +97,7 @@ public class UnitTest_Plotly {
 		
 		System.out.println(p.toString());
 		
-		PlotlyDocument pDoc = new PlotlyDocument();
+		PlotlyDocument pDoc = new PlotlyDocument(p);
 		
 		pDoc.toFile("test3.html");
 		
@@ -133,7 +133,7 @@ public class UnitTest_Plotly {
 		
 		p.layout().equalAxis();
 		
-		PlotlyDocument pDoc = new PlotlyDocument();
+		PlotlyDocument pDoc = new PlotlyDocument(p);
 				
 		pDoc.toFile("test3.html");
 	}
@@ -191,7 +191,7 @@ public class UnitTest_Plotly {
 		
 		p.layout().equalAxis();
 		
-		PlotlyDocument pDoc = new PlotlyDocument();
+		PlotlyDocument pDoc = new PlotlyDocument(p);
 				
 		pDoc.toFile("test3.html");
 	}
