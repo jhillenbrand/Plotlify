@@ -135,7 +135,7 @@ public class UnitTest_Plotly {
 		
 		PlotlyDocument pDoc = new PlotlyDocument(p);
 				
-		pDoc.toFile("test3.html");
+		pDoc.toFile();
 	}
 	
 	@Test

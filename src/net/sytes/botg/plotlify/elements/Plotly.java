@@ -86,26 +86,26 @@ public class Plotly {
 			} else {
 				traceSb.append("trace").append(i);
 			}
-			sb.append("var trace").append(i).append(" = ").append(t.toJson()).append(";");
+			sb.append("\tvar trace").append(i).append(" = ").append(t.toJson()).append(";");
 			sb.append("\n").append("\n");
 			++i;
 		}
 		
 		// add data
-		sb.append("var data = [").append(traceSb.toString()).append("];");
+		sb.append("\tvar data = [").append(traceSb.toString()).append("];");
 		sb.append("\n").append("\n");
 		
 		// add layout
 		if (this.layout != null) {
-			sb.append("var layout = ").append(this.layout.toJson()).append(";");
+			sb.append("\tvar layout = ").append(this.layout.toJson()).append(";");
 			sb.append("\n").append("\n");
 		} else {
-			sb.append("var layout = {};");
+			sb.append("\tvar layout = {};");
 			sb.append("\n").append("\n");
 		}
 		
 		// add plot
-		sb.append("Plotly.newPlot('").append(this.plotId).append("', data, layout, {responsive: true});");
+		sb.append("\tPlotly.newPlot('").append(this.plotId).append("', data, layout, {responsive: true});");
 		
 		return sb.toString();
 	}

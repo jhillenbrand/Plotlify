@@ -21,16 +21,6 @@ public class Plotlify {
 	}
 		
 	/**
-	 * creates a line plot based on the double array passed with {@code y}
-	 * @param filePath
-	 * @param y
-	 * @throws IOException
-	 */
-	public static PlotlyDocument line(String filePath, double[] y) throws IOException {
-		return line(null, y, "trace1", null, null, null);
-	}
-	
-	/**
 	 * creates a line plot based on the double arrays passed with {@code x} and {@code y}
 	 * @param x
 	 * @param y
@@ -79,18 +69,15 @@ public class Plotlify {
 		p.trace(traceName).y(y);
 		
 		PlotlyDocument pDoc = new PlotlyDocument(p);
-		
-		//pDoc.toFile(filePath);
-		
+				
 		return pDoc;
 	}
 	
 	/**
-	 * create 3D line plot based on the double arrays passed with {@code x}, {@code y} and {@code z} and exports it as html file under specified {@code filePath}
+	 * create 3D line plot based on the double arrays passed with {@code x}, {@code y} and {@code z}
 	 * <br>{@code traceName} can be used to specify the legend entry for the specified data
 	 * <br>{@code title} can be used to specify the plot's title
 	 * <br>{@code xLabel}, {@code xLabel} and {@code zLabel} can be used to specify the plot's axis labels
-	 * @param fil ePath
 	 * @param x
 	 * @param y
 	 * @param z
@@ -101,16 +88,15 @@ public class Plotlify {
 	 * @param zLabel
 	 * @throws IOException 
 	 */
-	public static PlotlyDocument line(String filePath, double[] x, double[] y, double[] z, String traceName) throws IOException {
-		return line(filePath, x, y, z, traceName, null, null, null, null);
+	public static PlotlyDocument line(double[] x, double[] y, double[] z, String traceName) throws IOException {
+		return line(x, y, z, traceName, null, null, null, null);
 	}
 	
 	/**
-	 * create 3D line plot based on the double arrays passed with {@code x}, {@code y} and {@code z} and exports it as html file under specified {@code filePath}
+	 * create 3D line plot based on the double arrays passed with {@code x}, {@code y} and {@code z}
 	 * <br>{@code traceName} can be used to specify the legend entry for the specified data
 	 * <br>{@code title} can be used to specify the plot's title
 	 * <br>{@code xLabel}, {@code xLabel} and {@code zLabel} can be used to specify the plot's axis labels
-	 * @param fil ePath
 	 * @param x
 	 * @param y
 	 * @param z
@@ -121,7 +107,7 @@ public class Plotlify {
 	 * @param zLabel
 	 * @throws IOException 
 	 */
-	public static PlotlyDocument line(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
+	public static PlotlyDocument line(double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
 
 		Plotly p = new Plotly();
 		
@@ -137,9 +123,7 @@ public class Plotlify {
 		p.trace(traceName).z(z);		
 		
 		PlotlyDocument pDoc = new PlotlyDocument(p);
-		
-		//pDoc.toFile(filePath);
-		
+				
 		return pDoc;
 	}
 	
@@ -149,7 +133,7 @@ public class Plotlify {
 	 * @throws IOException 
 	 */
 	public static PlotlyDocument lines(double[] ... y) throws IOException {		
-		return lines("plotly.html", null, y, null, "Plotly", null, null);
+		return lines(null, y, null, "Plotly", null, null);
 	}
 	
 	/**
@@ -158,15 +142,14 @@ public class Plotlify {
 	 * @throws IOException 
 	 */
 	public static PlotlyDocument lines(double[][] x, double[][] y) throws IOException {		
-		return lines("plotly.html", x, y, null, "Plotly", null, null);
+		return lines(x, y, null, "Plotly", null, null);
 	}
 	
 	/**
-	 * plots multiple lines defined by coordinates {@code x} and {@code y} and exports it as html file under specified {@code filePath}
+	 * plots multiple lines defined by coordinates {@code x} and {@code y}
 	 * <br>{@code traceNames} can be used to specify the legend entries for the specified lines
 	 * <br>{@code title} can be used to specify the plot's title
 	 * <br>{@code xLabel} and {@code xLabel} can be used to specify the plot's axis labels
-	 * @param filePath
 	 * @param x
 	 * @param y
 	 * @param traceNames
@@ -175,7 +158,7 @@ public class Plotlify {
 	 * @param yLabel
 	 * @throws IOException
 	 */
-	public static PlotlyDocument lines(String filePath, double[][] x, double[][] y, String[] traceNames, String title, String xLabel, String yLabel) throws IOException {
+	public static PlotlyDocument lines(double[][] x, double[][] y, String[] traceNames, String title, String xLabel, String yLabel) throws IOException {
 		if (x != null) {
 			// check for correct dimensions
 			// a) same rows
@@ -222,41 +205,36 @@ public class Plotlify {
 				
 		PlotlyDocument pDoc = new PlotlyDocument(p);
 		
-		//pDoc.toFile(filePath);
-		
 		return pDoc;
 	}
 	
 	/**
-	 * creates a scatter plot based on the double arrays passed with {@code x} and {@code y} and exports it as html file under specified {@code filePath}
-	 * @param filePath
+	 * creates a scatter plot based on the double arrays passed with {@code x} and {@code y}
 	 * @param x
 	 * @param y
 	 * @throws IOException 
 	 */
-	public static PlotlyDocument scatter(String filePath, double[] x, double[] y) throws IOException {
-		return scatter(filePath, x, y, "trace1", null, null, null);
+	public static PlotlyDocument scatter(double[] x, double[] y) throws IOException {
+		return scatter(x, y, "trace1", null, null, null);
 	}
 	
 	/**
-	 * creates a scatter plot based on the double arrays passed with {@code x} and {@code y} and exports it as html file under specified {@code filePath}
+	 * creates a scatter plot based on the double arrays passed with {@code x} and {@code y}
 	 * <br>{@code title} can be used to specify the plot's title
-	 * @param filePath
 	 * @param x
 	 * @param y
 	 * @param title
 	 * @throws IOException 
 	 */
-	public static PlotlyDocument scatter(String filePath, double[] x, double[] y, String title) throws IOException {
-		return scatter(filePath, x, y, "trace1", title, null, null);
+	public static PlotlyDocument scatter(double[] x, double[] y, String title) throws IOException {
+		return scatter(x, y, "trace1", title, null, null);
 	}
 	
 	/**
-	 * creates a scatter plot based on the double arrays passed with {@code x} and {@code y} and exports it as html file under specified {@code filePath}
+	 * creates a scatter plot based on the double arrays passed with {@code x} and {@code y}
 	 * <br>{@code traceName} can be used to specify the legend entry for the specified data
 	 * <br>{@code title} can be used to specify the plot's title
 	 * <br>{@code xLabel} and {@code xLabel} can be used to specify the plot's axis labels
-	 * @param filePath
 	 * @param x
 	 * @param y
 	 * @param traceName
@@ -265,7 +243,7 @@ public class Plotlify {
 	 * @param yLabel
 	 * @throws IOException 
 	 */
-	public static PlotlyDocument scatter(String filePath, double[] x, double[] y, String traceName, String title, String xLabel, String yLabel) throws IOException {
+	public static PlotlyDocument scatter(double[] x, double[] y, String traceName, String title, String xLabel, String yLabel) throws IOException {
 		
 		Plotly p = new Plotly();
 		
@@ -284,49 +262,34 @@ public class Plotlify {
 	}
 	
 	/**
-	 * creates a scatter 3D plot based on the double arrays passed with {@code x}, {@code y} and {@code z} and exports it as plotly.html in current directory
-	 * @param filePath
+	 * creates a scatter 3D plot based on the double arrays passed with {@code x}, {@code y} and {@code z}
 	 * @param x
 	 * @param y
 	 * @param z
 	 * @throws IOException 
 	 */
 	public static PlotlyDocument scatter3D(double[] x, double[] y, double[] z) throws IOException {
-		return scatter3D("plotly.html", x, y, z, "trace1", null, null, null, null);
+		return scatter3D(x, y, z, "trace1", null, null, null, null);
 	}
 	
 	/**
-	 * creates a scatter 3D plot based on the double arrays passed with {@code x}, {@code y} and {@code z} and exports it as html file under specified {@code filePath}
-	 * @param filePath
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @throws IOException 
-	 */
-	public static PlotlyDocument scatter3D(String filePath, double[] x, double[] y, double[] z) throws IOException {
-		return scatter3D(filePath, x, y, z, "trace1", null, null, null, null);
-	}
-	
-	/**
-	* creates a scatter 3D plot based on the double arrays passed with {@code x}, {@code y} and {@code z} and exports it as html file under specified {@code filePath}
+	* creates a scatter 3D plot based on the double arrays passed with {@code x}, {@code y} and {@code z}
 	 * <br>{@code title} can be used to specify the plot's title
-	 * @param filePath
 	 * @param x
 	 * @param y
 	 * @param z
 	 * @param title
 	 * @throws IOException 
 	 */
-	public static PlotlyDocument scatter3D(String filePath, double[] x, double[] y, double[] z, String title) throws IOException {
-		return scatter3D(filePath, x, y, z, "trace1", title, null, null, null);
+	public static PlotlyDocument scatter3D(double[] x, double[] y, double[] z, String title) throws IOException {
+		return scatter3D(x, y, z, "trace1", title, null, null, null);
 	}
 	
 	/**
-	  * creates a scatter 3D plot based on the double arrays passed with {@code x}, {@code y} and {@code z} and exports it as html file under specified {@code filePath}
+	  * creates a scatter 3D plot based on the double arrays passed with {@code x}, {@code y} and {@code z}
 	 * <br>{@code traceName} can be used to specify the legend entry for the specified data
 	 * <br>{@code title} can be used to specify the plot's title
 	 * <br>{@code xLabel}, {@code xLabel} and {@code zLabel} can be used to specify the plot's axis labels
-	 * @param filePath
 	 * @param x
 	 * @param y
 	 * @param z
@@ -337,7 +300,7 @@ public class Plotlify {
 	 * @param zLabel
 	 * @throws IOException 
 	 */
-	public static PlotlyDocument scatter3D(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
+	public static PlotlyDocument scatter3D(double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
 		
 		Plotly p = new Plotly();
 		
@@ -359,19 +322,17 @@ public class Plotlify {
 	
 	/**
 	 * creates a surface plot based on {@code x}, {@code y} and {@code z}, where {@code z} = [m x n] with {@code x} = [n] and {@code y} = [m]
-	 * @param filePath
 	 * @param x
 	 * @param y
 	 * @param z
 	 * @throws IOException 
 	 */
-	public static PlotlyDocument surface(String filePath, double[] x, double[] y, double[][] z) throws IOException {
-		return surface(filePath, x, y, z, "surf1", "Surface Plot", "X", "Y", "Z");
+	public static PlotlyDocument surface(double[] x, double[] y, double[][] z) throws IOException {
+		return surface(x, y, z, "surf1", "Surface Plot", "X", "Y", "Z");
 	}
 	
 	/**
 	 * creates a surface plot based on {@code x}, {@code y} and {@code z}, where {@code z} = [m x n] with {@code x} = [n] and {@code y} = [m]
-	 * @param filePath
 	 * @param x
 	 * @param y
 	 * @param z
@@ -382,7 +343,7 @@ public class Plotlify {
 	 * @param zLabel
 	 * @throws IOException 
 	 */
-	public static PlotlyDocument surface(String filePath, double[] x, double[] y, double[][] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
+	public static PlotlyDocument surface(double[] x, double[] y, double[][] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
 		
 		Plotly p = new Plotly();
 		
@@ -408,13 +369,12 @@ public class Plotlify {
 	 * @throws IOException 
 	 */
 	public static PlotlyDocument mesh3d(double[] x, double[] y, double[] z) throws IOException {
-		return mesh3d("plotly.html", x, y, z, null, null, null, null, null);
+		return mesh3d(x, y, z, null, null, null, null, null);
 	}
 	
 	/**
-	 * creates a 3D mesh of the inserted coordinates {@code x, y, z} with {@code traceName} and {@code title} and exports it under {@code filePath}
+	 * creates a 3D mesh of the inserted coordinates {@code x, y, z} with {@code traceName} and {@code title}
 	 * <br>axis labels are specified by {@code xLabel, yLabel, zLabel}
-	 * @param filePath
 	 * @param x
 	 * @param y
 	 * @param z
@@ -425,7 +385,7 @@ public class Plotlify {
 	 * @param zLabel
 	 * @throws IOException
 	 */
-	public static PlotlyDocument mesh3d(String filePath, double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
+	public static PlotlyDocument mesh3d(double[] x, double[] y, double[] z, String traceName, String title, String xLabel, String yLabel, String zLabel) throws IOException {
 		
 		if (traceName == null) {
 			traceName = "mesh0";

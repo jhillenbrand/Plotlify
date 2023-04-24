@@ -2,6 +2,8 @@ MIT License
 
 Copyright (c) 2022 Jonas Hillenbrand
 
+Disclaimer: this piece of code does not modify the plotly.js source (Licensed under MIT License), to properly work it only references the plotly.js source via cdn link in a html template
+
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights

@@ -2,7 +2,9 @@
 
 is a Java Utility Project for visualizing data generated in Java in Plotly.js plots
 <br>[Plotly](https://plotly.com/javascript/)
-<br>this project was tested under Plotly v2.18.0
+<br>this project was tested under Plotly v2.20.0
+<br>
+Disclaimer: this piece of code does not modify the plotly.js source (Licensed under MIT License), to properly work it only references the plotly.js source via cdn link in a html template
 
 ## Function
 

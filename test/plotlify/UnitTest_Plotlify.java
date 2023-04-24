@@ -32,7 +32,7 @@ public class UnitTest_Plotlify {
 		String filePath = "test.html";
 		String title = "Test1";
 		
-		Plotlify.scatter3D(filePath, x, y, z, title).toFile(filePath);
+		Plotlify.scatter3D(x, y, z, title).toFile(filePath);
 		
 	}
 	
@@ -43,7 +43,7 @@ public class UnitTest_Plotlify {
 		
 		String filePath = "test.html";
 		
-		Plotlify.line(filePath, y).toFile(filePath);
+		Plotlify.line(y).toFile(filePath);
 		
 	}
 	
@@ -101,10 +101,8 @@ public class UnitTest_Plotlify {
 		double[] x = Vec.linspace(10);
 		double[] y = Vec.rand(10);
 		double[] z = Vec.rand(10);
-		
-		String filePath = "test.html";
-				
-		Plotlify.line(filePath, x, y, z, "t1", "t1", "x1", "x2", "x3");
+						
+		Plotlify.line(x, y, z, "t1", "t1", "x1", "x2", "x3").toFile();
 		
 		//Plotlify.addScatter(filePath, x, y2);
 		
