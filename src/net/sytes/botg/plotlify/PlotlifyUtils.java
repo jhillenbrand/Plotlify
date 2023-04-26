@@ -2,12 +2,16 @@ package net.sytes.botg.plotlify;
 
 import java.awt.Desktop;
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +22,53 @@ public class PlotlifyUtils {
 	public static final String CDN_LINK = "https://cdn.plot.ly/plotly-" + VERSION + ".min.js";
 	
 	private static final Logger logger = LoggerFactory.getLogger(PlotlifyUtils.class);
+	
+	/**
+	 * reads a file from {@code plotlyPath} into new {@code PlotlyDocument}
+	 * @param plotlyPath
+	 * @return
+	 * @throws IOException 
+	 */
+	public static PlotlyDocument readFrom(String plotlyPath) throws IOException {
+		Document doc = readDocumentFrom(plotlyPath);
+		
+		return null;
+	}
+	
+	/**
+	 * reads a file from {@code plotlyPath} into a new HTML{@code Document}
+	 * @param plotlyPath
+	 * @return
+	 * @throws IOException 
+	 */
+	private static Document readDocumentFrom(String plotlyPath) throws IOException {
+		if (plotlyPath == null) {
+			throw new IOException("specified plotlyPath was NULL");
+		}
+		File plotlyFile = new File(plotlyPath);
+		if (plotlyFile.exists()) {
+			String html = null;
+			try {
+				BufferedReader br = new BufferedReader(new FileReader(plotlyFile));
+				String line;
+				StringBuilder sb = new StringBuilder();
+				while ((line = br.readLine()) != null) {
+					sb.append(line + System.lineSeparator());
+				}
+				html = sb.toString();
+				Document doc = Jsoup.parse(html, "UTF-16");
+				if (doc == null) {
+					throw new IOException("Could not parse file under '" + plotlyPath + "'.");
+				}
+				return doc;
+				
+			} catch (IOException e) {
+				throw new IOException("Could not read file under '" + plotlyPath + "'.");
+			}
+		} else {
+			throw new IOException("specified plotlyPath does not exist");
+		}
+	}
 	
 	public static void downloadPlotlyLibrary(String folderPath) {
 		URL url = null;

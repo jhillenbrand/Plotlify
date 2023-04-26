@@ -94,6 +94,11 @@ public class PlotlyDocument {
 		}
 		
 	}
+
+	private PlotlyDocument reverseDocument(Document doc) {
+		
+		return null;
+	}
 	
 	public void toFile() throws IOException {
 		this.toFile("plotly.html", true);
