@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sytes.botg.plotlify.elements.Animation;
 import net.sytes.botg.plotlify.elements.Plotly;
+import net.sytes.botg.plotlify.elements.Trace;
 
 public class PlotlyDocument {
 
@@ -31,6 +32,11 @@ public class PlotlyDocument {
 	private static final String PLOTLY_ANIMATION_TEMPLATE = "PLOTLY_ANIMATION_TEMPLATE.html";
 	
 	private static final Logger logger = LoggerFactory.getLogger(PlotlyDocument.class);
+	
+	/**
+	 * default value is -1, and no action is taken, otherwise numeric values in Plotly arrays are rounded to {@code PRECISION} decimal places
+	 */
+	private static int PRECISION = -1;
 	
 	public PlotlyDocument() {
 	}
@@ -81,9 +87,16 @@ public class PlotlyDocument {
 			plotDiv.attributes().put("id", plotly.plotId());
 			plotDiv.attributes().put("style", "width:100%; height:100%;");
 			
+			// check if precision must be forced
+			if (PRECISION >= 0) {
+				for (Trace t : plotly.traces()) {
+					t.forcePrecision(PRECISION);
+				}
+			}
+			
 			// create script tag
 			Element script = this.doc.body().appendElement("script");
-			script.html(plotly.toString());
+			script.html(plotly.toScript());
 		
 		}
 		
@@ -152,6 +165,14 @@ public class PlotlyDocument {
 
 	public void animation(Animation animation) {
 		this.animation = animation;
+	}
+
+	/**
+	 * default value is -1, and no action is taken, otherwise numeric values in Plotly arrays are rounded to {@code precision} decimal places
+	 * @param precision
+	 */
+	public static void setPrecision(int precision) {
+		PRECISION = precision;
 	}
 	
 }

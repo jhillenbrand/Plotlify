@@ -31,7 +31,7 @@ public class Plotly {
 	/**
 	 * returns the javascript text for a script tag to insert this Plotly into a HTML Document
 	 */
-	public String toString() {
+	public String toScript() {
 		
 		if (this.traces.size() < 1) {
 			throw new IllegalStateException(this.getClass().getSimpleName() + " must have at least " + Trace.class.getSimpleName());

@@ -3,6 +3,8 @@ package net.sytes.botg.plotlify.elements;
 import com.google.gson.Gson;
 
 import net.sytes.botg.array.ConvertArray;
+import net.sytes.botg.array.math.Scalar;
+import net.sytes.botg.array.math.Vec;
 
 public class Trace {
 	
@@ -35,7 +37,7 @@ public class Trace {
 	}
 	
 	public Object[] x() {
-		return x;
+		return this.x;
 	}
 
 	public Trace x(Object[] x) {
@@ -49,7 +51,7 @@ public class Trace {
 	}
 
 	public Object[] y() {
-		return y;
+		return this.y;
 	}
 
 	public Trace y(Object[] y) {
@@ -63,7 +65,7 @@ public class Trace {
 	}
 
 	public Object[] z() {
-		return z;
+		return this.z;
 	}
 
 	public Trace z(Object[] z) {
@@ -82,6 +84,34 @@ public class Trace {
 			this.z[i] = ConvertArray.toObjects(ConvertArray.wrap(z[i])); 
 		}
 		return this;		
+	}
+	
+	public void forcePrecision(int precision) {
+		if (this.x != null) {
+			for (int i = 0; i < this.x.length; i++) {
+				this.x[i] = Scalar.roundToDecimals((double) this.x[i], precision);
+			}
+		}
+		if (this.y != null) {
+			for (int i = 0; i < this.y.length; i++) {
+				this.y[i] = Scalar.roundToDecimals((double) this.y[i], precision);
+			}
+		}
+		if (this.z != null) {
+			if (Vec.isArray(this.z[0])) {
+				for (int i = 0; i < this.z.length; i++) {
+					Object[] objs = (Object[]) this.z[i];
+					for (int j = 0; j < objs.length; j++) {
+						objs[j] = Scalar.roundToDecimals((double) objs[j], precision);
+					}
+					this.z[i] = objs;
+				}
+			} else {
+				for (int i = 0; i < this.z.length; i++) {
+					this.z[i] = Scalar.roundToDecimals((double) this.z[i], precision);
+				}
+			}
+		}
 	}
 
 	public String mode() {
