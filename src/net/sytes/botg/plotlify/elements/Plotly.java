@@ -6,8 +6,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sytes.botg.array.ConvertArray;
-
 /**
  * Wrapper class for javascript's plotly library
  * <br><a href='https://plotly.com/javascript/'>Plotly.js</a>
@@ -51,6 +49,7 @@ public class Plotly {
 		for (Trace t : this.traces) {
 			// do data manipulation if required for specific plotType
 			if (t.type() != null) {
+				/*
 				switch (PlotType.valueOf(t.type().toUpperCase())) {
 					case SURFACE:
 						if (t.x() != null) {
@@ -78,6 +77,7 @@ public class Plotly {
 						}
 						break;
 				}
+				*/
 			}
 			if (i == this.traces.size() && i != 1) {
 				traceSb.append(", trace").append(i);

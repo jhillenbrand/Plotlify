@@ -46,7 +46,7 @@ public class Plotlify {
 	 * creates a line plot based on the double arrays passed with {@code x} and {@code y}
 	 * <br>{@code traceName} can be used to specify the legend entry for the specified data
 	 * <br>{@code title} can be used to specify the plot's title
-	 * <br>{@code xLabel} and {@code xLabel} can be used to specify the plot's axis labels
+	 * <br>{@code xLabel} and {@code yLabel} can be used to specify the plot's axis labels
 	 * @param x
 	 * @param y
 	 * @param traceName
