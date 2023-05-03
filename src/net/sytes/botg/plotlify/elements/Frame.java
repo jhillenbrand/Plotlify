@@ -2,7 +2,7 @@ package net.sytes.botg.plotlify.elements;
 
 import com.google.gson.Gson;
 
-import net.sytes.botg.array.ConvertArray;
+import net.sytes.botg.array.Ar;
 
 public class Frame {
 
@@ -17,9 +17,9 @@ public class Frame {
 	}
 	
 	public Frame(double[] x, double[] y, double[] z) {
-		this.x = ConvertArray.toObjects(x);
-		this.y = ConvertArray.toObjects(y);
-		this.z = ConvertArray.toObjects(z);
+		this.x = Ar.toObjects(x);
+		this.y = Ar.toObjects(y);
+		this.z = Ar.toObjects(z);
 	}
 	
 	public Frame(double x, double y, double z) {

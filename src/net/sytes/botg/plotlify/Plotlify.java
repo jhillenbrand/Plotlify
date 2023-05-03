@@ -2,6 +2,7 @@ package net.sytes.botg.plotlify;
 
 import java.io.IOException;
 
+import net.sytes.botg.array.Ar;
 import net.sytes.botg.array.geometry.Plane;
 import net.sytes.botg.array.geometry.SemiSphere;
 import net.sytes.botg.array.math.Vec;
@@ -259,6 +260,17 @@ public class Plotlify {
 		PlotlyDocument pDoc = new PlotlyDocument(p);
 				
 		return pDoc;
+	}
+	
+	/**
+	 * creates a scatter 3D plot based on the Double arrays passed with {@code x}, {@code y} and {@code z}
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @throws IOException 
+	 */
+	public static PlotlyDocument scatter3D(Double[] x, Double[] y, Double[] z) throws IOException {
+		return scatter3D(Ar.unwrap(x), Ar.unwrap(y), Ar.unwrap(z), "trace1", null, null, null, null);
 	}
 	
 	/**

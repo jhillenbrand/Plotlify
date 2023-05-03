@@ -2,7 +2,7 @@ package net.sytes.botg.plotlify.elements;
 
 import com.google.gson.Gson;
 
-import net.sytes.botg.array.ConvertArray;
+import net.sytes.botg.array.Ar;
 import net.sytes.botg.array.math.Scalar;
 import net.sytes.botg.array.math.Vec;
 
@@ -46,7 +46,7 @@ public class Trace {
 	}
 	
 	public Trace x(double[] x) {
-		this.x = ConvertArray.wrap(x);
+		this.x = Ar.wrap(x);
 		return this;
 	}
 
@@ -60,7 +60,7 @@ public class Trace {
 	}
 	
 	public Trace y(double[] y) {
-		this.y = ConvertArray.wrap(y);
+		this.y = Ar.wrap(y);
 		return this;
 	}
 
@@ -74,14 +74,14 @@ public class Trace {
 	}
 	
 	public Trace z(double[] z) {
-		this.z = ConvertArray.wrap(z);
+		this.z = Ar.wrap(z);
 		return this;
 	}
 	
 	public Trace z(double[][] z) {
 		this.z = new Object[z.length];
 		for (int i = 0; i < z.length; i++) {
-			this.z[i] = ConvertArray.toObjects(ConvertArray.wrap(z[i])); 
+			this.z[i] = Ar.toObjects(Ar.wrap(z[i])); 
 		}
 		return this;		
 	}
