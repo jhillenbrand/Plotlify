@@ -3,6 +3,7 @@ package net.sytes.botg.plotlify.elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -108,6 +109,11 @@ public class Plotly {
 		sb.append("\tPlotly.newPlot('").append(this.plotId).append("', data, layout, {responsive: true});");
 		
 		return sb.toString();
+	}
+	
+	public static Plotly fromScript(String scriptStr) {
+		
+		return null;		
 	}
 	
 	/**

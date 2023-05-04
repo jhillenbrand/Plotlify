@@ -6,12 +6,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -107,10 +110,41 @@ public class PlotlyDocument {
 		}
 		
 	}
-
-	private PlotlyDocument reverseDocument(Document doc) {
-		
-		return null;
+	
+	public static PlotlyDocument fromHTML(String filePath) {
+		try {
+			List<String> lines = Files.readAllLines(Paths.get(filePath));
+			String htmlStr = String.join("\n", lines);
+			
+			Document doc = Jsoup.parse(htmlStr);
+			
+			PlotlyDocument pDoc = new PlotlyDocument();
+			
+			String title = doc.head().getElementsByTag("title").get(0).text();
+			
+			Element bodyElem = doc.body();
+			List<Node> bodyChildren = bodyElem.childNodes();
+			
+			for (Node node : bodyChildren) {
+				//System.out.println(node.nodeName());
+				
+				// each <div> element
+				if (node.nodeName().contentEquals("div")) {
+					
+				}
+			}
+			
+			Plotly plotly = new Plotly();
+			
+			plotly.layout().title(title);
+			
+			pDoc.addPlotly(plotly);
+			
+			return pDoc;
+		} catch (IOException e) {
+			logger.error("Could not read plotly file under " + filePath);
+			return null;
+		}
 	}
 	
 	public void toFile() throws IOException {
