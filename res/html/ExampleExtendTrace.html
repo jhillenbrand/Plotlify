@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+	<head>
+	  	<!-- Plotly.js -->
+	  	<title>Plotly</title>
+	  	<script src="https://cdn.plot.ly/plotly-2.20.0.min.js"></script>
+	</head>
+	<body>
+		<div id="plot1" style="width:100%;height:100%;"></div>
+		<script>
+			var plotId = 'plot1';
+			var plotDiv = document.getElementById(plotId);
+			var i = 6;
+			var trace1 = {
+					x: [1, 2, 3, 4, 5],
+					y: [1, 2, 4, 8, 16],
+					mode: 'lines+markers',
+					type: 'scatter'					
+			};
+			
+			var data = [trace1];
+			
+			var layout = {
+				autosize: true,
+				title: 'XY-Lines',
+				xaxis: {
+				    title: {
+				      text: 'x Axis'
+				    }
+				},
+				yaxis: {
+				    title: {
+				      text: 'y Axis'
+				    }
+				},
+				margin: {
+					l: 50,
+				    r: 50,
+				    b: 100,
+				    t: 100,
+				    pad: 4
+				}
+			};
+			
+			Plotly.newPlot(plotDiv, data, layout, {responsive: true});
+			
+			function extendTrace(){
+					
+				Plotly.extendTraces(plotId, {x: [[i, i + 1, i + 2, i + 3]], y: [[5.0 * Math.random(), 5.0 * Math.random(), 5.0 * Math.random(), 5.0 * Math.random()]]}, [0], 100);
+				i = i + 4;
+				
+			}			
+			
+		</script>
+		<div>
+			<button onclick="extendTrace();">Extend Trace</button>
+		</div>
+	</body>
+</html>
