@@ -24,6 +24,8 @@ public class Layout {
 	
 	private boolean autosize = true;
 	
+	private String plot_bgcolor = null;
+	private String paper_bgcolor = null;
 	
 	public Layout() {
 		// preset the plot size
@@ -201,7 +203,25 @@ public class Layout {
 		this.autosize = autosize;
 		return this;
 	}
-
+	
+	public Layout backgroundColor(String color) {
+		this.plot_bgcolor = color;
+		return this;
+	}
+	
+	public String backgroundColor() {
+		return this.plot_bgcolor;
+	}
+	
+	public Layout paperColor(String color) {
+		this.paper_bgcolor = color;
+		return this;
+	}
+	
+	public String paperColor() {
+		return this.paper_bgcolor;
+	}
+	
 	public String toJson() {
 		return new Gson().toJson(this);
 	}
