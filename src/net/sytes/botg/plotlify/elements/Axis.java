@@ -15,6 +15,8 @@ public class Axis {
     private boolean zeroline = true;
     private boolean showline = false; 
     private boolean showgrid = true;
+    private String gridcolor = null;
+    private boolean showticklabels = true;
     private String mirror = null;
     
     private String linecolor = null;
@@ -32,30 +34,31 @@ public class Axis {
 		return this;
 	}
 
-	public String getTitle() {
+	public String title() {
 		return title;
 	}
 
-	public Axis setTitle(String title) {
+	public Axis title(String title) {
 		this.title = title;
 		return this;
 	}
 	
-	public boolean isAutotick() {
+	public boolean autotick() {
 		return autotick;
 	}
 
-	public Axis setAutotick(boolean autotick) {
+	public Axis autotick(boolean autotick) {
 		this.autotick = autotick;
 		return this;
 	}
 
-	public boolean isZeroline() {
-		return zeroline;
+	public boolean zeroline() {
+		return this.zeroline;
 	}
 
-	public void setZeroline(boolean zeroline) {
+	public Axis zeroline(boolean zeroline) {
 		this.zeroline = zeroline;
+		return this;
 	}
 
 	public boolean isShowline() {
@@ -66,12 +69,31 @@ public class Axis {
 		this.showline = showline;
 	}
 
-	public boolean isShowgrid() {
-		return showgrid;
+	public boolean showgrid() {
+		return this.showgrid;
 	}
 
-	public void setShowgrid(boolean showgrid) {
+	public Axis showgrid(boolean showgrid) {
 		this.showgrid = showgrid;
+		return this;
+	}
+	
+	public Axis gridColor(String gridColor) {
+		this.gridcolor = gridColor;
+		return this;
+	}
+	
+	public String gridColor() {
+		return this.gridcolor;
+	}
+	
+	public Axis showTickLabels(boolean showTickLabels) {
+		this.showticklabels = showTickLabels;
+		return this;
+	}
+	
+	public boolean showTickLabels() {
+		return this.showticklabels;
 	}
 
 	public String getMirror() {
@@ -86,24 +108,26 @@ public class Axis {
 		return linecolor;
 	}
 
-	public void setLinecolor(String linecolor) {
+	public void linecolor(String linecolor) {
 		this.linecolor = linecolor;
 	}
 
-	public String getScaleAnchor() {
+	public String scaleAnchor() {
 		return scaleanchor;
 	}
 
-	public void setScaleAnchor(String scaleanchor) {
+	public Axis scaleAnchor(String scaleanchor) {
 		this.scaleanchor = scaleanchor;
+		return this;
 	}
 
 	public int getScaleRatio() {
 		return scaleratio;
 	}
 
-	public void setScaleRatio(int scaleratio) {
+	public Axis setScaleRatio(int scaleratio) {
 		this.scaleratio = scaleratio;
+		return this;
 	}
 
 	public String toJson() {

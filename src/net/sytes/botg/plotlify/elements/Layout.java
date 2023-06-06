@@ -47,7 +47,7 @@ public class Layout {
 		//	this.zaxis = new Axis();
 		//}
 		
-		this.yaxis.setScaleAnchor("x");
+		this.yaxis.scaleAnchor("x");
 		this.yaxis.setScaleRatio(1);
 		
 		//this.zaxis.setScaleAnchor("x");

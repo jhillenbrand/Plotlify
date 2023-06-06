@@ -61,8 +61,8 @@ public class Plotlify {
 		Plotly p = new Plotly();
 		
 		p.layout().title(title);
-		p.layout().xAxis().setTitle(xLabel);
-		p.layout().yAxis().setTitle(yLabel);
+		p.layout().xAxis().title(xLabel);
+		p.layout().yAxis().title(yLabel);
 		
 		p.trace(traceName).type(PlotType.SCATTER);
 		p.trace(traceName).mode(Mode.LINES);
@@ -113,9 +113,9 @@ public class Plotlify {
 		Plotly p = new Plotly();
 		
 		p.layout().title(title);
-		p.layout().scene().getXAxis().setTitle(xLabel);
-		p.layout().scene().getYAxis().setTitle(yLabel);
-		p.layout().scene().getZAxis().setTitle(zLabel);
+		p.layout().scene().getXAxis().title(xLabel);
+		p.layout().scene().getYAxis().title(yLabel);
+		p.layout().scene().getZAxis().title(zLabel);
 		
 		p.trace(traceName).type(PlotType.SCATTER3D);
 		p.trace(traceName).mode(Mode.LINES);
@@ -190,8 +190,8 @@ public class Plotlify {
 		Plotly p = new Plotly();
 		
 		p.layout().title(title);
-		p.layout().xAxis().setTitle(yLabel);
-		p.layout().yAxis().setTitle(yLabel);
+		p.layout().xAxis().title(yLabel);
+		p.layout().yAxis().title(yLabel);
 		
 		int m = y.length;
 		for (int i = 0; i < m; i++) {
@@ -249,8 +249,8 @@ public class Plotlify {
 		Plotly p = new Plotly();
 		
 		p.layout().title(title);
-		p.layout().xAxis().setTitle(xLabel);
-		p.layout().yAxis().setTitle(yLabel);
+		p.layout().xAxis().title(xLabel);
+		p.layout().yAxis().title(yLabel);
 		
 		p.trace(traceName).type(PlotType.SCATTER);
 		p.trace(traceName).mode(Mode.MARKERS);
@@ -317,9 +317,9 @@ public class Plotlify {
 		Plotly p = new Plotly();
 		
 		p.layout().title(title);
-		p.layout().scene().getXAxis().setTitle(xLabel);
-		p.layout().scene().getYAxis().setTitle(yLabel);
-		p.layout().scene().getZAxis().setTitle(zLabel);
+		p.layout().scene().getXAxis().title(xLabel);
+		p.layout().scene().getYAxis().title(yLabel);
+		p.layout().scene().getZAxis().title(zLabel);
 		
 		p.trace(traceName).type(PlotType.SCATTER3D);
 		p.trace(traceName).mode(Mode.MARKERS);
@@ -360,9 +360,9 @@ public class Plotlify {
 		Plotly p = new Plotly();
 		
 		p.layout().title(title);
-		p.layout().scene().getXAxis().setTitle(xLabel);
-		p.layout().scene().getYAxis().setTitle(yLabel);
-		p.layout().scene().getZAxis().setTitle(zLabel);
+		p.layout().scene().getXAxis().title(xLabel);
+		p.layout().scene().getYAxis().title(yLabel);
+		p.layout().scene().getZAxis().title(zLabel);
 		
 		p.trace(traceName).type(PlotType.SURFACE);
 		p.trace(traceName).x(x);
@@ -418,9 +418,9 @@ public class Plotlify {
 		Plotly p = new Plotly();
 		
 		p.layout().title(title);
-		p.layout().scene().getXAxis().setTitle(xLabel);
-		p.layout().scene().getYAxis().setTitle(yLabel);
-		p.layout().scene().getZAxis().setTitle(zLabel);
+		p.layout().scene().getXAxis().title(xLabel);
+		p.layout().scene().getYAxis().title(yLabel);
+		p.layout().scene().getZAxis().title(zLabel);
 		
 		p.trace(traceName).type(PlotType.MESH3D);
 		p.trace(traceName).x(x);
@@ -466,8 +466,8 @@ public class Plotlify {
 		
 		Plotly p = new Plotly();
 		
-		p.layout().xAxis().setTitle("X");
-		p.layout().yAxis().setTitle("Y");
+		p.layout().xAxis().title("X");
+		p.layout().yAxis().title("Y");
 				
 		p.trace("s1").type(PlotType.MESH3D);
 		p.trace("s1").x(x1);
@@ -516,9 +516,9 @@ public class Plotlify {
 		
 		Plotly p = new Plotly();
 		
-		p.layout().xAxis().setTitle("X");
-		p.layout().yAxis().setTitle("Y");
-		p.layout().zAxis().setTitle("Z");
+		p.layout().xAxis().title("X");
+		p.layout().yAxis().title("Y");
+		p.layout().zAxis().title("Z");
 				
 		p.trace("plane1").type(PlotType.MESH3D);
 		p.trace("plane1").x(plane.x());
