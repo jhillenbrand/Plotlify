@@ -20,9 +20,27 @@ public class Color {
 		this.b = b;
 	}
 	
+	public Color(String hexColor) {
+		if (hexColor.length() == 7) {
+			if (hexColor.startsWith("#")) {
+				this.r = Integer.valueOf(hexColor.substring(1, 3), 16);
+			    this.g = Integer.valueOf(hexColor.substring(3, 5), 16);
+			    this.b = Integer.valueOf(hexColor.substring(5, 7), 16);
+			} else {
+				throw new IllegalArgumentException("Color String passed must be HEX Format");
+			}
+		} else if(hexColor.length() == 6) {
+			this.r = Integer.valueOf(hexColor.substring(0, 2), 16);
+		    this.g = Integer.valueOf(hexColor.substring(2, 4), 16);
+		    this.b = Integer.valueOf(hexColor.substring(4, 6), 16);
+		} else {
+			throw new IllegalArgumentException("Color String passed must be HEX Format");
+		}
+	}
+	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("rgb(").append(r).append(", ").append(g).append(", ").append(b).append(")");
+		sb.append("rgb(").append(this.r).append(", ").append(this.g).append(", ").append(this.b).append(")");
 		return sb.toString();
 	}
 	

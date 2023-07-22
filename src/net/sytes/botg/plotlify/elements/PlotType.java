@@ -2,7 +2,7 @@ package net.sytes.botg.plotlify.elements;
 
 public enum PlotType {
 	
-	SCATTER("scatter"), BAR("bar"), PIE("pie"), SCATTER3D("scatter3d"), SURFACE("surface"), MESH3D("mesh3d"); 
+	SCATTER("scatter"), BAR("bar"), PIE("pie"), SCATTER3D("scatter3d"), SURFACE("surface"), MESH3D("mesh3d"), CONE("cone"); 
 	
 	private final String type;
 	

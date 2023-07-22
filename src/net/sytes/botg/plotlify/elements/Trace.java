@@ -12,6 +12,7 @@ public class Trace {
 	private Object[] y;
 	private Object[] z;
 	
+	
 	private String mode = null;
 	
 	private String type = null;
@@ -28,6 +29,27 @@ public class Trace {
 	private Marker marker = null;
 	
 	private double opacity = 1.0;
+	
+	/**
+	 * properties for cone
+	 */
+
+	/**
+	 * additional coordinate data objects, controlling e.g. cones / directional vectors
+	 */
+	private Object[] u;
+	private Object[] v;
+	private Object [] w;
+	
+	/**
+	 * used for hiding colorbar in case of cone
+	 */
+	private boolean showscale = false;
+	
+	/**
+	 * to set the colors of the cone, if unicolor than set first and second element to same rgb colors
+	 */
+	private Object[] colorscale;
 	
 	private static int TRACE_NUM = 0;
 		
@@ -113,7 +135,54 @@ public class Trace {
 			}
 		}
 	}
+	
+	public Object[] u() {
+		return this.u;
+	}
 
+	public Trace u(Object[] u) {
+		this.u = u;
+		return this;
+	}
+	
+	public Trace u(double[] u) {
+		this.u = Ar.wrap(u);
+		return this;
+	}	
+
+	public Object[] v() {
+		return this.v;
+	}
+
+	public Trace v(Object[] v) {
+		this.v = v;
+		return this;
+	}
+	
+	public Trace v(double[] v) {
+		this.v = Ar.wrap(v);
+		return this;
+	}
+
+	public Object[] w() {
+		return this.z;
+	}
+
+	public Trace w(Object[] w) {
+		this.w = w;
+		return this;
+	}
+	
+	public Trace w(double[] w) {
+		this.w = Ar.wrap(w);
+		return this;
+	}
+
+	public Trace colorscale(Object[] colorscale) {
+		this.colorscale = colorscale;
+		return this;
+	}
+	
 	public String mode() {
 		return this.mode;
 	}

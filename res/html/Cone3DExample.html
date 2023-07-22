@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+ <head>
+  <script src="https://cdn.plot.ly/plotly-2.20.0.min.js"></script> <!-- file based javascript library --> <!-- 
+	  	<script src="res/js/plotly-latest.min.js"></script>
+	  	-->
+  <title></title>
+ </head>
+ <body>
+  <div id="plot1" style="width:100%; height:100%;"></div>
+  <script>var plotDiv1 = document.getElementById('plot1');
+
+	var trace1 = {"x":[0.0,0.8],"y":[0.0,0.8],"z":[0.0,0.0],"mode":"lines","type":"scatter3d","name":"trace1","line":{"width":3,"color":"rgb(0, 0, 255)"},"opacity":1.0,"showscale":false};
+
+	var trace2 = {"x":[0.8],"y":[0.8],"z":[0.0],"u":[0.2],"v":[0.2],"w":[0.0],"type":"cone","name":"trace2","opacity":1.0,"showscale":false, "color":"rgb(0, 0, 255)"};
+
+	var data = [trace1, trace2];
+
+	var layout = {"height":0,"width":0,"showlegend":false,"autosize":true};
+
+	Plotly.newPlot('plot1', data, layout, {responsive: true});</script>
+ </body>
+</html>

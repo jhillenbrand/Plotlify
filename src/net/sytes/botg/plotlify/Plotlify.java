@@ -1,14 +1,20 @@
 package net.sytes.botg.plotlify;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.sytes.botg.array.Ar;
 import net.sytes.botg.array.geometry.Plane;
 import net.sytes.botg.array.geometry.SemiSphere;
 import net.sytes.botg.array.math.Vec;
+import net.sytes.botg.plotlify.elements.Color;
+import net.sytes.botg.plotlify.elements.Marker.AngleRef;
+import net.sytes.botg.plotlify.elements.Marker.Symbol;
 import net.sytes.botg.plotlify.elements.Mode;
 import net.sytes.botg.plotlify.elements.PlotType;
 import net.sytes.botg.plotlify.elements.Plotly;
+import net.sytes.botg.plotlify.elements.Trace;
 
 public class Plotlify { 
 	
@@ -527,6 +533,83 @@ public class Plotlify {
 		
 		PlotlyDocument pDoc = new PlotlyDocument(p);
 		return pDoc;
+	}
+	
+	/**
+	 * create a arrow trace based on start and end coordinates
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 * @param color
+	 * @return
+	 */
+	public static Trace arrow(double x1, double y1, double x2, double y2, Color color) {
+		Trace tr = new Trace();		
+		tr.x(new double[] {x1, x2}).y(new double[]{y1, y2});
+		tr.type(PlotType.SCATTER).mode(Mode.LINES_MARKERS);
+		if (color != null) {
+			tr.line().color(color);
+		}
+		tr.marker().symbol(Symbol.ARROW).angleRef(AngleRef.PREVIOUS);
+		
+		return tr;
+	}
+	
+	
+	/**
+	 * create a 3D arrow consisting of a line and cone trace based on start and end coordinates
+	 * @param x1
+	 * @param y1
+	 * @param z1
+	 * @param x2
+	 * @param y2
+	 * @param z2
+	 * @param color
+	 * @return
+	 */
+	public static List<Trace> arrow3D(double x1, double y1, double z1, double x2, double y2, double z2, Color color) {
+		// compute length of vector
+		double[] p1 = new double[] {x1, y1, z1};
+		double[] p2 = new double[] {x2, y2, z2};
+		double len = Vec.distance(p1, p2);
+		
+		// directional vector
+		double[] dv = Vec.directionalVector(p1, p2, true);
+		
+		// make the arrow head / cone 2/10 of the arrow length
+		double[] av = Vec.product(dv, 2.0 / 10.0 * len);
+		
+		// new end coordinates of line
+		double[] p2_ = Vec.plus(p1, Vec.product(dv, 8.0 / 10.0 * len));
+		
+		Trace lineTrace = new Trace();		
+		lineTrace.x(new double[] {p1[0], p2_[0]}).y(new double[]{p1[1], p2_[1]}).z(new double[] {p1[2], p2_[2]});
+		lineTrace.type(PlotType.SCATTER3D).mode(Mode.LINES);
+		if (color != null) {
+			lineTrace.line().color(color);
+		}
+		
+		Trace coneTrace = new Trace();
+		coneTrace.x(new double[]{p2_[0]}).y(new double[]{p2_[1]}).z(new double[]{p2_[2]}).u(new double[]{av[0]}).v(new double[]{av[1]}).w(new double[]{av[2]});
+		coneTrace.type(PlotType.CONE);
+		
+		// assemble the colorscale for unicolor cone
+		Object[] colorScale = new Object[2];
+		Object[] o1 = new Object[2];
+		Object[] o2 = new Object[2];
+		o1[0] = 0;
+		o1[1] = color.toString();
+		o2[0] = 1;
+		o2[1] = color.toString();
+		colorScale[0] = o1;
+		colorScale[1] = o2;
+		coneTrace.colorscale(colorScale);
+		
+		List<Trace> traces = new ArrayList<Trace>();
+		traces.add(lineTrace);
+		traces.add(coneTrace);
+		return traces;
 	}
 	
 }

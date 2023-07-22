@@ -1,11 +1,16 @@
 package plotlify;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.junit.Test;
 
 import net.sytes.botg.array.math.Vec;
 import net.sytes.botg.plotlify.Plotlify;
+import net.sytes.botg.plotlify.PlotlyDocument;
+import net.sytes.botg.plotlify.elements.Color;
+import net.sytes.botg.plotlify.elements.Plotly;
+import net.sytes.botg.plotlify.elements.Trace;
 
 public class UnitTest_Plotlify {
 
@@ -112,6 +117,36 @@ public class UnitTest_Plotlify {
 	public void test060() throws IOException {
 		
 		Plotlify.plane(new double[] {1, 1, 1}, new double[] {-1, 1 ,1}, 10.0, 10.0).toFile();
+		
+	}
+	
+	@Test
+	public void test070() throws IOException {
+		
+		Plotly plotly = new Plotly();
+		
+		Trace tr = Plotlify.arrow(0, 0, 1, 1, Color.RED);
+		
+		plotly.traces().add(tr);
+		
+		PlotlyDocument pDoc = new PlotlyDocument(plotly);
+		
+		pDoc.toFile();
+		
+	}
+	
+	@Test
+	public void test071() throws IOException {
+		
+		Plotly plotly = new Plotly();
+		
+		List<Trace> traces = Plotlify.arrow3D(0, 0, 0, 1, 1, 0, Color.BLUE);
+		
+		plotly.traces().addAll(traces);
+		
+		PlotlyDocument pDoc = new PlotlyDocument(plotly);
+		
+		pDoc.toFile();
 		
 	}
 	
