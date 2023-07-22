@@ -150,4 +150,30 @@ public class UnitTest_Plotlify {
 		
 	}
 	
+	@Test
+	public void test080() throws IOException {
+		
+		PlotlyDocument pDocument = Plotlify.line(new double[]{0, 1}, new double[]{0, 1});
+		
+		Trace tr = Plotlify.annotation(new double[]{1}, new double[]{1}, null, new String[]{"Test"});
+		
+		pDocument.plotlys().get(0).traces().add(tr);
+		
+		pDocument.toFile();
+		
+	}
+	
+	@Test
+	public void test081() throws IOException {
+		
+		PlotlyDocument pDocument = Plotlify.line(new double[]{0, 1}, new double[]{0, 1}, new double[] {0, 1});
+		
+		Trace tr = Plotlify.annotation(new double[]{1}, new double[]{1},  new double[]{1}, new String[]{"Test"});
+		
+		pDocument.plotlys().get(0).traces().add(tr);
+		
+		pDocument.toFile();
+		
+	}
+	
 }

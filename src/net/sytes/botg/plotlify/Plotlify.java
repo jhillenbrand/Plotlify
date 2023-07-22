@@ -8,12 +8,13 @@ import net.sytes.botg.array.Ar;
 import net.sytes.botg.array.geometry.Plane;
 import net.sytes.botg.array.geometry.SemiSphere;
 import net.sytes.botg.array.math.Vec;
+import net.sytes.botg.plotlify.elements.AngleRef;
 import net.sytes.botg.plotlify.elements.Color;
-import net.sytes.botg.plotlify.elements.Marker.AngleRef;
-import net.sytes.botg.plotlify.elements.Marker.Symbol;
 import net.sytes.botg.plotlify.elements.Mode;
 import net.sytes.botg.plotlify.elements.PlotType;
 import net.sytes.botg.plotlify.elements.Plotly;
+import net.sytes.botg.plotlify.elements.Symbol;
+import net.sytes.botg.plotlify.elements.TextPosition;
 import net.sytes.botg.plotlify.elements.Trace;
 
 public class Plotlify { 
@@ -82,9 +83,23 @@ public class Plotlify {
 	
 	/**
 	 * create 3D line plot based on the double arrays passed with {@code x}, {@code y} and {@code z}
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param traceName
+	 * @param title
+	 * @param xLabel
+	 * @param yLabel
+	 * @param zLabel
+	 * @throws IOException 
+	 */
+	public static PlotlyDocument line(double[] x, double[] y, double[] z) throws IOException {
+		return line(x, y, z, "trace1", null, null, null, null);
+	}
+	
+	/**
+	 * create 3D line plot based on the double arrays passed with {@code x}, {@code y} and {@code z}
 	 * <br>{@code traceName} can be used to specify the legend entry for the specified data
-	 * <br>{@code title} can be used to specify the plot's title
-	 * <br>{@code xLabel}, {@code xLabel} and {@code zLabel} can be used to specify the plot's axis labels
 	 * @param x
 	 * @param y
 	 * @param z
@@ -536,6 +551,36 @@ public class Plotlify {
 	}
 	
 	/**
+	 * create a text annotation defined at locations {@code x, y, z} with labels in {@code labels}
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param labels
+	 * @return
+	 */
+	public static Trace annotation(double[] x, double[] y, double[] z, String[] labels) {
+		if (x.length != labels.length) {
+			throw new IllegalArgumentException("length of x does not match the number of labels");
+		}
+		
+		Trace tr = new Trace();
+		
+		tr.x(x).y(y).z(z).mode(Mode.LINES_TEXT).text(labels).textPosition(TextPosition.TOP);
+		
+		if (z != null) {
+			tr.type(PlotType.SCATTER3D);
+		} else {
+			tr.type(PlotType.SCATTER);
+		}
+		
+		// make the line to hide it
+		tr.opacity(1.0);
+		
+		return tr;
+	}
+	
+	
+	/**
 	 * create a arrow trace based on start and end coordinates
 	 * @param x1
 	 * @param y1
@@ -609,6 +654,43 @@ public class Plotlify {
 		List<Trace> traces = new ArrayList<Trace>();
 		traces.add(lineTrace);
 		traces.add(coneTrace);
+		return traces;
+	}	
+	
+	/**
+	 * creates traces for a coordinate system at {@code origin} defined by {@code unitVectors} and their {@code labels} of {@code length} and {@code color}
+	 * @param origin
+	 * @param unitVectors	3 x 3 matrix or 2 x 2 matrix, containing the unit vectors for each axis of an orthogonal coordinate system, unitVectors[0] --> x-axis, unitVectors[1] --> y-axis, unitVectors[2] --> z-axis 
+	 * @param length	length of the axes arrows
+	 * @param color	color of the axes arrows
+	 * @return
+	 */
+	public static List<Trace> cos(double[] origin, double[][] unitVectors, String[] labels, double length, Color color){
+		if (unitVectors == null) {
+			throw new IllegalArgumentException("unitVectors must not be NULL");
+		}
+		if (unitVectors[0] != null) {
+			throw new IllegalArgumentException("elements of unitVectors must not be NULL");
+		}
+		Vec.checkForEqualDimensions(origin, unitVectors[0]);
+		if (origin.length != unitVectors.length) {
+			throw new IllegalArgumentException("dimension of origin and unitVectors does not match");
+		}
+
+		List<Trace> traces = new ArrayList<Trace>();
+		
+		if (origin.length == 2) {
+			
+		} else if (origin.length == 3) {
+
+			double[] e1 = Vec.plus(origin, Vec.product(unitVectors[0], length));
+			double[] e2 = Vec.plus(origin, Vec.product(unitVectors[1], length));
+			double[] e3 = Vec.plus(origin, Vec.product(unitVectors[2], length));
+			
+		} else {
+			throw new IllegalArgumentException("method cos is undefined for dimension " + origin.length);
+		}	
+				
 		return traces;
 	}
 	

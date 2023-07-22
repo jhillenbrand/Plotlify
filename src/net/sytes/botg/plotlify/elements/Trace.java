@@ -232,11 +232,11 @@ public class Trace {
 	}
 
 	public String textPosition() {
-		return textposition;
+		return this.textposition;
 	}
 
-	public Trace textPosition(String textposition) {
-		this.textposition = textposition;
+	public Trace textPosition(TextPosition textposition) {
+		this.textposition = textposition.toString();
 		return this;
 	}
 
