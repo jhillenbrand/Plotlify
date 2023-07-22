@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import net.sytes.botg.array.math.Mat;
 import net.sytes.botg.array.math.Vec;
 import net.sytes.botg.plotlify.Plotlify;
 import net.sytes.botg.plotlify.PlotlyDocument;
@@ -173,6 +174,26 @@ public class UnitTest_Plotlify {
 		pDocument.plotlys().get(0).traces().add(tr);
 		
 		pDocument.toFile();
+	
+	}
+	
+	
+	@Test
+	public void test090() throws IOException {
+		
+		Plotly plotly = new Plotly();
+		
+		double[] origin = new double[] {0, 0, 0};
+		double[][] unitVectors = Mat.unitMatrix(3); 
+		String[] labels = new String[] {"x", "y", "z"};
+		
+		List<Trace> traces = Plotlify.coordSys(origin, unitVectors, labels, 1, Color.BLACK);
+		
+		plotly.traces().addAll(traces);
+		
+		PlotlyDocument pDoc = new PlotlyDocument(plotly);
+		
+		pDoc.toFile();
 		
 	}
 	

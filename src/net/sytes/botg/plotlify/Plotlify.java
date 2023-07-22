@@ -565,7 +565,7 @@ public class Plotlify {
 		
 		Trace tr = new Trace();
 		
-		tr.x(x).y(y).z(z).mode(Mode.LINES_TEXT).text(labels).textPosition(TextPosition.TOP);
+		tr.x(x).y(y).z(z).mode(Mode.MARKERS_TEXT).text(labels).textPosition(TextPosition.TOP);
 		
 		if (z != null) {
 			tr.type(PlotType.SCATTER3D);
@@ -573,8 +573,8 @@ public class Plotlify {
 			tr.type(PlotType.SCATTER);
 		}
 		
-		// make the line to hide it
-		tr.opacity(1.0);
+		// make the markers of size 0 to hide them
+		tr.marker().size(1);
 		
 		return tr;
 	}
@@ -626,17 +626,17 @@ public class Plotlify {
 		double[] av = Vec.product(dv, 2.0 / 10.0 * len);
 		
 		// new end coordinates of line
-		double[] p2_ = Vec.plus(p1, Vec.product(dv, 8.0 / 10.0 * len));
+		//double[] p2_ = Vec.plus(p1, Vec.product(dv, 8.0 / 10.0 * len));
 		
 		Trace lineTrace = new Trace();		
-		lineTrace.x(new double[] {p1[0], p2_[0]}).y(new double[]{p1[1], p2_[1]}).z(new double[] {p1[2], p2_[2]});
+		lineTrace.x(new double[] {p1[0], p2[0]}).y(new double[]{p1[1], p2[1]}).z(new double[] {p1[2], p2[2]});
 		lineTrace.type(PlotType.SCATTER3D).mode(Mode.LINES);
 		if (color != null) {
 			lineTrace.line().color(color);
 		}
 		
 		Trace coneTrace = new Trace();
-		coneTrace.x(new double[]{p2_[0]}).y(new double[]{p2_[1]}).z(new double[]{p2_[2]}).u(new double[]{av[0]}).v(new double[]{av[1]}).w(new double[]{av[2]});
+		coneTrace.x(new double[]{p2[0]}).y(new double[]{p2[1]}).z(new double[]{p2[2]}).u(new double[]{av[0]}).v(new double[]{av[1]}).w(new double[]{av[2]});
 		coneTrace.type(PlotType.CONE);
 		
 		// assemble the colorscale for unicolor cone
@@ -665,16 +665,19 @@ public class Plotlify {
 	 * @param color	color of the axes arrows
 	 * @return
 	 */
-	public static List<Trace> cos(double[] origin, double[][] unitVectors, String[] labels, double length, Color color){
+	public static List<Trace> coordSys(double[] origin, double[][] unitVectors, String[] labels, double length, Color color){
 		if (unitVectors == null) {
 			throw new IllegalArgumentException("unitVectors must not be NULL");
 		}
-		if (unitVectors[0] != null) {
+		if (unitVectors[0] == null) {
 			throw new IllegalArgumentException("elements of unitVectors must not be NULL");
 		}
 		Vec.checkForEqualDimensions(origin, unitVectors[0]);
 		if (origin.length != unitVectors.length) {
 			throw new IllegalArgumentException("dimension of origin and unitVectors does not match");
+		}
+		if (color == null) {
+			color = Color.BLACK;
 		}
 
 		List<Trace> traces = new ArrayList<Trace>();
@@ -686,6 +689,33 @@ public class Plotlify {
 			double[] e1 = Vec.plus(origin, Vec.product(unitVectors[0], length));
 			double[] e2 = Vec.plus(origin, Vec.product(unitVectors[1], length));
 			double[] e3 = Vec.plus(origin, Vec.product(unitVectors[2], length));
+			
+			List<Trace> trs1 = arrow3D(origin[0], origin[1], origin[2], e1[0], e1[1], e1[2], Color.BLACK);
+			List<Trace> trs2 = arrow3D(origin[0], origin[1], origin[2], e2[0], e2[1], e2[2], Color.BLACK);
+			List<Trace> trs3 = arrow3D(origin[0], origin[1], origin[2], e3[0], e3[1], e3[2], Color.BLACK);
+			
+			// assemble coordinates for labels
+			double[] xt = new double[3];
+			double[] yt = new double[3];
+			double[] zt = new double[3];
+			
+			xt[0] = e1[0];
+			xt[1] = e2[0];
+			xt[2] = e3[0];
+			yt[0] = e1[1];
+			yt[1] = e2[1];
+			yt[2] = e3[1];
+			zt[0] = e1[2];
+			zt[1] = e2[2];
+			zt[2] = e3[2];
+			
+			
+			Trace ttr = annotation(xt, yt, zt, labels);
+			
+			traces.addAll(trs1);
+			traces.addAll(trs2);
+			traces.addAll(trs3);
+			traces.add(ttr);
 			
 		} else {
 			throw new IllegalArgumentException("method cos is undefined for dimension " + origin.length);
