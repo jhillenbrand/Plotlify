@@ -558,7 +558,7 @@ public class Plotlify {
 	 * @param labels
 	 * @return
 	 */
-	public static Trace annotation(double[] x, double[] y, double[] z, String[] labels) {
+	public static Trace annotation(double[] x, double[] y, double[] z, String[] labels, Color color) {
 		if (x.length != labels.length) {
 			throw new IllegalArgumentException("length of x does not match the number of labels");
 		}
@@ -574,7 +574,10 @@ public class Plotlify {
 		}
 		
 		// make the markers of size 0 to hide them
-		tr.marker().size(1);
+		if (color == null) {
+			color = Color.BLACK;
+		}
+		tr.marker().size(1).color(color);
 		
 		return tr;
 	}
@@ -690,9 +693,9 @@ public class Plotlify {
 			double[] e2 = Vec.plus(origin, Vec.product(unitVectors[1], length));
 			double[] e3 = Vec.plus(origin, Vec.product(unitVectors[2], length));
 			
-			List<Trace> trs1 = arrow3D(origin[0], origin[1], origin[2], e1[0], e1[1], e1[2], Color.BLACK);
-			List<Trace> trs2 = arrow3D(origin[0], origin[1], origin[2], e2[0], e2[1], e2[2], Color.BLACK);
-			List<Trace> trs3 = arrow3D(origin[0], origin[1], origin[2], e3[0], e3[1], e3[2], Color.BLACK);
+			List<Trace> trs1 = arrow3D(origin[0], origin[1], origin[2], e1[0], e1[1], e1[2], color);
+			List<Trace> trs2 = arrow3D(origin[0], origin[1], origin[2], e2[0], e2[1], e2[2], color);
+			List<Trace> trs3 = arrow3D(origin[0], origin[1], origin[2], e3[0], e3[1], e3[2], color);
 			
 			// assemble coordinates for labels
 			double[] xt = new double[3];
@@ -710,7 +713,7 @@ public class Plotlify {
 			zt[2] = e3[2];
 			
 			
-			Trace ttr = annotation(xt, yt, zt, labels);
+			Trace ttr = annotation(xt, yt, zt, labels, color);
 			
 			traces.addAll(trs1);
 			traces.addAll(trs2);

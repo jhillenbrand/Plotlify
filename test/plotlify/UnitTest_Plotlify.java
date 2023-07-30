@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import net.sytes.botg.array.geometry.CoordSys;
 import net.sytes.botg.array.math.Mat;
 import net.sytes.botg.array.math.Vec;
 import net.sytes.botg.plotlify.Plotlify;
@@ -156,7 +157,7 @@ public class UnitTest_Plotlify {
 		
 		PlotlyDocument pDocument = Plotlify.line(new double[]{0, 1}, new double[]{0, 1});
 		
-		Trace tr = Plotlify.annotation(new double[]{1}, new double[]{1}, null, new String[]{"Test"});
+		Trace tr = Plotlify.annotation(new double[]{1}, new double[]{1}, null, new String[]{"Test"}, null);
 		
 		pDocument.plotlys().get(0).traces().add(tr);
 		
@@ -169,7 +170,7 @@ public class UnitTest_Plotlify {
 		
 		PlotlyDocument pDocument = Plotlify.line(new double[]{0, 1}, new double[]{0, 1}, new double[] {0, 1});
 		
-		Trace tr = Plotlify.annotation(new double[]{1}, new double[]{1},  new double[]{1}, new String[]{"Test"});
+		Trace tr = Plotlify.annotation(new double[]{1}, new double[]{1},  new double[]{1}, new String[]{"Test"}, null);
 		
 		pDocument.plotlys().get(0).traces().add(tr);
 		
@@ -190,6 +191,32 @@ public class UnitTest_Plotlify {
 		List<Trace> traces = Plotlify.coordSys(origin, unitVectors, labels, 1, Color.BLACK);
 		
 		plotly.traces().addAll(traces);
+		
+		PlotlyDocument pDoc = new PlotlyDocument(plotly);
+		
+		pDoc.toFile();
+		
+	}
+	
+	@Test
+	public void test091() throws IOException {
+		
+		Plotly plotly = new Plotly();
+		
+		CoordSys cos1 = CoordSys.defaultSystem();
+		
+		List<Trace> traces = Plotlify.coordSys(cos1.origin(), cos1.base(), cos1.labels(), 1, Color.BLACK);
+		
+		plotly.traces().addAll(traces);
+		
+		CoordSys cos2 = cos1.clone();
+		cos2.labels(new String[] {"x'", "y'", "z'"});
+		
+		cos2.rot3(22.5);
+		
+		List<Trace> traces2 = Plotlify.coordSys(cos2.origin(), cos2.base(), cos2.labels(), 1, Color.BLUE);
+		
+		plotly.traces().addAll(traces2);
 		
 		PlotlyDocument pDoc = new PlotlyDocument(plotly);
 		
