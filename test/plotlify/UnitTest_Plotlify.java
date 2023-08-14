@@ -11,6 +11,8 @@ import net.sytes.botg.array.math.Vec;
 import net.sytes.botg.plotlify.Plotlify;
 import net.sytes.botg.plotlify.PlotlyDocument;
 import net.sytes.botg.plotlify.elements.Color;
+import net.sytes.botg.plotlify.elements.Mode;
+import net.sytes.botg.plotlify.elements.PlotType;
 import net.sytes.botg.plotlify.elements.Plotly;
 import net.sytes.botg.plotlify.elements.Trace;
 
@@ -217,6 +219,12 @@ public class UnitTest_Plotlify {
 		List<Trace> traces2 = Plotlify.coordSys(cos2.origin(), cos2.base(), cos2.labels(), 1, Color.BLUE);
 		
 		plotly.traces().addAll(traces2);
+		
+		Trace t1 = new Trace().type(PlotType.SCATTER3D).mode(Mode.LINES).x(new double[] {-2, 2}).y(new double[] {-2, 2}).z(new double[] {-1, 1});
+		
+		plotly.traces().add(t1);
+		
+		plotly.layout().width(1200).height(900).equalAxis3D();
 		
 		PlotlyDocument pDoc = new PlotlyDocument(plotly);
 		

@@ -40,6 +40,7 @@ public class Layout {
 	 * sets the scale of the axes to be equal
 	 */
 	public Layout equalAxis() {
+		
 		if (this.yaxis == null) {
 			this.yaxis = new Axis();
 		}
@@ -52,6 +53,21 @@ public class Layout {
 		
 		//this.zaxis.setScaleAnchor("x");
 		//this.zaxis.setScaleRatio(1);
+		
+		return this;
+	}
+		
+	/**
+	 * sets the scale of the axes to be equal for 3D plots
+	 */
+	public Layout equalAxis3D() {
+		
+		if (this.scene == null) {
+			this.scene = new Scene();
+		}
+		
+		//this.scene.aspectMode(AspectMode.MANUAL).aspectRatio().x(1.0).y(1.0).z(1.0);
+		this.scene.aspectMode(AspectMode.DATA);
 		
 		return this;
 	}
