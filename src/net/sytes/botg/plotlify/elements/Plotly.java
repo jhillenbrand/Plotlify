@@ -171,6 +171,34 @@ public class Plotly {
 	public void layout(Layout layout) {
 		this.layout = layout;
 	}
+	
+	/**
+	 * prepares the {@code trace}s to be prepared for subplots (by naming all {@code trace}s except first in ascending order like x2, y2, ..., x3, y3, ...)
+	 * <br>Only works if a {@code Grid} is defined in {@code Layout} aswell
+	 * @return
+	 */
+	public Plotly subplots() {
+		boolean first = true;
+		int i = 2;
+		for (Trace t : this.traces) {
+			if (first ) {
+				first = false;
+			} else {
+				if (t.x() != null) {
+					t.xaxis = "x" + i;
+				}
+				if (t.y() != null) {
+					t.yaxis = "y" + i;
+					t.xaxis = "x" + i;
+				}
+				if (t.z() != null) {
+					t.zaxis = "z" + i;
+				}
+				++i;
+			}			
+		}
+		return this;
+	}
 
 	public String plotId() {
 		return this.plotId;

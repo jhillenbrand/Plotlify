@@ -11,30 +11,19 @@ public class Trace {
 	private Object[] x;
 	private Object[] y;
 	private Object[] z;
-	
-	
-	private String mode = null;
-	
-	private String type = null;
-	
-	private String name = null;
-	
-	private Line line = null;
-	
-	private String[] text = null;
-	
+		
+	private String mode = null;	
+	private String type = null;	
+	private String name = null;	
+	private Line line = null;	
+	private String[] text = null;	
 	private TextFont font = null;
-	private String textposition = null;
-	
-	private Marker marker = null;
-	
+	private String textposition = null;	
+	private Marker marker = null;	
 	private double opacity = 1.0;
 	
 	/**
-	 * properties for cone
-	 */
-
-	/**
+	 * ----- properties for cone -------
 	 * additional coordinate data objects, controlling e.g. cones / directional vectors
 	 */
 	private Object[] u;
@@ -50,6 +39,13 @@ public class Trace {
 	 * to set the colors of the cone, if unicolor than set first and second element to same rgb colors
 	 */
 	private Object[] colorscale;
+	
+	/**
+	 * axis names in case of subplot functionality
+	 */
+	protected String xaxis = null;
+	protected String yaxis = null;
+	protected String zaxis = null;
 	
 	private static int TRACE_NUM = 0;
 		

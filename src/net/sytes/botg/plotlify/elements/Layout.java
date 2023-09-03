@@ -131,7 +131,7 @@ public class Layout {
 	}
 
 	public Legend legend() {
-		return legend;
+		return this.legend;
 	}
 
 	public Layout legend(Legend legend) {
@@ -169,7 +169,7 @@ public class Layout {
 	}
 
 	public boolean showLegend() {
-		return showlegend;
+		return this.showlegend;
 	}
 
 	public Layout showLegend(boolean showlegend) {

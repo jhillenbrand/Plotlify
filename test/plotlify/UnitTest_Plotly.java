@@ -196,5 +196,33 @@ public class UnitTest_Plotly {
 		pDoc.toFile("test3.html");
 	}
 	
+	/**
+	 * testing sub plot / grid layout
+	 * @throws IOException 
+	 */
+	@Test
+	public void test040() throws IOException {
+		Trace t = new Trace();
+		
+		//t.setName("t1");
+		t.x(new double[] {1.0, 2.0, 3.0, 4.0});
+		t.y(new double[] {1.0, 1.1, 1.2, 1.3});
+				
+		Trace t2 = new Trace();
+	
+		t2.x(new double[] {1.0, 2.0, 3.0, 4.0});
+		t2.y(new double[] {1.0, 2.1, 0.2, 1.3});
+		
+		Plotly p = new Plotly();
+		
+		p.traces().add(t);
+		p.traces().add(t2);
+		
+		p.layout().grid().rows(1).columns(2).pattern("independent");
+		p.subplots();
+		
+		new PlotlyDocument(p).toFile();
+		
+	}
 	
 }
