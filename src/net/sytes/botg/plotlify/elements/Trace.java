@@ -116,7 +116,7 @@ public class Trace {
 			}
 		}
 		if (this.z != null) {
-			if (Vec.isArray(this.z[0])) {
+			if (Ar.isArray(this.z[0])) {
 				for (int i = 0; i < this.z.length; i++) {
 					Object[] objs = (Object[]) this.z[i];
 					for (int j = 0; j < objs.length; j++) {

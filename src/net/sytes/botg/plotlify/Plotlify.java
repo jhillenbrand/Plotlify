@@ -195,7 +195,7 @@ public class Plotlify {
 			}
 		}
 		if (x == null) {
-			Vec.checkForEqualDimensions(y);
+			Ar.checkForEqualDimensions(y);
 		}
 		// populate traceNames if nothing specified
 		if (traceNames == null) {
@@ -675,7 +675,7 @@ public class Plotlify {
 		if (unitVectors[0] == null) {
 			throw new IllegalArgumentException("elements of unitVectors must not be NULL");
 		}
-		Vec.checkForEqualDimensions(origin, unitVectors[0]);
+		Ar.checkForEqualDimensions(origin, unitVectors[0]);
 		if (origin.length != unitVectors.length) {
 			throw new IllegalArgumentException("dimension of origin and unitVectors does not match");
 		}
