@@ -245,4 +245,48 @@ public class UnitTest_Plotlify {
 		
 	}
 	
+	@Test
+	public void test100() throws IOException {
+		
+		double[] x = Vec.rand(25);
+		double[] y = Vec.rand(x.length);
+		
+		int[] labels = new int[x.length];
+		for (int i = 0; i < labels.length; i++) {
+			if ( x[i] + y[i] > 1.4) {
+				labels[i] = 0;
+			} else if ( x[i] + y[i] < 0.8) {
+				labels[i] = 1;
+			} else {
+				labels[i] = 2;
+			}
+		}
+		
+		Plotlify.scatter(x, y, labels, null, null, null, null).toFile();
+		
+	}
+	
+	@Test
+	public void test101() throws IOException {
+		
+		double[] x = Vec.rand(25);
+		double[] y = Vec.rand(x.length);
+		double[] z = Vec.rand(x.length);
+		
+		int[] labels = new int[x.length];
+		for (int i = 0; i < labels.length; i++) {
+			if ( x[i] + y[i] > 1.4) {
+				labels[i] = 0;
+			} else if ( x[i] + y[i] < 0.8) {
+				labels[i] = 1;
+			} else {
+				labels[i] = 2;
+			}
+		}
+		
+		Plotlify.scatter3D(x, y, z, labels, null, null, null, null, null).toFile();
+		
+	}
+	
+	
 }

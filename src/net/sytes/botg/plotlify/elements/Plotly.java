@@ -144,7 +144,9 @@ public class Plotly {
 			}
 			++i;
 		}
-		logger.warn("Could not find " + t.toJson() + " in this " + this.getClass().getSimpleName());
+		t.name(name);
+		this.traces.add(i, t);
+		//logger.warn("Could not find " + t.toJson() + " in this " + this.getClass().getSimpleName());
 		return this;
 	}
 	

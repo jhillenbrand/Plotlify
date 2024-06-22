@@ -15,6 +15,11 @@ import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sytes.botg.array.Ar;
+import net.sytes.botg.array.math.Vec;
+import net.sytes.botg.plotlify.elements.Plotly;
+import net.sytes.botg.plotlify.elements.Trace;
+
 public class PlotlifyUtils {
 
 	public static final String PLOTLY_NAME = "plotly";

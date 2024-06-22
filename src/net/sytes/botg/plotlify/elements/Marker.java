@@ -5,9 +5,10 @@ import com.google.gson.Gson;
 public class Marker {
 
 	private int size = 12;	
-	private String color = null;
+	private Object color = null;
 	private String symbol = null;
 	private String angleref = null;
+	private Line line = null;
 	
 	public int size() {
 		return size;
@@ -18,12 +19,22 @@ public class Marker {
 		return this;
 	}
 
-	public String color() {
+	public Object color() {
 		return color;
 	}
 
 	public Marker color(Color color) {
 		this.color = color.toString();
+		return this;
+	}
+	
+	/**
+	 * define the colors of every single marker by specifying a number between 0 to 1 representing a color from the current colorscale
+	 * @param colors
+	 * @return
+	 */
+	public Marker color(double[] colors) {
+		this.color = colors;
 		return this;
 	}
 	
@@ -45,6 +56,18 @@ public class Marker {
 		return this.angleref;
 	}
 	
+	public Line line() {
+		if (this.line == null) {
+			this.line = new Line();
+		}
+		return this.line;
+	}
+	
+	public Marker line(Line line) {
+		this.line = line;
+		return this;
+	}
+		
 	public String toJson() {
 		return new Gson().toJson(this);
 	}

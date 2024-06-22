@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import net.sytes.botg.array.geometry.Circle;
 import net.sytes.botg.array.math.Vec;
 import net.sytes.botg.plotlify.PlotlyDocument;
+import net.sytes.botg.plotlify.elements.Color;
 import net.sytes.botg.plotlify.elements.Layout;
 import net.sytes.botg.plotlify.elements.Mode;
 import net.sytes.botg.plotlify.elements.PlotType;
@@ -223,6 +224,33 @@ public class UnitTest_Plotly {
 		
 		new PlotlyDocument(p).toFile();
 		
+	}
+	
+	@Test
+	public void test050() throws IOException {
+		
+		double[] x = Vec.rand(25);
+		double[] y = Vec.rand(x.length);
+		
+		double[] colors = new double[x.length];
+		for (int i = 0; i < colors.length; i++) {
+			if ( x[i] + y[i] > 1.4) {
+				colors[i] = 0;
+			} else if ( x[i] + y[i] < 0.8) {
+				colors[i] = 0.5;
+			} else {
+				colors[i] = 1;
+			}
+		}
+		
+		Trace t = new Trace();
+		t.x(x).y(y);
+		t.mode(Mode.MARKERS).marker().color(colors).line().color(Color.BLACK).width(1);		
+		
+		Plotly p = new Plotly();
+		
+		p.traces().add(t);
+		new PlotlyDocument(p).toFile();
 	}
 	
 }

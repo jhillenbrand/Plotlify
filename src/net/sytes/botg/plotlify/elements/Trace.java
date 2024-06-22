@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 
 import net.sytes.botg.array.Ar;
 import net.sytes.botg.array.math.Scalar;
-import net.sytes.botg.array.math.Vec;
 
 public class Trace {
 	

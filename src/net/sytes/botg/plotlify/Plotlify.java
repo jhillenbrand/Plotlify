@@ -284,6 +284,73 @@ public class Plotlify {
 	}
 	
 	/**
+	 * creates a scatter plot for {@code x, y, labels}, where labels specify the group the samples in {@code x, y} belong to
+	 * @param x
+	 * @param y
+	 * @param labels
+	 * @return
+	 */
+	public static PlotlyDocument scatter(double[] x, double[] y, int[] labels) {
+		return scatter(x, y, labels, null, null, null, null);
+	}
+	
+	/**
+	 * creates a scatter plot for {@code x, y, labels}, where labels specify the group the samples in {@code x, y} belong to
+	 * <br>{@code labelNames} can be used to specify the names of the label groups
+	 * <br>use {@code title, xLabel, yLabel} to specify the plots title and axis labels 
+	 * @param x
+	 * @param y
+	 * @param labels
+	 * @param labelNames
+	 * @param title
+	 * @param xLabel
+	 * @param yLabel
+	 * @return
+	 */
+	public static PlotlyDocument scatter(double[] x, double[] y, int[] labels, String[] labelNames, String title, String xLabel, String yLabel) {
+		
+		int[] uLabels = Ar.unique(labels);		
+
+		if (labelNames == null) {
+			labelNames = new String[uLabels.length];
+			for (int i = 0; i < labelNames.length; i++) {
+				labelNames[i] = "" + i;
+			}
+		}
+		
+		if (uLabels.length != labelNames.length) {
+			throw new IllegalArgumentException("number of unique labels (" + uLabels.length + ") must correspond to number of labelNames (" + labelNames.length + ")");
+		}
+		
+
+		Plotly plotly = new Plotly();
+		
+		double[][] xGroups = Vec.group(x, labels);
+		double[][] yGroups = Vec.group(y, labels);
+		
+		// generate traces for each group
+		for (int i = 0; i < uLabels.length; i++) {
+			
+			double[] xg = xGroups[i];
+			double[] yg = yGroups[i];
+			 
+			Trace t = new Trace().x(xg).y(yg).mode(Mode.MARKERS);
+			t.marker().size(12).line().color(Color.BLACK).width(1); 
+			
+			plotly.trace(labelNames[i], t);
+			
+		}
+	
+		plotly.layout().title(title).showLegend(true);
+		plotly.layout().xAxis().title(xLabel);
+		plotly.layout().yAxis().title(yLabel);
+	
+		PlotlyDocument pDoc = new PlotlyDocument(plotly);
+	
+		return pDoc;
+	}
+	
+	/**
 	 * creates a scatter 3D plot based on the Double arrays passed with {@code x}, {@code y} and {@code z}
 	 * @param x
 	 * @param y
@@ -352,6 +419,67 @@ public class Plotlify {
 				
 		return pDoc;
 	}
+		
+	/**
+	 * creates a scatter 3D plot based on the double arrays passed with {@code x}, {@code y} and {@code z} and the {@code labels}
+	 * <br>{@code title} can be used to specify the plot's title
+	 * <br>{@code xLabel}, {@code xLabel} and {@code zLabel} can be used to specify the plot's axis labels	 
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param labels
+	 * @param labelNames
+	 * @param title
+	 * @param xLabel
+	 * @param yLabel
+	 * @param zLabel
+	 * @return
+	 * @throws IOException
+	 */
+	public static PlotlyDocument scatter3D(double[] x, double[] y, double[] z, int[] labels, String[] labelNames, String title, String xLabel, String yLabel, String zLabel) throws IOException {
+		
+		int[] uLabels = Ar.unique(labels);		
+
+		if (labelNames == null) {
+			labelNames = new String[uLabels.length];
+			for (int i = 0; i < labelNames.length; i++) {
+				labelNames[i] = "" + i;
+			}
+		}
+		
+		if (uLabels.length != labelNames.length) {
+			throw new IllegalArgumentException("number of unique labels (" + uLabels.length + ") must correspond to number of labelNames (" + labelNames.length + ")");
+		}
+				
+		Plotly p = new Plotly();
+		
+		double[][] xGroups = Vec.group(x, labels);
+		double[][] yGroups = Vec.group(y, labels);
+		double[][] zGroups = Vec.group(z, labels);
+		
+		// generate traces for each group
+		for (int i = 0; i < uLabels.length; i++) {
+			
+			double[] xg = xGroups[i];
+			double[] yg = yGroups[i];
+			double[] zg = zGroups[i];
+			 
+			Trace t = new Trace().x(xg).y(yg).z(zg).type(PlotType.SCATTER3D).mode(Mode.MARKERS);
+			t.marker().line().color(Color.BLACK).width(1); 
+			
+			p.trace(labelNames[i], t);
+			
+		}
+		
+		p.layout().title(title).showLegend(true);
+		p.layout().scene().getXAxis().title(xLabel);
+		p.layout().scene().getYAxis().title(yLabel);
+		p.layout().scene().getZAxis().title(zLabel);		
+		
+		PlotlyDocument pDoc = new PlotlyDocument(p);
+				
+		return pDoc;
+	}	
 	
 	/**
 	 * creates a surface plot based on {@code x}, {@code y} and {@code z}, where {@code z} = [m x n] with {@code x} = [n] and {@code y} = [m]
