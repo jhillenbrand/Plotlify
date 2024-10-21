@@ -1,6 +1,7 @@
 package net.sytes.botg.plotlify.elements;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import net.sytes.botg.array.Ar;
 import net.sytes.botg.array.math.Scalar;
@@ -281,7 +282,8 @@ public class Trace {
 	}
 	
 	public String toJson() {
-		return new Gson().toJson(this);
+		Gson gson = new GsonBuilder().serializeSpecialFloatingPointValues().create();
+		return gson.toJson(this);
 	}
 
 }
